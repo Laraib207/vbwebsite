@@ -8,7 +8,8 @@ export const products = [
     gallery: ["/product1.jpg"],
     highlights: ["Cold-pressed", "Rich Aroma", "Omega-3 Conscious"],
     short: "Cold-pressed mustard oil with bold flavour and authentic aroma for traditional cooking.",
-    long: "Veer Bharat Kachi Ghani Mustard Oil is crafted using traditional cold-press extraction to preserve pungency, aroma and essential fatty acids. The sharp, authentic character elevates pickles, curries and tadkas while staying clean on the palate. Carefully graded seeds and hygienic filtration deliver clarity and dependable performance in daily Indian kitchens."
+    long: "Veer Bharat Kachi Ghani Mustard Oil is crafted using traditional cold-press extraction to preserve pungency, aroma and essential fatty acids. The sharp, authentic character elevates pickles, curries and tadkas while staying clean on the palate. Carefully graded seeds and hygienic filtration deliver clarity and dependable performance in daily Indian kitchens.",
+    video: "/product1.mp4",
   },
   {
     slug: "soyabean-oil",
@@ -18,7 +19,8 @@ export const products = [
     gallery: ["/product2.jpg"],
     highlights: ["Neutral Taste", "Vitamin E", "Daily Cooking"],
     short: "Light, versatile and nutrition-forward—lets ingredients shine without heaviness.",
-    long: "Veer Bharat Soyabean Oil offers a neutral flavour so your ingredients lead the experience. Carefully refined and filtered, it provides clarity and a comfortable smoke point for sautéing, stir-frying, tempering and light baking. Rich in Vitamin E for antioxidant support."
+    long: "Veer Bharat Soyabean Oil offers a neutral flavour so your ingredients lead the experience. Carefully refined and filtered, it provides clarity and a comfortable smoke point for sautéing, stir-frying, tempering and light baking. Rich in Vitamin E for antioxidant support.",
+    video: "/product2.mp4"
   },
   {
     slug: "sunflower-oil",
@@ -28,7 +30,8 @@ export const products = [
     gallery: ["/product3.jpg"],
     highlights: ["Light Mouthfeel", "Family-Friendly", "Reliable Frying"],
     short: "High in Vitamin E with a clean, delicate taste—keeps meals light and bright.",
-    long: "Veer Bharat Sunflower Oil brings a gentle, sunny character with naturally high Vitamin E. Its clean taste keeps recipes light and family-friendly—poha that stays fluffy, evenly fried cutlets and bright stir-fries—while a reliable smoke point gives you golden results with minimal greasiness."
+    long: "Veer Bharat Sunflower Oil brings a gentle, sunny character with naturally high Vitamin E. Its clean taste keeps recipes light and family-friendly—poha that stays fluffy, evenly fried cutlets and bright stir-fries—while a reliable smoke point gives you golden results with minimal greasiness.",
+    video: "/product3.mp4"
   },
   {
     slug: "palmolein-oil",

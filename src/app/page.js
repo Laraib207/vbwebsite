@@ -401,6 +401,13 @@
 // If your Home lives elsewhere, keep "use client" and imports the same.
 
 // src/app/page.js
+
+
+// src/app/page.js
+
+// src/app/page.js
+
+
 "use client";
 
 import Link from "next/link";
@@ -408,17 +415,16 @@ import Image from "next/image";
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Poppins, Playfair_Display } from "next/font/google";
-import { products } from "../data/products"; // correct relative path
+import { products } from "../data/products"; // keep relative path correct
 
 // Fonts
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"] });
 
-// Easing
+// easing
 const ease = [0.22, 1, 0.36, 1];
 
 export default function Home() {
-  // Slides for hero
   const slides = [
     {
       img: "/banner1.jpg",
@@ -431,7 +437,6 @@ export default function Home() {
       notes: ["Cold-Pressed", "Omega-3 Rich", "Strong Aroma"],
     },
     {
-      /// jurni add this componenet
       img: "/banner2.jpg",
       title: "Soyabean Oil",
       line: "Light & healthy for every day.",
@@ -455,21 +460,16 @@ export default function Home() {
 
   const [current, setCurrent] = useState(0);
 
-  // Auto slide
+  // auto slide
   useEffect(() => {
     const t = setInterval(() => setCurrent((p) => (p + 1) % slides.length), 5000);
     return () => clearInterval(t);
   }, [slides.length]);
 
-  // navigation removed from hero (per your request)
-  const next = () => setCurrent((p) => (p + 1) % slides.length);
-  const prev = () => setCurrent((p) => (p - 1 + slides.length) % slides.length);
-
   return (
     <main className={`${poppins.className} bg-[#0f1115] text-white`}>
       {/* ===== HERO ===== */}
       <section className="relative h-[90vh] w-full overflow-hidden">
-        {/* Backdrop image crossfade */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -483,13 +483,11 @@ export default function Home() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Dark overlay for readability */}
+        {/* overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black/70" />
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(80%_60%_at_50%_30%,rgba(255,196,0,0.12),transparent),radial-gradient(60%_40%_at_80%_20%,rgba(16,185,129,0.12),transparent)]" />
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(80%_60%_at_50%_30%,rgba(255,196,0,0.08),transparent),radial-gradient(60%_40%_at_80%_20%,rgba(16,185,129,0.06),transparent)]" />
 
-        {/* Note: removed the top-left glass card + badge + prev/next controls per your screenshot */}
-
-        {/* Center hero text */}
+        {/* center hero text */}
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto w-full max-w-6xl px-6 text-center lg:text-left">
             <motion.h1
@@ -534,81 +532,72 @@ export default function Home() {
             >
               <Link
                 href="/products"
-                className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600 px-6 py-3 font-extrabold shadow-lg hover:shadow-amber-500/20"
+                className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600 px-6 py-3 font-extrabold shadow-lg hover:shadow-amber-500/20 transition"
               >
                 Explore Products
               </Link>
-              {/* Removed the "Why Veer Bharat?" button per your request */}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ===== NEW EXPENSIVE H1 (between banner and video) ===== */}
-      <motion.section
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="max-w-7xl mx-auto px-6 py-12"
-      >
-        <div className="mx-auto max-w-5xl text-center lg:text-left">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-amber-300 drop-shadow-lg">
-            Veer Bharat ka Naya <span className="text-white">Soyabean Oil</span>
-          </h1>
-          <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl">
+      {/* ===== Animated expensive H1 (left & right open) ===== */}
+      <section className="max-w-7xl mx-auto px-6 py-10">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            className="relative overflow-hidden"
+          >
+            {/* Left part slides from left */}
+            <motion.h1
+              variants={{
+                hidden: { x: -120, opacity: 0 },
+                visible: { x: 0, opacity: 1, transition: { duration: 0.7, ease } },
+              }}
+              className="inline-block text-4xl md:text-5xl lg:text-6xl font-extrabold text-amber-300 mr-3"
+            >
+              Veer Bharat ka Naya
+            </motion.h1>
+
+            {/* Right part slides from right */}
+            <motion.h1
+              variants={{
+                hidden: { x: 120, opacity: 0 },
+                visible: { x: 0, opacity: 1, transition: { duration: 0.7, ease, delay: 0.06 } },
+              }}
+              className="inline-block text-4xl md:text-5xl lg:text-6xl font-extrabold text-white"
+            >
+              Soyabean Oil
+            </motion.h1>
+
+            {/* thin gold underline reveal */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "60%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease }}
+              className="h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 rounded mt-4 mx-auto"
+              style={{ maxWidth: "720px" }}
+            />
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.12 }}
+            className="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto"
+          >
             Premium Purity, Everyday Health — <span className="font-semibold text-white">Ek dum expensive, pure & trusted</span>.
             Experience smoother cooking, healthier meals and richer taste with our new flagship soyabean oil.
-          </p>
+          </motion.p>
         </div>
-      </motion.section>
+      </section>
 
-      {/* ===== VIDEO (slides in left → right) ===== */}
-      <motion.section
-        initial={{ opacity: 0, x: -60 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease }}
-        className="relative w-full overflow-hidden"
-      >
-        <div className="relative h-[56vh] md:h-[60vh] lg:h-[68vh]">
-          <video
-            src="/hero-video.mp4"
-            poster="/banner1.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none" />
-
-          <div className="absolute left-0 right-0 bottom-6 px-6 md:px-12 lg:px-20">
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.12 }}
-              className="max-w-4xl bg-white/8 backdrop-blur-md border border-white/8 rounded-2xl p-5 md:p-6 flex items-center gap-4"
-            >
-              <div className="flex-1">
-                <h3 className="text-white text-lg md:text-xl font-extrabold">
-                  Live At Events — Veer Bharat On Ground
-                </h3>
-                <p className="mt-1 text-sm md:text-base text-white/90">
-                  Our Delhi team presenting live demos & tastings — bringing flavour to every plate.
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Link href="/contact" className="px-4 py-2 rounded-full bg-amber-400 text-black font-semibold hover:scale-105 transition">
-                  Contact Team
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        <div className="h-6 bg-gradient-to-b from-transparent to-white/6 -mt-1" />
-      </motion.section>
+      {/* ===== BIG VIDEO BANNER — with exact 2px clear top & bottom gap ===== */}
+      <VideoBanner src="/hero-video.mp4" poster="/banner1.jpg" />
 
       {/* ===== PRODUCTS (Luxury Cards) ===== */}
       <section className="relative py-24">
@@ -764,5 +753,130 @@ function LuxuryCard({ img, title, tagline, href, chip, accent, notes = [] }) {
         />
       </Link>
     </motion.div>
+  );
+}
+
+/* ===== Big Video Banner (with exact 2px clear gap top & bottom) ===== */
+function VideoBanner({ src = "/hero-video.mp4", poster = "/banner1.jpg" }) {
+  const [playing, setPlaying] = useState(true);
+  const vidRef = useRef(null);
+
+  useEffect(() => {
+    const v = vidRef.current;
+    if (v) {
+      v.muted = true;
+      const p = v.play();
+      if (p && p.catch) {
+        // ignore autoplay rejection
+      } else {
+        setPlaying(!v.paused);
+      }
+    }
+  }, []);
+
+  const toggle = () => {
+    const v = vidRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play();
+      setPlaying(true);
+    } else {
+      v.pause();
+      setPlaying(false);
+    }
+  };
+
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="relative w-full overflow-hidden"
+    >
+      {/* The wrapper provides exact 2px gap top/bottom so video won't clip */}
+      <div className="px-0 py-[2px]"> {/* 2px clear top & bottom */}
+        <div className="relative h-[66vh] md:h-[74vh] lg:h-[82vh] rounded-none overflow-hidden">
+          {/* Video fills the area but respects the 2px gaps around wrapper */}
+          <video
+            ref={vidRef}
+            src={src}
+            poster={poster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover block"
+            style={{ display: "block" }}
+          />
+
+          {/* overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10 pointer-events-none" />
+
+          {/* premium caption — centered bottom */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.01, y: -6 }}
+            transition={{ duration: 0.45 }}
+            className="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 w-[94%] max-w-4xl"
+          >
+            <div className="relative group">
+              <div className="backdrop-blur-xl bg-white/6 border border-white/10 rounded-3xl p-5 md:p-6 shadow-2xl">
+                {/* thin gold top stroke */}
+                <div className="absolute -top-1 -left-1 right-1 h-1 rounded-t-2xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 opacity-95 pointer-events-none" />
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-amber-400 via-orange-400 to-rose-400 flex items-center justify-center text-white font-extrabold shadow-lg">
+                      VB
+                    </div>
+                  </div>
+
+                  <div className="flex-1">
+                    <h3 className="text-white text-lg md:text-2xl font-extrabold tracking-tight">
+                      Veer Bharat — Live At Events
+                    </h3>
+                    <p className="mt-1 text-sm md:text-base text-white/90">
+                      Taste the purity — our Delhi team presents soyabean oil demos and live tastings.
+                    </p>
+
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <span className="rounded-full bg-white/8 px-3 py-1 text-xs font-medium text-white/90 border border-white/10">Premium Purity</span>
+                      <span className="rounded-full bg-white/8 px-3 py-1 text-xs font-medium text-white/90 border border-white/10">Trusted Quality</span>
+                      <span className="rounded-full bg-white/8 px-3 py-1 text-xs font-medium text-white/90 border border-white/10">Pan-India</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={toggle}
+                      aria-label={playing ? "Pause video" : "Play video"}
+                      className="px-4 py-2 rounded-full bg-amber-400 text-black font-semibold hover:scale-105 transition shadow"
+                    >
+                      {playing ? "Pause" : "Play"}
+                    </button>
+
+                    <Link
+                      href="/products"
+                      className="hidden md:inline-block px-4 py-2 rounded-full border border-white/10 text-white font-semibold hover:bg-white/5 transition"
+                    >
+                      View Products
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* subtle gold glow on hover */}
+              <div
+                className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={{
+                  boxShadow: "0 30px 80px -20px rgba(255,171,0,0.18), 0 18px 50px -24px rgba(255,200,30,0.12)",
+                }}
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </motion.section>
   );
 }
