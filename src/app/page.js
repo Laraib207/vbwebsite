@@ -1678,6 +1678,7 @@
 
 
 "use client";
+import AnimatedSlickSlider from "../components/AnimatedSlickSlider";
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -1685,6 +1686,10 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Poppins, Playfair_Display } from "next/font/google";
 import { FaWhatsapp, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import ProductSlider from "../components/ProductSlider";
+
+
+
 
 /* ---------- Fonts & easing ---------- */
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
@@ -1743,7 +1748,11 @@ export default function Home() {
       {/* Branches / Gallery */}
       <Branches />
 
+<AnimatedSlickSlider />
+
       {/* Fixed WhatsApp button — update number */}
+
+      <ProductSlider/>
       <a
         href="https://wa.me/YOUR_WHATSAPP_NUMBER"
         target="_blank"
@@ -2234,6 +2243,9 @@ function Branches() {
   );
 }
 
+
+
+
 /* ========== VideoHero ========== */
 function VideoHero({ videos = [] }) {
   const vidRef = useRef(null);
@@ -2280,6 +2292,8 @@ function VideoHero({ videos = [] }) {
           {playing ? "Pause" : "Play"}
         </button>
       </div>
+
+
     </section>
   );
 }

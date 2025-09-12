@@ -1,4 +1,4 @@
-// File: /Users/laraibd/Desktop/veer-bharat-complete/src/app/page.js
+// File: /Users/laraibd/Desktop/wwwvbb/vbwebsite/src/app/page.js
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
