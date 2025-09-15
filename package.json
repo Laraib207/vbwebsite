@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next export"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",

@@ -1677,6 +1677,12 @@
 // }
 
 
+
+/// Final code after this line 
+
+
+
+
 "use client";
 import AnimatedSlickSlider from "../components/AnimatedSlickSlider";
 
@@ -1754,7 +1760,7 @@ export default function Home() {
 
       <ProductSlider/>
       <a
-        href="https://wa.me/YOUR_WHATSAPP_NUMBER"
+        href="https://wa.me/6205771930"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed right-5 bottom-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-green-500 shadow-lg text-white hover:scale-105 transition"
@@ -2299,8 +2305,7 @@ function VideoHero({ videos = [] }) {
 }
 
 
-
-
+////////// Final code above this line //////////
 
 
 // pasted and the animation code above added by me 
@@ -2450,5 +2455,758 @@ function VideoHero({ videos = [] }) {
 //         </div>
 //       </section>
 //     </main>
+//   );
+// }
+
+
+
+// "use client";
+// import React, { useEffect, useRef, useState } from "react";
+// import Link from "next/link";
+// import Image from "next/image";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { Poppins, Playfair_Display } from "next/font/google";
+// import {
+//   FaWhatsapp,
+//   FaChevronLeft,
+//   FaChevronRight,
+//   FaFacebookF,
+//   FaInstagram,
+//   FaYoutube,
+// } from "react-icons/fa";
+
+// /* ---------- Fonts ---------- */
+// const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
+// const playfair = Playfair_Display({
+//   subsets: ["latin"],
+//   weight: ["700", "800"],
+// });
+// const ease = [0.22, 1, 0.36, 1];
+
+// /* ========== MAIN PAGE (copy/paste this whole file) ========== */
+// export default function Home() {
+//   return (
+//     <main
+//       className={`${poppins.className} text-[#0b0d11]`}
+//       style={{ backgroundColor: "#ffcc99" }}
+//     >
+//       {/* Hero */}
+//       <VideoHero videos={["/images/hero-video.mp4"]} />
+
+//       {/* Category heading */}
+//       <section className="py-12 md:py-16 text-center">
+//         <motion.h1
+//           initial={{ y: 30, opacity: 0 }}
+//           whileInView={{ y: 0, opacity: 1 }}
+//           transition={{ duration: 0.8, ease }}
+//           viewport={{ once: true }}
+//           className={`${playfair.className} text-3xl md:text-5xl font-extrabold tracking-tight`}
+//         >
+//           Veer Bharat Oil — Category
+//         </motion.h1>
+//         <motion.div
+//           initial={{ scaleX: 0 }}
+//           whileInView={{ scaleX: 1 }}
+//           transition={{ duration: 0.7, ease }}
+//           viewport={{ once: true }}
+//           className="mt-4 w-32 md:w-40 mx-auto h-1 rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600"
+//         />
+//       </section>
+
+//       {/* Category Carousel */}
+//       <SectionWrapper>
+//         <CategoryCarousel />
+//       </SectionWrapper>
+
+//       {/* Our Product heading */}
+//       <section className="text-center my-12">
+//         <h2 className={`${playfair.className} text-2xl md:text-3xl font-extrabold`}>
+//           Our Product
+//         </h2>
+//         <div className="mx-auto mt-3 w-20 h-1 rounded-full bg-amber-400" />
+//       </section>
+
+//       {/* Sliders + Showcase */}
+//       <SectionWrapper>
+//         <BannerSlider />
+//       </SectionWrapper>
+
+//       <SectionWrapper>
+//         <ModernSlider />
+//       </SectionWrapper>
+
+//       <SectionWrapper>
+//         <MovingShowcase />
+//       </SectionWrapper>
+
+//       <SectionWrapper>
+//         <SignatureCollection />
+//       </SectionWrapper>
+
+//       <SectionWrapper>
+//         <Branches />
+//       </SectionWrapper>
+
+//       <SectionWrapper>
+//         <AnimatedSlickSlider />
+//       </SectionWrapper>
+
+//       <SectionWrapper>
+//         <ProductSlider />
+//       </SectionWrapper>
+
+//       {/* Footer */}
+//       <Footer />
+
+//       {/* WhatsApp Floating */}
+//       <a
+//         href="https://wa.me/YOUR_WHATSAPP_NUMBER"
+//         target="_blank"
+//         rel="noopener noreferrer"
+//         className="fixed right-5 bottom-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-green-500 shadow-lg text-white hover:scale-105 transition"
+//         aria-label="WhatsApp"
+//       >
+//         <FaWhatsapp className="w-6 h-6" />
+//       </a>
+
+//       {/* small page-level styles for modern slider */}
+//       <style jsx>{`
+//         .modern-wrap {
+//           position: relative;
+//           overflow: hidden;
+//         }
+//         .modern-slide {
+//           position: absolute;
+//           inset: 0;
+//           display: grid;
+//           place-items: center;
+//         }
+//         .modern-img {
+//           width: 100%;
+//           height: 100vh;
+//           object-fit: cover;
+//           filter: blur(4px);
+//           transform: scale(1.03);
+//         }
+//         .modern-overlay {
+//           position: absolute;
+//           inset: 0;
+//           background: rgba(0, 0, 0, 0.45);
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           padding: 1.5rem;
+//         }
+//         .modern-info {
+//           max-width: 880px;
+//           text-align: center;
+//           color: white;
+//         }
+//         .modern-info h3 {
+//           font-size: 28px;
+//           margin-bottom: 0.6rem;
+//           text-transform: uppercase;
+//         }
+//         .modern-info h5 {
+//           font-size: 16px;
+//           max-width: 680px;
+//           margin: 0 auto;
+//           opacity: 0.95;
+//         }
+//         .modern-arrow {
+//           position: absolute;
+//           top: 50%;
+//           transform: translateY(-50%);
+//           width: 48px;
+//           height: 48px;
+//           background: rgba(0, 0, 0, 0.45);
+//           border-radius: 999px;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           color: #fff;
+//           z-index: 40;
+//           cursor: pointer;
+//         }
+//         .modern-arrow.left {
+//           left: 10px;
+//         }
+//         .modern-arrow.right {
+//           right: 10px;
+//         }
+//         @media (max-width: 768px) {
+//           .modern-info h3 {
+//             font-size: 20px;
+//           }
+//           .modern-info h5 {
+//             font-size: 14px;
+//           }
+//         }
+//       `}</style>
+//     </main>
+//   );
+// }
+
+// /* ========== Section Wrapper (white card) ========== */
+// function SectionWrapper({ children }) {
+//   return (
+//     <section className="py-10">
+//       <div className="container mx-auto max-w-7xl px-6">
+//         <div className="rounded-3xl bg-white shadow-xl p-6 md:p-10">{children}</div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// /* ========== VideoHero ========== */
+// function VideoHero({ videos = [] }) {
+//   const vidRef = useRef(null);
+//   const [playing, setPlaying] = useState(true);
+
+//   useEffect(() => {
+//     const v = vidRef.current;
+//     if (!v) return;
+//     v.muted = true;
+//     v.playsInline = true;
+//     v.preload = "metadata";
+//     v.play().catch(() => setPlaying(false));
+//   }, [videos]);
+
+//   function toggle() {
+//     const v = vidRef.current;
+//     if (!v) return;
+//     if (v.paused) {
+//       v.play().catch(() => setPlaying(false));
+//       setPlaying(true);
+//     } else {
+//       v.pause();
+//       setPlaying(false);
+//     }
+//   }
+
+//   return (
+//     <section className="relative w-full overflow-hidden">
+//       <div className="relative h-[60vh] md:h-[72vh] lg:h-[82vh] rounded-b-3xl shadow-xl overflow-hidden">
+//         <video
+//           ref={vidRef}
+//           src={videos[0]}
+//           className="w-full h-full object-cover"
+//           autoPlay
+//           muted
+//           loop
+//           playsInline
+//           preload="metadata"
+//         />
+
+//         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/30 pointer-events-none" />
+
+//         <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+//           <motion.h1
+//             initial={{ y: 40, opacity: 0 }}
+//             animate={{ y: 0, opacity: 1 }}
+//             transition={{ duration: 1 }}
+//             className={`${playfair.className} text-3xl md:text-5xl lg:text-6xl font-extrabold text-white`}
+//           >
+//             Welcome to Veer Bharat
+//           </motion.h1>
+//           <motion.h2
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             transition={{ delay: 0.9, duration: 0.8 }}
+//             className={`${poppins.className} text-lg md:text-2xl font-bold text-amber-300 mt-3`}
+//           >
+//             मज़ा आ गया
+//           </motion.h2>
+//         </div>
+
+//         <button
+//           onClick={toggle}
+//           className="absolute right-6 top-6 z-30 flex items-center gap-2 rounded-full bg-white/20 backdrop-blur px-4 py-2 text-sm font-semibold border border-white/10 hover:scale-105 transition"
+//         >
+//           {playing ? "Pause" : "Play"}
+//         </button>
+//       </div>
+//     </section>
+//   );
+// }
+
+// /* ========== CategoryCarousel ========== */
+// function CategoryCarousel() {
+//   const items = [
+//     {
+//       id: "kachi",
+//       title: "Kachi Ghani Mustard Oil",
+//       img: "/images/banner2.jpg",
+//       desc: `कची घानी सरसों का तेल — परंपरा और तीखापन दोनों में संतुलन। हमारी cold-press विधि से निकला यह तेल अपनी सुगंध और स्वाद के लिये मशहूर है।`,
+//     },
+//     {
+//       id: "soya",
+//       title: "Soyabean Oil — Light & Healthy",
+//       img: "/images/slide2.jpg",
+//       desc: `Soyabean oil हल्का, पौष्टिक और रोज़ाना के लिए उपयुक्त। इसमें Vitamin E और अनसैचुरेटेड फैटी एसिड्स होते हैं।`,
+//     },
+//     {
+//       id: "rice",
+//       title: "Rice Bran Oil — Heart Friendly",
+//       img: "/images/slide1.jpg",
+//       desc: `Rice bran oil उच्च स्मोक पॉइंट और हृदय-हितकर प्रोफाइल के साथ आता है।`,
+//     },
+//   ];
+
+//   const [index, setIndex] = useState(0);
+//   const len = items.length;
+//   const autoplayRef = useRef(null);
+
+//   useEffect(() => {
+//     autoplayRef.current = setInterval(() => setIndex((i) => (i + 1) % len), 6000);
+//     return () => clearInterval(autoplayRef.current);
+//   }, [len]);
+
+//   function prev() {
+//     clearInterval(autoplayRef.current);
+//     setIndex((i) => (i - 1 + len) % len);
+//   }
+//   function next() {
+//     clearInterval(autoplayRef.current);
+//     setIndex((i) => (i + 1) % len);
+//   }
+
+//   return (
+//     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+//       <div className="relative">
+//         <div className="relative h-[420px] md:h-[520px] rounded-2xl overflow-hidden shadow-2xl">
+//           <AnimatePresence mode="wait">
+//             <motion.div
+//               key={items[index].id}
+//               initial={{ opacity: 0, x: 60 }}
+//               animate={{ opacity: 1, x: 0 }}
+//               exit={{ opacity: 0, x: -60 }}
+//               transition={{ duration: 0.8, ease }}
+//               className="absolute inset-0"
+//             >
+//               <Image src={items[index].img} alt={items[index].title} fill className="object-cover" unoptimized />
+//             </motion.div>
+//           </AnimatePresence>
+//         </div>
+
+//         <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
+//           <FaChevronLeft />
+//         </button>
+//         <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center">
+//           <FaChevronRight />
+//         </button>
+//       </div>
+
+//       <div>
+//         <h3 className={`${playfair.className} text-2xl md:text-4xl font-extrabold mb-4`}>{items[index].title}</h3>
+//         <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">{items[index].desc}</p>
+
+//         <div className="mt-6 flex flex-wrap gap-4">
+//           <Link href="/products" className="inline-block rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600 px-6 py-3 font-bold shadow text-white hover:scale-105 transition">
+//             Explore Products
+//           </Link>
+//           <button onClick={() => alert(items[index].title + " — Quick View")} className="px-4 py-2 rounded-full border border-gray-300 hover:shadow transition">
+//             Quick View →
+//           </button>
+//         </div>
+
+//         <div className="mt-8 flex items-center gap-3">
+//           {items.map((it, i) => (
+//             <button key={it.id} onClick={() => setIndex(i)} className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"} transition`} aria-label={`Go to ${i + 1}`} />
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// /* ========== BannerSlider ========== */
+// function BannerSlider() {
+//   const slides = [
+//     { id: "b1", img: "/images/banner2.jpg", title: "Premium Quality Oils", cta: { text: "Start a Project", href: "#" }, color: "#ff8a65" },
+//     { id: "b2", img: "/images/banner3.jpg", title: "Freshly Packed", cta: { text: "Contact Now!!", href: "#" }, color: "#ffd54f" },
+//     { id: "b3", img: "/images/banner4.jpg", title: "Trusted By Families", cta: null, color: "#81d4fa" },
+//   ];
+
+//   const [index, setIndex] = useState(0);
+//   const len = slides.length;
+//   const autoplayRef = useRef(null);
+
+//   useEffect(() => {
+//     autoplayRef.current = setInterval(() => setIndex((i) => (i + 1) % len), 6000);
+//     return () => clearInterval(autoplayRef.current);
+//   }, [len]);
+
+//   function prev() {
+//     clearInterval(autoplayRef.current);
+//     setIndex((i) => (i - 1 + len) % len);
+//   }
+//   function next() {
+//     clearInterval(autoplayRef.current);
+//     setIndex((i) => (i + 1) % len);
+//   }
+
+//   return (
+//     <section className="relative overflow-hidden">
+//       <button onClick={prev} aria-label="Prev banner" className="absolute left-4 top-1/2 z-40 -translate-y-1/2 rounded-full bg-white shadow-lg w-12 h-12 flex items-center justify-center hover:scale-105 transition">
+//         <FaChevronLeft />
+//       </button>
+//       <button onClick={next} aria-label="Next banner" className="absolute right-4 top-1/2 z-40 -translate-y-1/2 rounded-full bg-white shadow-lg w-12 h-12 flex items-center justify-center hover:scale-105 transition">
+//         <FaChevronRight />
+//       </button>
+
+//       <div className="relative h-[420px] md:h-[520px] w-full">
+//         <AnimatePresence mode="wait">
+//           <motion.div key={slides[index].id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }} className="absolute inset-0">
+//             <Image src={slides[index].img} alt={slides[index].title} fill className="object-cover" unoptimized />
+//             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/10" />
+//             <div className="absolute inset-0 flex items-center">
+//               <div className="container mx-auto max-w-6xl px-6">
+//                 <div className="max-w-3xl text-white">
+//                   <motion.h2 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.18 }} style={{ color: slides[index].color }} className={`${playfair.className} text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight`}>
+//                     {slides[index].title}
+//                   </motion.h2>
+
+//                   {slides[index].cta && (
+//                     <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.35 }}>
+//                       <Link href={slides[index].cta.href} className="inline-block mt-6 rounded-full bg-amber-400 px-6 py-3 font-bold shadow text-black hover:scale-105 transition">
+//                         {slides[index].cta.text}
+//                       </Link>
+//                     </motion.div>
+//                   )}
+//                 </div>
+//               </div>
+//             </div>
+
+//             <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+//               <svg viewBox="0 0 1440 120" width="100%" height="100%" preserveAspectRatio="none">
+//                 <path d="M0,40 C180,120 360,0 540,40 C720,80 900,10 1080,40 C1260,70 1440,30 1440,30 L1440,120 L0,120 Z" fill="#ffffff" />
+//               </svg>
+//             </div>
+//           </motion.div>
+//         </AnimatePresence>
+//       </div>
+
+//       <div className="flex items-center justify-center gap-3 py-6">
+//         {slides.map((s, i) => (
+//           <button key={s.id} onClick={() => setIndex(i)} className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"}`} aria-label={`Go to ${i + 1}`} />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+// /* ========== ModernSlider ========== */
+// function ModernSlider() {
+//   const slides = [
+//     { id: "m1", img: "/images/slide1.jpg", title: "Full Width Slider With Layers", subtitle: "You can easily add image, html formatted texts and video layers over each slide and each layer accepts unique animation." },
+//     { id: "m2", img: "/images/slide2.jpg", title: "Fully responsive Scales with its container", subtitle: "Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet." },
+//     { id: "m3", img: "/images/slide3.jpg", title: "Awesome Transtions With CSS3", subtitle: "Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet." },
+//   ];
+
+//   const [index, setIndex] = useState(0);
+//   const len = slides.length;
+//   const autoplay = useRef(null);
+
+//   useEffect(() => {
+//     autoplay.current = setInterval(() => setIndex((i) => (i + 1) % len), 8000);
+//     return () => clearInterval(autoplay.current);
+//   }, [len]);
+
+//   function prev() {
+//     clearInterval(autoplay.current);
+//     setIndex((i) => (i - 1 + len) % len);
+//   }
+//   function next() {
+//     clearInterval(autoplay.current);
+//     setIndex((i) => (i + 1) % len);
+//   }
+
+//   return (
+//     <section className="modern-wrap relative mb-12">
+//       <div className="modern-arrow left" onClick={prev}><FaChevronLeft /></div>
+//       <div className="modern-arrow right" onClick={next}><FaChevronRight /></div>
+
+//       <div className="relative h-[60vh] md:h-[80vh]">
+//         <AnimatePresence mode="wait">
+//           <motion.div key={slides[index].id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }} className="modern-slide">
+//             <Image src={slides[index].img} alt={slides[index].title} className="modern-img" fill unoptimized />
+//             <div className="modern-overlay">
+//               <div className="modern-info">
+//                 <motion.h3 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.12 }} className={`${playfair.className}`}>{slides[index].title}</motion.h3>
+//                 <motion.h5 initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }} className="mt-3">{slides[index].subtitle}</motion.h5>
+//               </div>
+//             </div>
+//           </motion.div>
+//         </AnimatePresence>
+//       </div>
+
+//       <p className="text-center mt-6">Slick-like modern slider — responsive and full-bleed.</p>
+//     </section>
+//   );
+// }
+
+// /* ========== MovingShowcase ========== */
+// function MovingShowcase() {
+//   const slides = [
+//     { id: "s-soya", img: "/images/slide2.jpg", title: "Soyabean Oil — हल्का, स्वास्थ्यवर्धक", subtitle: "Vitamin E • Light Texture • Daily Cooking", cta: { text: "Explore Soyabean", href: "/products/soyabean-oil" } },
+//     { id: "s-mustard", img: "/images/slide1.jpg", title: "Kachi Ghani Mustard Oil — परंपरा का स्वाद", subtitle: "Cold Pressed • Strong Aroma • Authentic Taste", cta: { text: "Explore Mustard", href: "/products/kachi-ghani-mustard-oil" } },
+//     { id: "s-banner3", img: "/images/banner3.jpg", title: "Healthy Frying — Rice Bran Oil", subtitle: "High Smoke Point • Neutral Taste • Heart Friendly", cta: { text: "Explore Rice Bran", href: "/products/rice-bran-oil" } },
+//   ];
+
+//   const [idx, setIdx] = useState(0);
+//   const len = slides.length;
+//   const autoplayRef = useRef(null);
+
+//   useEffect(() => {
+//     autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
+//     return () => clearInterval(autoplayRef.current);
+//   }, [len]);
+
+//   function prev() {
+//     clearInterval(autoplayRef.current);
+//     setIdx((i) => (i - 1 + len) % len);
+//   }
+//   function next() {
+//     clearInterval(autoplayRef.current);
+//     setIdx((i) => (i + 1) % len);
+//   }
+
+//   const slide = slides[idx];
+
+//   return (
+//     <section className="relative w-full min-h-[52vh] md:min-h-[62vh] overflow-hidden">
+//       <div className="absolute inset-0 -z-10">
+//         <AnimatePresence mode="wait">
+//           <motion.div key={slide.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }}>
+//             <Image src={slide.img} alt={slide.title} fill className="object-cover object-center" unoptimized />
+//             <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-white/60" />
+//           </motion.div>
+//         </AnimatePresence>
+//       </div>
+
+//       <div className="relative z-10 container mx-auto max-w-7xl px-6 py-20 md:py-28">
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+//           <div className="hidden md:block" />
+//           <motion.div initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} className="bg-white/95 backdrop-blur rounded-2xl p-8 md:max-w-xl shadow-2xl border border-gray-100">
+//             <motion.h2 className={`${playfair.className} text-2xl md:text-3xl font-extrabold`} initial={{ x: -8, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1 }}>
+//               {slide.title}
+//             </motion.h2>
+//             <motion.p className="mt-2 text-sm md:text-base text-gray-700 font-semibold" initial={{ x: -6, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
+//               {slide.subtitle}
+//             </motion.p>
+
+//             <motion.p className="mt-4 text-sm text-gray-600 leading-relaxed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
+//               Veer Bharat की excellence और modern quality control के साथ आपके किचन तक शुद्ध और भरोसेमंद तेल पहुँचाने का वादा।
+//             </motion.p>
+
+//             <div className="mt-6 flex items-center gap-3">
+//               <Link href={slide.cta.href} className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-5 py-2.5 font-bold shadow-md hover:scale-105 transition">
+//                 {slide.cta.text}
+//               </Link>
+
+//               <button onClick={prev} className="px-4 py-2 rounded-full border border-gray-200">‹ Prev</button>
+//               <button onClick={next} className="px-4 py-2 rounded-full border border-gray-200">Next ›</button>
+//             </div>
+//           </motion.div>
+//         </div>
+//       </div>
+
+//       <button onClick={prev} aria-label="Prev slide" className="absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition">‹</button>
+//       <button onClick={next} aria-label="Next slide" className="absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition">›</button>
+//     </section>
+//   );
+// }
+
+// /* ========== SignatureCollection ========== */
+// function SignatureCollection() {
+//   const list = [
+//     { id: "p1", slug: "kachi-ghani-mustard-oil", name: "Kachi Ghani Mustard Oil", img: "/images/prod-mustard.jpg", desc: "Traditional cold-pressed mustard oil with strong aroma & flavor." },
+//     { id: "p2", slug: "soyabean-oil", name: "Soyabean Oil", img: "/images/prod-soyabean.jpg", desc: "Light texture, rich in Vitamin E — great for everyday cooking." },
+//     { id: "p3", slug: "rice-bran-oil", name: "Rice Bran Oil", img: "/images/prod-ricebran.jpg", desc: "High smoke point and heart friendly — ideal for frying." },
+//   ];
+
+//   const [idx, setIdx] = useState(0);
+//   const len = list.length;
+//   const autoplay = useRef(null);
+
+//   useEffect(() => {
+//     autoplay.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
+//     return () => clearInterval(autoplay.current);
+//   }, [len]);
+
+//   function prev() {
+//     clearInterval(autoplay.current);
+//     setIdx((i) => (i - 1 + len) % len);
+//   }
+//   function next() {
+//     clearInterval(autoplay.current);
+//     setIdx((i) => (i + 1) % len);
+//   }
+
+//   const current = list[idx];
+
+//   return (
+//     <section className="py-6 md:py-12">
+//       <div className="container mx-auto max-w-7xl px-6">
+//         <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold mb-8 text-center">
+//           Our Signature Collection
+//         </motion.h2>
+
+//         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+//           <div className="hidden md:block">
+//             <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
+//               <Image src={list[(idx - 1 + len) % len].img} alt="prev" fill className="object-cover" unoptimized />
+//             </div>
+//             <p className="mt-3 text-sm text-gray-500">{list[(idx - 1 + len) % len].name}</p>
+//           </div>
+
+//           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="col-span-1 md:col-span-1 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-white">
+//             <div className="relative h-[420px] md:h-[520px]">
+//               <Image src={current.img} alt={current.name} fill className="object-cover" unoptimized />
+//             </div>
+//             <div className="p-8">
+//               <h3 className="text-2xl font-extrabold">{current.name}</h3>
+//               <p className="mt-3 text-gray-600">{current.desc}</p>
+
+//               <div className="mt-6 flex items-center gap-4">
+//                 <button onClick={() => alert(`Open ${current.name}`)} className="rounded-full bg-amber-400 px-6 py-2 font-bold text-black hover:scale-105 transition">Explore</button>
+//                 <Link href={`/products/${current.slug}`} className="rounded-full border border-gray-200 px-4 py-2">View Page</Link>
+//               </div>
+//             </div>
+//           </motion.div>
+
+//           <div className="hidden md:block">
+//             <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
+//               <Image src={list[(idx + 1) % len].img} alt="next" fill className="object-cover" unoptimized />
+//             </div>
+//             <p className="mt-3 text-sm text-gray-500">{list[(idx + 1) % len].name}</p>
+//           </div>
+
+//           <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 z-30">
+//             <button onClick={prev} aria-label="prev product" className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow">
+//               <FaChevronLeft className="text-[#0b0d11]" />
+//             </button>
+//             <div className="text-sm text-gray-700 px-4 py-2 rounded-full bg-white/10">{idx + 1} / {len}</div>
+//             <button onClick={next} aria-label="next product" className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow">
+//               <FaChevronRight className="text-[#0b0d11]" />
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// /* ========== Branches (gallery grid) ========== */
+// function Branches() {
+//   const imgs = ["/images/banner4.jpg", "/images/banner3.jpg", "/images/team1.jpg"];
+//   return (
+//     <section className="py-8 md:py-12">
+//       <div className="container mx-auto max-w-7xl px-6">
+//         <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
+//           Our Branches & Gallery
+//         </motion.h2>
+
+//         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+//           {imgs.map((src, i) => (
+//             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }} className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
+//               <Image src={src} alt={`Gallery ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-700" unoptimized />
+//             </motion.div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// /* ========== AnimatedSlickSlider (simple placeholder) ========== */
+// function AnimatedSlickSlider() {
+//   const slides = ["/images/banner2.jpg", "/images/banner3.jpg", "/images/slide1.jpg"];
+//   const [i, setI] = useState(0);
+//   useEffect(() => {
+//     const t = setInterval(() => setI((s) => (s + 1) % slides.length), 4000);
+//     return () => clearInterval(t);
+//   }, [slides.length]);
+
+//   return (
+//     <div className="w-full">
+//       <div className="relative h-48 md:h-64 rounded-xl overflow-hidden">
+//         <Image src={slides[i]} alt={`slide-${i}`} fill className="object-cover" unoptimized />
+//         <div className="absolute inset-0 bg-black/20" />
+//         <div className="absolute bottom-4 left-4 text-white">
+//           <h4 className="font-bold">Customer Favorites</h4>
+//           <p className="text-sm">Popular picks from Veer Bharat</p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// /* ========== ProductSlider (simple grid placeholder) ========== */
+// function ProductSlider() {
+//   const products = [
+//     { id: 1, name: "Kachi Ghani Mustard Oil", img: "/images/prod-mustard.jpg" },
+//     { id: 2, name: "Soyabean Oil", img: "/images/prod-soyabean.jpg" },
+//     { id: 3, name: "Rice Bran Oil", img: "/images/prod-ricebran.jpg" },
+//   ];
+
+//   return (
+//     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+//       {products.map((p) => (
+//         <div key={p.id} className="rounded-2xl overflow-hidden shadow-lg bg-white">
+//           <div className="relative h-44">
+//             <Image src={p.img} alt={p.name} fill className="object-cover" unoptimized />
+//           </div>
+//           <div className="p-4">
+//             <h4 className="font-bold">{p.name}</h4>
+//             <p className="mt-2 text-sm text-gray-600">Quality you can trust — Veer Bharat.</p>
+//             <div className="mt-4 flex items-center gap-3">
+//               <Link href={`/products/${p.id}`} className="text-sm font-semibold text-amber-500">View</Link>
+//               <button className="ml-auto px-3 py-1 rounded-full bg-amber-400 text-black font-bold">Buy</button>
+//             </div>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+// /* ========== Footer ========== */
+// function Footer() {
+//   return (
+//     <footer className="bg-[#0b0d11] text-white mt-12 rounded-t-3xl">
+//       <div className="container mx-auto max-w-7xl px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+//         <div>
+//           <h3 className="text-2xl font-extrabold text-amber-400">VEER BHARAT</h3>
+//           <p className="mt-3 text-gray-300 text-sm">
+//             हर बूंद में भरोसा — bringing purity & tradition to every kitchen with premium oils.
+//           </p>
+//           <p className="mt-4 text-sm text-gray-400">Office no 731, 7th Floor, Tower B, Ithum, Plot No-A-40, Sector 62, Noida, Uttar Pradesh 201301</p>
+//         </div>
+//         <div>
+//           <h4 className="font-bold text-lg mb-3">Quick Links</h4>
+//           <ul className="space-y-2 text-gray-300">
+//             <li><Link href="/">Home</Link></li>
+//             <li><Link href="/products">Products</Link></li>
+//             <li><Link href="/about">About Us</Link></li>
+//             <li><Link href="/contact">Contact</Link></li>
+//           </ul>
+//         </div>
+//         <div>
+//           <h4 className="font-bold text-lg mb-3">Follow Us</h4>
+//           <div className="flex gap-4">
+//             <a href="https://facebook.com" target="_blank" rel="noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-amber-400 transition"><FaFacebookF /></a>
+//             <a href="https://instagram.com" target="_blank" rel="noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-amber-400 transition"><FaInstagram /></a>
+//             <a href="https://youtube.com" target="_blank" rel="noreferrer" className="p-3 bg-white/10 rounded-full hover:bg-amber-400 transition"><FaYoutube /></a>
+//           </div>
+//           <div className="mt-4 text-sm text-gray-400">WhatsApp: +91 9266329444</div>
+//           <div className="text-sm text-gray-400">Email: hr@veer-bharat.com</div>
+//         </div>
+//       </div>
+//       <div className="text-center text-gray-400 text-sm py-4 border-t border-white/10">
+//         © {new Date().getFullYear()} Veer Bharat. All rights reserved.
+//       </div>
+//     </footer>
 //   );
 // }
