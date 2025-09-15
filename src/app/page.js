@@ -2018,11 +2018,11 @@ function CategoryCarousel() {
   }
 
   return (
-    <section className="py-12">
+    <section className="py-12 my-bg">
       <div className="container mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <div className="relative h-[420px] md:h-[520px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-[420px] md:h-[520px] rounded-2xl overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div key={items[index].id} initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -60 }} transition={{ duration: 0.8, ease }} className="absolute inset-0">
                   <Image src={items[index].img} alt={items[index].title} fill className="object-cover" unoptimized />
@@ -2030,7 +2030,7 @@ function CategoryCarousel() {
               </AnimatePresence>
             </div>
 
-            <button onClick={prev} aria-label="Prev" className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">
+            <button onClick={prev} aria-label="Prev" className="absolute left-1/2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">
               <FaChevronLeft className="text-[#0b0d11] w-4 h-4" />
             </button>
             <button onClick={next} aria-label="Next" className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">

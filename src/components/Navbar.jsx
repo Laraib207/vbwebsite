@@ -546,9 +546,10 @@ export default function Navbar() {
     <>
       <header
         // header is NOT fixed/sticky now; it sits in normal document flow
-        className={`w-full transition-all duration-300 bg-white/90 border-b border-[rgba(8,52,139,0.04)] ${
-          scrolled ? "py-3 shadow-sm" : "py-5 shadow-sm"
-        }`}
+        className={`w-full transition-all duration-300 bg-white border-b border-[rgba(8,52,139,0.04)] ${scrolled ? "fixed top-0 left-0 z-50 py-3 shadow-sm" : "relative py-5 shadow-sm"
+          }`}
+
+
       >
         <div className="container mx-auto flex items-center justify-between px-6">
           {/* logo + brand */}
@@ -559,9 +560,8 @@ export default function Navbar() {
             aria-label="Veer Bharat Home"
           >
             <div
-              className={`relative overflow-hidden rounded-lg ring-2 ring-[#08348b]/8 transition-all duration-300 shadow-lg flex-shrink-0 ${
-                scrolled ? "w-14 h-14" : "w-20 h-20"
-              }`}
+              className={`relative overflow-hidden rounded-lg ring-2 ring-[#08348b]/8 transition-all duration-300 shadow-lg flex-shrink-0 ${scrolled ? "w-14 h-14" : "w-20 h-20"
+                }`}
               aria-hidden={false}
             >
               <Image
@@ -575,18 +575,16 @@ export default function Navbar() {
 
             <div className="flex flex-col leading-tight">
               <span
-                className={`font-extrabold tracking-tight transition-all duration-300 ${
-                  scrolled ? "text-2xl" : "text-3xl"
-                } text-[#08348b]`}
+                className={`font-extrabold tracking-tight transition-all duration-300 ${scrolled ? "text-2xl" : "text-3xl"
+                  } text-[#08348b]`}
               >
-                VEER BHARAT
+                {/* VEER BHARAT */}
               </span>
               <span
-                className={`italic text-[#aa2266] transition-all duration-300 ${
-                  scrolled ? "text-sm" : "text-base"
-                }`}
+                className={`italic text-[#aa2266] transition-all duration-300 ${scrolled ? "text-sm" : "text-base"
+                  }`}
               >
-                वह! मज़ा आ गया
+                {/* वह! मज़ा आ गया */}
               </span>
             </div>
           </Link>
@@ -630,9 +628,8 @@ export default function Navbar() {
                 <div
                   role="menu"
                   aria-label="Team menu"
-                  className={`absolute top-full mt-2 right-0 w-44 rounded-md bg-white/95 text-[#082f63] shadow-lg ring-1 ring-black/10 backdrop-blur transition-all duration-200 ${
-                    teamOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none translate-y-1"
-                  }`}
+                  className={`absolute top-full mt-2 right-0 w-44 rounded-md bg-white/95 text-[#082f63] shadow-lg ring-1 ring-black/10 backdrop-blur transition-all duration-200 ${teamOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none translate-y-1"
+                    }`}
                 >
                   <ul className="flex flex-col py-2">
                     <li>
@@ -656,7 +653,7 @@ export default function Navbar() {
             {/* CTA */}
             <a
               href="#"
-              className="ml-4 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-[#08348b] via-[#aa2266] to-[#5d169e] text-white text-lg font-bold shadow-lg hover:scale-[1.05] transition"
+              className="ml-4 inline-flex items-center gap-2 px-4 py-2 rounded bg-gradient-to-r from-[#08348b] via-[#aa2266] to-[#5d169e] text-white text-lg font-bold shadow-lg hover:scale-[1.05] transition"
             >
               Shop Now
             </a>
@@ -745,9 +742,8 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         <div
-          className={`md:hidden bg-white border-t border-[rgba(8,52,139,0.06)] shadow-inner overflow-hidden transition-all duration-300 ${
-            open ? "max-h-[640px] py-6 opacity-100" : "max-h-0 py-0 opacity-0"
-          }`}
+          className={`md:hidden bg-white border-t border-[rgba(8,52,139,0.06)] shadow-inner overflow-hidden transition-all duration-300 ${open ? "max-h-[640px] py-6 opacity-100" : "max-h-0 py-0 opacity-0"
+            }`}
         >
           <div className="container mx-auto px-6 flex flex-col gap-4 text-lg font-medium">
             <MobileLink href="/" onClick={() => setOpen(false)}>
