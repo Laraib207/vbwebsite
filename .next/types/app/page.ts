@@ -1,4 +1,4 @@
-// File: /Users/laraibd/Desktop/wwwvbb/vbwebsite-1/src/app/page.js
+// File: /Users/laraibd/Desktop/wwwvbb/vbwebsite/vbwebsite/src/app/page.js
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

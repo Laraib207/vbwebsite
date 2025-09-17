@@ -1979,6 +1979,7 @@ function ModernSlider() {
 }
 
 /* ========== CategoryCarousel ========== */
+
 function CategoryCarousel() {
   const items = [
     {
@@ -2119,69 +2120,208 @@ function MovingShowcase() {
     { id: "s-banner3", img: "/images/banner3.jpg", title: "Healthy Frying — Rice Bran Oil", subtitle: "High Smoke Point • Neutral Taste • Heart Friendly", cta: { text: "Explore Rice Bran", href: "/products/rice-bran-oil" } },
   ];
 
-  const [idx, setIdx] = useState(0);
+  const [idx, setIdx] = React.useState(0);
   const len = slides.length;
-  const autoplayRef = useRef(null);
+  const autoplayRef = React.useRef(null);
+  const animGuard = React.useRef(false);
 
-  useEffect(() => {
-    autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
+  // Preload images (safe in SSR)
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    slides.forEach((s) => {
+      try {
+        const pre = new window.Image();
+        pre.src = s.img;
+      } catch (e) {
+        // ignore preload failures
+      }
+    });
+  }, []);
+
+  // autoplay
+  React.useEffect(() => {
+    autoplayRef.current = setInterval(() => {
+      setIdx((i) => (i + 1) % len);
+    }, 7000);
     return () => clearInterval(autoplayRef.current);
   }, [len]);
 
   function prev() {
+    if (animGuard.current) return;
     clearInterval(autoplayRef.current);
+    animGuard.current = true;
     setIdx((i) => (i - 1 + len) % len);
+    setTimeout(() => {
+      animGuard.current = false;
+      autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
+    }, 650);
   }
+
   function next() {
+    if (animGuard.current) return;
     clearInterval(autoplayRef.current);
+    animGuard.current = true;
     setIdx((i) => (i + 1) % len);
+    setTimeout(() => {
+      animGuard.current = false;
+      autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
+    }, 650);
   }
 
   const slide = slides[idx];
 
   return (
-    <section className="relative w-full min-h-[62vh] md:min-h-[72vh] overflow-hidden">
+    <section className="relative w-full min-h-[62vh] md:min-h-[72vh] overflow-hidden bg-white">
+      {/* Layered background images with fade */}
       <div className="absolute inset-0 -z-10">
-        <AnimatePresence mode="wait">
-          <motion.div key={slide.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }}>
-            <Image src={slide.img} alt={slide.title} fill className="object-cover object-center" priority unoptimized />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-white/60" />
-          </motion.div>
-        </AnimatePresence>
+        {slides.map((s, i) => (
+          <img
+            key={s.id}
+            src={s.img}
+            alt={s.title}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              transition: "opacity 0.9s ease, transform 0.9s ease",
+              opacity: i === idx ? 1 : 0,
+              transform: i === idx ? "scale(1)" : "scale(1.02)",
+              willChange: "opacity, transform",
+            }}
+          />
+        ))}
+
+        {/* subtle gradient to help text readability */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.22), rgba(0,0,0,0.04) 35%, rgba(255,255,255,0.6) 100%)",
+            pointerEvents: "none",
+          }}
+        />
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-7xl px-6 py-24 md:py-32">
+      {/* Content: keep card on the right, image visible on left */}
+      <div className="relative z-10 container mx-auto max-w-7xl px-6 py-20 md:py-28">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="hidden md:block" />
-          <motion.div initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} className="bg-white/95 backdrop-blur rounded-2xl p-8 md:max-w-xl shadow-2xl border border-gray-100">
-            <motion.h2 className={`${playfair.className} text-2xl md:text-3xl font-extrabold`} initial={{ x: -8, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.1 }}>
-              {slide.title}
-            </motion.h2>
-            <motion.p className="mt-2 text-sm md:text-base text-gray-700 font-semibold" initial={{ x: -6, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
-              {slide.subtitle}
-            </motion.p>
+          {/* LEFT: Visible image block for strong product display (keeps image large and uncropped) */}
+          <div className="flex items-center justify-center w-full">
+            <div
+              className="relative rounded-lg overflow-hidden shadow-2xl"
+              style={{
+                width: "100%",
+                maxWidth: 720,
+                height: "min(60vh, 520px)",
+                backgroundColor: "#f7f7f7",
+              }}
+            >
+              <img
+                src={slide.img}
+                alt={slide.title}
+                className="w-full h-full object-cover object-center block"
+                style={{ display: "block" }}
+              />
 
-            <motion.p className="mt-4 text-sm text-gray-600 leading-relaxed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
-              Veer Bharat की excellence और modern quality control के साथ आपके किचन तक शुद्ध और भरोसेमंद तेल पहुँचाने का वादा।
-            </motion.p>
-
-            <div className="mt-6 flex items-center gap-3">
-              <Link href={slide.cta.href} className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-5 py-2.5 font-bold shadow-md hover:scale-105 transition">
-                {slide.cta.text}
-              </Link>
-
-              <button onClick={prev} className="px-4 py-2 rounded-full border border-gray-200">‹ Prev</button>
-              <button onClick={next} className="px-4 py-2 rounded-full border border-gray-200">Next ›</button>
+              {/* optional small title badge on image */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: 16,
+                  top: 16,
+                  background: "rgba(255,255,255,0.95)",
+                  padding: "6px 10px",
+                  borderRadius: 999,
+                  fontSize: 14,
+                  boxShadow: "0 6px 18px rgba(2,6,23,0.08)",
+                  color: "#0b0d11",
+                }}
+              >
+                {slide.title.split("—")[0].trim()}
+              </div>
             </div>
-          </motion.div>
+          </div>
+
+          {/* RIGHT: Card with textual content and controls */}
+          <div>
+            <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-gray-900">{slide.title}</h2>
+            <p className="text-sm md:text-base text-gray-700 font-semibold mb-4">{slide.subtitle}</p>
+
+            <p className="text-sm text-gray-600 leading-relaxed mb-6">
+              Veer Bharat की excellence और modern quality control के साथ आपके किचन तक शुद्ध और भरोसेमंद तेल पहुँचाने का वादा।
+            </p>
+
+            <div className="flex items-center gap-3">
+              <a
+                href={slide.cta.href}
+                className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-5 py-2.5 font-bold shadow-md hover:scale-105 transition"
+              >
+                {slide.cta.text}
+              </a>
+
+              <button onClick={prev} className="px-4 py-2 rounded-full border border-gray-200">
+                ‹ Prev
+              </button>
+              <button onClick={next} className="px-4 py-2 rounded-full border border-gray-200">
+                Next ›
+              </button>
+            </div>
+
+            {/* small dots indicator */}
+            <div className="mt-6 flex items-center gap-3">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (animGuard.current || i === idx) return;
+                    clearInterval(autoplayRef.current);
+                    animGuard.current = true;
+                    setIdx(i);
+                    setTimeout(() => {
+                      animGuard.current = false;
+                      autoplayRef.current = setInterval(() => setIdx((j) => (j + 1) % len), 7000);
+                    }, 600);
+                  }}
+                  aria-label={`Go to ${i + 1}`}
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 999,
+                    background: i === idx ? "#0b0d11" : "#d1d5db",
+                    border: "none",
+                    padding: 0,
+                    transition: "background 200ms",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      <button onClick={prev} aria-label="Prev slide" className="absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition">‹</button>
-      <button onClick={next} aria-label="Next slide" className="absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition">›</button>
+      {/* Prev / Next overlay buttons for larger screens */}
+      <button
+        onClick={prev}
+        aria-label="Prev slide"
+        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition"
+      >
+        ‹
+      </button>
+      <button
+        onClick={next}
+        aria-label="Next slide"
+        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition"
+      >
+        ›
+      </button>
     </section>
   );
 }
+
 
 /* ========== SignatureCollection ========== */
 function SignatureCollection() {
