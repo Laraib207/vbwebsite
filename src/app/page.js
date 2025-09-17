@@ -1697,6 +1697,7 @@ import ProductSlider from "../components/ProductSlider";
 
 
 
+
 /* ---------- Fonts & easing ---------- */
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"] });
@@ -1717,7 +1718,7 @@ export default function Home() {
           viewport={{ once: true }}
           className={`${playfair.className} text-3xl md:text-5xl font-extrabold tracking-tight`}
         >
-          Veer Bharat Oil — Category
+          Veer Bharat Oill — Category
         </motion.h1>
 
         <motion.div
@@ -1759,6 +1760,7 @@ export default function Home() {
       {/* Fixed WhatsApp button — update number */}
 
       <ProductSlider/>
+      
       <a
         href="https://wa.me/6205771930"
         target="_blank"
@@ -1982,7 +1984,7 @@ function CategoryCarousel() {
     {
       id: "kachi",
       title: "Kachi Ghani Mustard Oil",
-      img: "/images/banner2.jpg",
+      img: "/images/bgim.png",
       desc: `कची घानी सरसों का तेल — परंपरा और तीखापन दोनों में संतुलन। हमारी cold-press विधि से निकला यह तेल अपनी सुगंध और स्वाद के लिये मशहूर है।`,
     },
     {
@@ -2001,72 +2003,113 @@ function CategoryCarousel() {
 
   const [index, setIndex] = useState(0);
   const len = items.length;
-  const autoplayRef = useRef(null);
+  const animGuard = useRef(false); // prevent rapid clicks that break animation
 
-  useEffect(() => {
-    autoplayRef.current = setInterval(() => setIndex((i) => (i + 1) % len), 6000);
-    return () => clearInterval(autoplayRef.current);
-  }, [len]);
-
+  // Manual navigation only — no autoplay here (more predictable)
   function prev() {
-    clearInterval(autoplayRef.current);
+    if (animGuard.current) return;
+    animGuard.current = true;
     setIndex((i) => (i - 1 + len) % len);
+    setTimeout(() => (animGuard.current = false), 700);
   }
   function next() {
-    clearInterval(autoplayRef.current);
+    if (animGuard.current) return;
+    animGuard.current = true;
     setIndex((i) => (i + 1) % len);
+    setTimeout(() => (animGuard.current = false), 700);
   }
 
   return (
-    <section className="py-12 my-bg">
-      <div className="container mx-auto max-w-7xl px-6">
+    <section className="py-12 my-bg relative overflow-visible">
+      <div className="container mx-auto max-w-7xl px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            <div className="relative h-[420px] md:h-[520px] rounded-2xl overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div key={items[index].id} initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -60 }} transition={{ duration: 0.8, ease }} className="absolute inset-0">
-                  <Image src={items[index].img} alt={items[index].title} fill className="object-cover" unoptimized />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <button onClick={prev} aria-label="Prev" className="absolute left-1/2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">
-              <FaChevronLeft className="text-[#0b0d11] w-4 h-4" />
-            </button>
-            <button onClick={next} aria-label="Next" className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">
-              <FaChevronRight className="text-[#0b0d11] w-4 h-4" />
-            </button>
+          {/* LEFT: Big visible image (not hidden by overlays) */}
+          <div className="relative h-[420px] md:h-[520px] overflow-hidden rounded-xl shadow-lg">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={items[index].id}
+                initial={{ opacity: 0, x: 80 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -80 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={items[index].img}
+                  alt={items[index].title}
+                  fill
+                  className="object-cover object-center"
+                  unoptimized
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          <div>
-            <motion.h3 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className={`${playfair.className} text-2xl md:text-4xl font-extrabold mb-4`}>
+          {/* RIGHT: Title + Description */}
+          <div className="relative z-20">
+            <motion.h3
+              key={items[index].id + "-title"}
+              initial={{ y: 18, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl md:text-4xl font-extrabold mb-4 text-[#0b0d11]"
+            >
               {items[index].title}
             </motion.h3>
 
-            <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.12 }} className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
+            <motion.p
+              key={items[index].id + "-desc"}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.08 }}
+              className="text-lg text-gray-800 leading-relaxed whitespace-pre-line"
+            >
               {items[index].desc}
             </motion.p>
-
-            <div className="mt-6 flex flex-wrap gap-4">
-              <Link href="/products" className="inline-block rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600 px-6 py-3 font-bold shadow text-white hover:scale-105 transition">
-                Explore Products
-              </Link>
-              <button onClick={() => alert(items[index].title + " — Quick View")} className="px-4 py-2 rounded-full border border-gray-300 hover:shadow transition">
-                Quick View →
-              </button>
-            </div>
           </div>
         </div>
 
+        {/* Dots Indicators */}
         <div className="mt-8 flex items-center justify-center gap-3">
           {items.map((it, i) => (
-            <button key={it.id} onClick={() => setIndex(i)} className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"} transition`} aria-label={`Go to ${i + 1}`} />
+            <button
+              key={it.id}
+              onClick={() => {
+                if (animGuard.current || i === index) return;
+                animGuard.current = true;
+                setIndex(i);
+                setTimeout(() => (animGuard.current = false), 700);
+              }}
+              className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"} transition`}
+              aria-label={`Go to ${i + 1}`}
+            />
           ))}
         </div>
       </div>
+
+      {/* Prev / Next buttons placed on the section edges for clear visibility */}
+      <button
+        onClick={prev}
+        aria-label="Prev"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
+      >
+        <FaChevronLeft className="text-[#0b0d11] w-5 h-5" />
+      </button>
+
+      <button
+        onClick={next}
+        aria-label="Next"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
+      >
+        <FaChevronRight className="text-[#0b0d11] w-5 h-5" />
+      </button>
+
+      {/* small unobtrusive backdrop to help readability but NOT covering images */}
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
     </section>
   );
 }
+
 
 /* ========== MovingShowcase ========== */
 function MovingShowcase() {
@@ -2143,84 +2186,49 @@ function MovingShowcase() {
 /* ========== SignatureCollection ========== */
 function SignatureCollection() {
   const list = [
-    { id: "p1", slug: "kachi-ghani-mustard-oil", name: "Kachi Ghani Mustard Oil", img: "/images/prod-mustard.jpg", desc: "Traditional cold-pressed mustard oil with strong aroma & flavor." },
-    { id: "p2", slug: "soyabean-oil", name: "Soyabean Oil", img: "/images/prod-soyabean.jpg", desc: "Light texture, rich in Vitamin E — great for everyday cooking." },
-    { id: "p3", slug: "rice-bran-oil", name: "Rice Bran Oil", img: "/images/prod-ricebran.jpg", desc: "High smoke point and heart friendly — ideal for frying." },
+    { id: "c1", name: "Fruits & Vegetables", img: "/images/cat4.jpeg" },
+    { id: "c2", name: "Bakery Dairy & Fresh Chicken", img: "/images/cat5.jpg" },
+    { id: "c3", name: "Packaged Food & Beverages", img: "/images/cat6.jpg" },
+    { id: "c4", name: "Rice Dals & More", img: "/images/cat7.jpg" },
   ];
 
-  const [idx, setIdx] = useState(0);
-  const len = list.length;
-  const autoplay = useRef(null);
-
-  useEffect(() => {
-    autoplay.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
-    return () => clearInterval(autoplay.current);
-  }, [len]);
-
-  function prev() {
-    clearInterval(autoplay.current);
-    setIdx((i) => (i - 1 + len) % len);
-  }
-  function next() {
-    clearInterval(autoplay.current);
-    setIdx((i) => (i + 1) % len);
-  }
-
-  const current = list[idx];
-
   return (
-    <section className="py-20 bg-[#0f1115] text-white">
+    <section className="py-12 md:py-20 bg-gray-50">
       <div className="container mx-auto max-w-7xl px-6">
-        <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold mb-8 text-center">
-          Our Signature Collection
-        </motion.h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-center text-gray-900">
+          Categories
+        </h2>
 
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-          <div className="hidden md:block">
-            <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
-              <Image src={list[(idx - 1 + len) % len].img} alt="prev" fill className="object-cover" unoptimized />
-            </div>
-            <p className="mt-3 text-sm text-gray-300">{list[(idx - 1 + len) % len].name}</p>
-          </div>
+        {/* Responsive grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          {list.map((item) => (
+            <div
+              key={item.id}
+              className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow hover:shadow-xl transform transition duration-300 hover:scale-105"
+            >
+              {/* Fixed size image container */}
+              <div className="relative w-full h-[280px]">
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="col-span-1 md:col-span-1 rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-white/5">
-            <div className="relative h-[420px] md:h-[520px]">
-              <Image src={current.img} alt={current.name} fill className="object-cover" unoptimized />
-            </div>
-            <div className="p-8">
-              <h3 className="text-2xl font-extrabold">{current.name}</h3>
-              <p className="mt-3 text-gray-200">{current.desc}</p>
-
-              <div className="mt-6 flex items-center gap-4">
-                <button onClick={() => alert(`Open ${current.name}`)} className="rounded-full bg-amber-400 px-6 py-2 font-bold text-black hover:scale-105 transition">Explore</button>
-                <Link href={`/products/${current.slug}`} className="rounded-full border border-white/20 px-4 py-2">View Page</Link>
+              {/* Title */}
+              <div className="py-4 text-center">
+                <h3 className="text-base md:text-lg font-semibold text-gray-800">
+                  {item.name}
+                </h3>
               </div>
             </div>
-          </motion.div>
-
-          <div className="hidden md:block">
-            <div className="relative h-48 rounded-2xl overflow-hidden shadow-lg">
-              <Image src={list[(idx + 1) % len].img} alt="next" fill className="object-cover" unoptimized />
-            </div>
-            <p className="mt-3 text-sm text-gray-300">{list[(idx + 1) % len].name}</p>
-          </div>
-
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 z-30">
-            <button onClick={prev} aria-label="prev product" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/95 shadow">
-              <FaChevronLeft className="text-[#0b0d11]" />
-            </button>
-            <div className="text-sm text-gray-200 px-4 py-2 rounded-full bg-white/10">{idx + 1} / {len}</div>
-            <button onClick={next} aria-label="next product" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/95 shadow">
-              <FaChevronRight className="text-[#0b0d11]" />
-            </button>
-          </div>
+          ))}
         </div>
-
-        <div style={{ height: 64 }} />
       </div>
     </section>
   );
 }
+
 
 /* ========== Branches ========== */
 function Branches() {

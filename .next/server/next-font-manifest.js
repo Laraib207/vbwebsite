@@ -1,1 +1,1 @@
-self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{},\"appUsingSizeAdjust\":false,\"pagesUsingSizeAdjust\":false}"
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/laraibd/Desktop/wwwvbb/vbwebsite-1/src/app/page\":[\"static/media/eaead17c7dbfcd5d-s.p.woff2\",\"static/media/eafabf029ad39a43-s.p.woff2\",\"static/media/0484562807a97172-s.p.woff2\",\"static/media/7db6c35d839a711c-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"
