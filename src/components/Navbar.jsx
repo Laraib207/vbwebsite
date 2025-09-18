@@ -513,6 +513,8 @@
 //   );
 // }
 
+
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -522,8 +524,9 @@ import Image from "next/image";
 export default function Navbar() {
   const [open, setOpen] = useState(false); // mobile menu
   const [scrolled, setScrolled] = useState(false);
-  const [teamOpen, setTeamOpen] = useState(false); // desktop dropdown state (for keyboard & touch)
+  const [teamOpen, setTeamOpen] = useState(false); // desktop dropdown state
   const teamRef = useRef(null);
+  const teamButtonRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -534,7 +537,12 @@ export default function Navbar() {
   // close team dropdown on outside click (desktop)
   useEffect(() => {
     const onDoc = (e) => {
-      if (teamRef.current && !teamRef.current.contains(e.target)) {
+      if (
+        teamRef.current &&
+        !teamRef.current.contains(e.target) &&
+        teamButtonRef.current &&
+        !teamButtonRef.current.contains(e.target)
+      ) {
         setTeamOpen(false);
       }
     };
@@ -542,48 +550,43 @@ export default function Navbar() {
     return () => document.removeEventListener("click", onDoc);
   }, []);
 
+  // close on Escape (keyboard)
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setTeamOpen(false);
+        setOpen(false);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
   return (
     <>
       <header
-        // header is NOT fixed/sticky now; it sits in normal document flow
-        className={`w-full transition-all duration-300 bg-white border-b border-[rgba(8,52,139,0.04)] ${scrolled ? "fixed top-0 left-0 z-50 py-3 shadow-sm" : "relative py-5 shadow-sm"
-          }`}
-
-
+        // Allow dropdown to overflow the header area: overflow-visible
+        className={`w-full transition-all duration-300 bg-white border-b border-[rgba(8,52,139,0.04)] overflow-visible ${
+          scrolled ? "fixed top-0 left-0 z-50 py-3 shadow-sm" : "relative py-5 shadow-sm"
+        }`}
       >
         <div className="container mx-auto flex items-center justify-between px-6">
           {/* logo + brand */}
-          <Link
-            href="/"
-            className="flex items-center gap-4"
-            onClick={() => setOpen(false)}
-            aria-label="Veer Bharat Home"
-          >
+          <Link href="/" className="flex items-center gap-4" onClick={() => setOpen(false)} aria-label="Veer Bharat Home">
             <div
-              className={`relative overflow-hidden rounded-lg ring-2 ring-[#08348b]/8 transition-all duration-300 shadow-lg flex-shrink-0 ${scrolled ? "w-14 h-14" : "w-20 h-20"
-                }`}
+              className={`relative overflow-hidden rounded-lg ring-2 ring-[#08348b]/8 transition-all duration-300 shadow-lg flex-shrink-0 ${
+                scrolled ? "w-14 h-14" : "w-20 h-20"
+              }`}
               aria-hidden={false}
             >
-              <Image
-                src="/logo.png"
-                alt="Veer Bharat logo"
-                fill
-                style={{ objectFit: "cover" }}
-                priority
-              />
+              <Image src="/logo.png" alt="Veer Bharat logo" fill style={{ objectFit: "cover" }} priority />
             </div>
 
             <div className="flex flex-col leading-tight">
-              <span
-                className={`font-extrabold tracking-tight transition-all duration-300 ${scrolled ? "text-2xl" : "text-3xl"
-                  } text-[#08348b]`}
-              >
+              <span className={`font-extrabold tracking-tight transition-all duration-300 ${scrolled ? "text-2xl" : "text-3xl"} text-[#08348b]`}>
                 {/* VEER BHARAT */}
               </span>
-              <span
-                className={`italic text-[#aa2266] transition-all duration-300 ${scrolled ? "text-sm" : "text-base"
-                  }`}
-              >
+              <span className={`italic text-[#aa2266] transition-all duration-300 ${scrolled ? "text-sm" : "text-base"}`}>
                 {/* वह! मज़ा आ गया */}
               </span>
             </div>
@@ -595,50 +598,57 @@ export default function Navbar() {
               <NavLink href="/">Home</NavLink>
               <NavLink href="/products">Products</NavLink>
 
-              {/* Team with dropdown */}
-              <div
-                ref={teamRef}
-                onMouseEnter={() => setTeamOpen(true)}
-                onMouseLeave={() => setTeamOpen(false)}
-                className="relative"
-              >
+              {/* Team with dropdown (desktop) */}
+              <div className="relative" ref={teamRef}>
                 <button
+                  ref={teamButtonRef}
                   onClick={() => setTeamOpen((s) => !s)}
+                  onMouseEnter={() => setTeamOpen(true)}
+                  onFocus={() => setTeamOpen(true)}
                   onKeyDown={(e) => {
                     if (e.key === "Escape") setTeamOpen(false);
                     if (e.key === "ArrowDown") setTeamOpen(true);
                   }}
                   aria-expanded={teamOpen}
-                  aria-haspopup="true"
+                  aria-haspopup="menu"
                   className="flex items-center gap-2 px-3 py-2 rounded hover:bg-white/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#08348b]"
                 >
                   Team
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className={`transition-transform ${teamOpen ? "rotate-180" : "rotate-0"}`}
-                    aria-hidden
-                  >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className={`transition-transform ${teamOpen ? "rotate-180" : "rotate-0"}`} aria-hidden>
                     <path d="M6 9l6 6 6-6" stroke="#08348b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
 
+                {/* Dropdown — solid white background, fixed min-w, strong shadow */}
                 <div
                   role="menu"
                   aria-label="Team menu"
-                  className={`absolute top-full mt-2 right-0 w-44 rounded-md bg-white/95 text-[#082f63] shadow-lg ring-1 ring-black/10 backdrop-blur transition-all duration-200 ${teamOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none translate-y-1"
-                    }`}
+                  onMouseEnter={() => setTeamOpen(true)}
+                  onMouseLeave={() => setTeamOpen(false)}
+                  className={`absolute top-full mt-2 right-0 min-w-[180px] rounded-md bg-white text-[#082f63] shadow-lg ring-1 ring-black/10 backdrop-blur-sm transition-all duration-150 transform origin-top-right z-50 ${
+                    teamOpen ? "opacity-100 pointer-events-auto translate-y-0 scale-100" : "opacity-0 pointer-events-none -translate-y-1 scale-95"
+                  }`}
                 >
                   <ul className="flex flex-col py-2">
-                    <li>
-                      <Link href="/team" onClick={() => setTeamOpen(false)} className="block px-4 py-2 hover:bg-[#08348b]/6">
+                    <li role="none">
+                      <Link
+                        href="/team"
+                        role="menuitem"
+                        tabIndex={teamOpen ? 0 : -1}
+                        onClick={() => setTeamOpen(false)}
+                        className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                      >
                         Our Team
                       </Link>
                     </li>
-                    <li>
-                      <Link href="/gallery" onClick={() => setTeamOpen(false)} className="block px-4 py-2 hover:bg-[#08348b]/6">
+                    <li role="none">
+                      <Link
+                        href="/gallery"
+                        role="menuitem"
+                        tabIndex={teamOpen ? 0 : -1}
+                        onClick={() => setTeamOpen(false)}
+                        className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                      >
                         Gallery
                       </Link>
                     </li>
@@ -660,64 +670,10 @@ export default function Navbar() {
 
             {/* Social icons (right side) */}
             <div className="ml-4 flex items-center gap-3">
-              <SocialIcon
-                href="https://www.instagram.com/veerbharatofficial"
-                label="Instagram"
-                ariaLabel="Veer Bharat Instagram"
-                svg={
-                  <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                    <defs>
-                      <linearGradient id="instaGrad" x1="0" x2="1">
-                        <stop offset="0" stopColor="#f58529" />
-                        <stop offset="0.5" stopColor="#dd2a7b" />
-                        <stop offset="1" stopColor="#515bd4" />
-                      </linearGradient>
-                    </defs>
-                    <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#instaGrad)" />
-                    <circle cx="12" cy="12" r="3.2" fill="#fff" opacity="0.95" />
-                    <circle cx="17" cy="7" r="0.9" fill="#fff" />
-                  </svg>
-                }
-              />
-
-              <SocialIcon
-                href="https://www.facebook.com/share/1CKoYSoAVg/"
-                label="Facebook"
-                ariaLabel="Veer Bharat Facebook"
-                svg={
-                  <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                    <rect x="2" y="2" width="20" height="20" rx="3" fill="#1877F2" />
-                    <path d="M15 8.5h1.8V6.2H15c-.9 0-1.3.4-1.3 1.2V9H12v2.1h1.7v6.6h2.1v-6.6H17l.3-2.1h-1.6V7.8c0-.5.2-1.3 1.1-1.3z" fill="#fff" />
-                  </svg>
-                }
-              />
-
-              <SocialIcon
-                href="https://www.linkedin.com/company/veer-bharat" // <-- replace with your company LinkedIn URL
-                label="LinkedIn"
-                ariaLabel="Veer Bharat LinkedIn"
-                svg={
-                  <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                    <rect x="2" y="2" width="20" height="20" rx="3" fill="#0A66C2" />
-                    <path
-                      d="M8.1 17H5.5V9.5h2.6V17zm-1.3-8.6c-.8 0-1.3-.6-1.3-1.3 0-.8.6-1.3 1.3-1.3.8 0 1.3.6 1.3 1.3 0 .7-.5 1.3-1.3 1.3zM19 17h-2.6v-3.7c0-.9-.3-1.5-1.1-1.5-.6 0-.9.4-1.1.8-.1.2-.1.5-.1.7V17h-2.6s.1-6.7 0-7.5h2.6v1.1c.3-.5.8-1.2 2-1.2 1.5 0 2.7 1 2.7 3.3V17z"
-                      fill="#fff"
-                    />
-                  </svg>
-                }
-              />
-
-              <SocialIcon
-                href="https://www.youtube.com/@Veer.officialbharat"
-                label="YouTube"
-                ariaLabel="Veer Bharat YouTube"
-                svg={
-                  <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                    <rect x="2" y="6" width="20" height="12" rx="3" fill="#FF0000" />
-                    <polygon points="10,9 16,12 10,15" fill="#fff" />
-                  </svg>
-                }
-              />
+              <SocialIcon href="https://www.instagram.com/veerbharatofficial" label="Instagram" ariaLabel="Veer Bharat Instagram" svg={<SvgInstagram />} />
+              <SocialIcon href="https://www.facebook.com/veerbharatofficial" label="Facebook" ariaLabel="Veer Bharat Facebook" svg={<SvgFacebook />} />
+              <SocialIcon href="https://www.linkedin.com/company/veer-bharat" label="LinkedIn" ariaLabel="Veer Bharat LinkedIn" svg={<SvgLinkedIn />} />
+              <SocialIcon href="https://www.youtube.com/@Veerbharatofficial1" label="YouTube" ariaLabel="Veer Bharat YouTube" svg={<SvgYouTube />} />
             </div>
           </nav>
 
@@ -730,21 +686,14 @@ export default function Navbar() {
               className="relative w-12 h-12 flex items-center justify-center rounded-lg hover:bg-[#08348b]/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#08348b]"
             >
               <svg className="w-8 h-8 text-[#08348b]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                {open ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                )}
+                {open ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />}
               </svg>
             </button>
           </div>
         </div>
 
         {/* Mobile menu */}
-        <div
-          className={`md:hidden bg-white border-t border-[rgba(8,52,139,0.06)] shadow-inner overflow-hidden transition-all duration-300 ${open ? "max-h-[640px] py-6 opacity-100" : "max-h-0 py-0 opacity-0"
-            }`}
-        >
+        <div className={`md:hidden bg-white border-t border-[rgba(8,52,139,0.06)] shadow-inner overflow-hidden transition-all duration-300 ${open ? "max-h-[640px] py-6 opacity-100" : "max-h-0 py-0 opacity-0"}`}>
           <div className="container mx-auto px-6 flex flex-col gap-4 text-lg font-medium">
             <MobileLink href="/" onClick={() => setOpen(false)}>
               Home
@@ -784,7 +733,6 @@ export default function Navbar() {
               Shop Now
             </a>
 
-            {/* Social icons in mobile */}
             <div className="flex items-center gap-4 pt-2">
               <SocialIconSmall href="https://www.instagram.com/veerbharatofficial" label="Instagram" />
               <SocialIconSmall href="https://www.facebook.com/share/1CKoYSoAVg/" label="Facebook" />
@@ -819,13 +767,7 @@ function MobileLink({ href, children, onClick }) {
 /* Social small button used in desktop right side */
 function SocialIcon({ href, label, svg, ariaLabel }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label={ariaLabel || label}
-      className="p-2 rounded-md hover:bg-white/20 transition flex items-center justify-center"
-    >
+    <a href={href} target="_blank" rel="noreferrer noopener" aria-label={ariaLabel || label} className="p-2 rounded-md hover:bg-white/20 transition flex items-center justify-center">
       <span className="sr-only">{label}</span>
       {svg}
     </a>
@@ -835,13 +777,7 @@ function SocialIcon({ href, label, svg, ariaLabel }) {
 /* mobile simple circular icons */
 function SocialIconSmall({ href, label }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer noopener"
-      aria-label={label}
-      className="w-10 h-10 rounded-full bg-[#08348b]/5 flex items-center justify-center hover:scale-105 transition"
-    >
+    <a href={href} target="_blank" rel="noreferrer noopener" aria-label={label} className="w-10 h-10 rounded-full bg-[#08348b]/5 flex items-center justify-center hover:scale-105 transition">
       <span className="sr-only">{label}</span>
 
       {label.toLowerCase().includes("insta") && (
@@ -868,10 +804,7 @@ function SocialIconSmall({ href, label }) {
       {label.toLowerCase().includes("linkedin") && (
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
           <rect x="2" y="2" width="20" height="20" rx="3" fill="#0A66C2" />
-          <path
-            d="M8.1 17H5.5V9.5h2.6V17zm-1.3-8.6c-.8 0-1.3-.6-1.3-1.3 0-.8.6-1.3 1.3-1.3.8 0 1.3.6 1.3 1.3 0 .7-.5 1.3-1.3 1.3zM19 17h-2.6v-3.7c0-.9-.3-1.5-1.1-1.5-.6 0-.9.4-1.1.8-.1.2-.1.5-.1.7V17h-2.6s.1-6.7 0-7.5h2.6v1.1c.3-.5.8-1.2 2-1.2 1.5 0 2.7 1 2.7 3.3V17z"
-            fill="#fff"
-          />
+          <path d="M8.1 17H5.5V9.5h2.6V17zm-1.3-8.6c-.8 0-1.3-.6-1.3-1.3 0-.8.6-1.3 1.3-1.3.8 0 1.3.6 1.3 1.3 0 .7-.5 1.3-1.3 1.3zM19 17h-2.6v-3.7c0-.9-.3-1.5-1.1-1.5-.6 0-.9.4-1.1.8-.1.2-.1.5-.1.7V17h-2.6s.1-6.7 0-7.5h2.6v1.1c.3-.5.8-1.2 2-1.2 1.5 0 2.7 1 2.7 3.3V17z" fill="#fff" />
         </svg>
       )}
 
@@ -882,5 +815,47 @@ function SocialIconSmall({ href, label }) {
         </svg>
       )}
     </a>
+  );
+}
+
+/* small inline SVG components for cleanliness */
+function SvgInstagram() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+      <defs>
+        <linearGradient id="instaGrad" x1="0" x2="1">
+          <stop offset="0" stopColor="#f58529" />
+          <stop offset="0.5" stopColor="#dd2a7b" />
+          <stop offset="1" stopColor="#515bd4" />
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#instaGrad)" />
+      <circle cx="12" cy="12" r="3.2" fill="#fff" opacity="0.95" />
+      <circle cx="17" cy="7" r="0.9" fill="#fff" />
+    </svg>
+  );
+}
+function SvgFacebook() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+      <rect x="2" y="2" width="20" height="20" rx="3" fill="#1877F2" />
+      <path d="M15 8.5h1.8V6.2H15c-.9 0-1.3.4-1.3 1.2V9H12v2.1h1.7v6.6h2.1v-6.6H17l.3-2.1h-1.6V7.8c0-.5.2-1.3 1.1-1.3z" fill="#fff" />
+    </svg>
+  );
+}
+function SvgLinkedIn() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+      <rect x="2" y="2" width="20" height="20" rx="3" fill="#0A66C2" />
+      <path d="M8.1 17H5.5V9.5h2.6V17zm-1.3-8.6c-.8 0-1.3-.6-1.3-1.3 0-.8.6-1.3 1.3-1.3.8 0 1.3.6 1.3 1.3 0 .7-.5 1.3-1.3 1.3zM19 17h-2.6v-3.7c0-.9-.3-1.5-1.1-1.5-.6 0-.9.4-1.1.8-.1.2-.1.5-.1.7V17h-2.6s.1-6.7 0-7.5h2.6v1.1c.3-.5.8-1.2 2-1.2 1.5 0 2.7 1 2.7 3.3V17z" fill="#fff" />
+    </svg>
+  );
+}
+function SvgYouTube() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+      <rect x="2" y="6" width="20" height="12" rx="3" fill="#FF0000" />
+      <polygon points="10,9 16,12 10,15" fill="#fff" />
+    </svg>
   );
 }

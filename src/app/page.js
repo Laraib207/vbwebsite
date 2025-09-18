@@ -1673,784 +1673,796 @@
 //         </button>
 //       </div>
 //     </section>
+// //   );
+// // }
+
+
+
+// /// Final code after this line 
+
+
+
+
+
+
+
+
+
+// "use client";
+// import AnimatedSlickSlider from "../components/AnimatedSlickSlider";
+
+// import React, { useEffect, useRef, useState } from "react";
+// import Link from "next/link";
+// import Image from "next/image";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { Poppins, Playfair_Display } from "next/font/google";
+// import { FaWhatsapp, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+// import ProductSlider from "../components/ProductSlider";
+
+
+
+
+
+// /* ---------- Fonts & easing ---------- */
+// const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
+// const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"] });
+// const ease = [0.22, 1, 0.36, 1];
+
+// export default function Home() {
+//   return (
+//     <main className={`${poppins.className} bg-white text-[#0b0d11]`}>
+//       {/* Video hero */}
+//       <VideoHero videos={["/images/hero-video.mp4"]} />
+
+//       {/* Heading for Category */}
+//       <div className="py-12 md:py-16 text-center">
+//         <motion.h1
+//           initial={{ y: 30, opacity: 0 }}
+//           whileInView={{ y: 0, opacity: 1 }}
+//           transition={{ duration: 0.8, ease }}
+//           viewport={{ once: true }}
+//           className={`${playfair.className} text-3xl md:text-5xl font-extrabold tracking-tight`}
+//         >
+//           Veer Bharat Oill — Category
+//         </motion.h1>
+
+//         <motion.div
+//           initial={{ scaleX: 0 }}
+//           whileInView={{ scaleX: 1 }}
+//           transition={{ duration: 0.7, ease }}
+//           viewport={{ once: true }}
+//           className="mt-4 w-32 md:w-40 mx-auto h-1 rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600"
+//         />
+//       </div>
+
+//       {/* Category carousel (Image Left + Text Right) */}
+//       <CategoryCarousel />
+
+//       {/* gap + heading */}
+//       <div className="h-6" />
+//       <div className="text-center mb-8">
+//         <h2 className={`${playfair.className} text-2xl md:text-3xl font-extrabold`}>Our Product</h2>
+//         <div className="mx-auto mt-3 w-20 h-1 rounded-full bg-amber-400" />
+//       </div>
+
+//       {/* Banner slider (page-level) */}
+//       <BannerSlider />
+
+//       {/* Modern full-screen style slider (your 'modern-slider' converted to React) */}
+//       <ModernSlider />
+
+//       {/* Moving/Showcase */}
+//       <MovingShowcase />
+
+//       {/* Signature collection */}
+//       <SignatureCollection />
+
+//       {/* Branches / Gallery */}
+//       <Branches />
+
+// <AnimatedSlickSlider />
+
+//       {/* Fixed WhatsApp button — update number */}
+
+//       <ProductSlider/>
+      
+//       <a
+//         href="https://wa.me/6205771930"
+//         target="_blank"
+//         rel="noopener noreferrer"
+//         className="fixed right-5 bottom-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-green-500 shadow-lg text-white hover:scale-105 transition"
+//         aria-label="WhatsApp"
+//       >
+//         <FaWhatsapp className="w-6 h-6" />
+//       </a>
+
+//       {/* small local CSS for ModernSlider visuals */}
+//       <style jsx>{`
+//         /* Modern slider custom CSS (kept small, responsive) */
+//         .modern-wrap {
+//           position: relative;
+//           overflow: hidden;
+//         }
+//         .modern-slide {
+//           position: absolute;
+//           inset: 0;
+//           display: grid;
+//           place-items: center;
+//         }
+//         .modern-img {
+//           width: 100%;
+//           height: 100vh;
+//           object-fit: cover;
+//           filter: blur(4px);
+//           transform: scale(1.03);
+//         }
+//         .modern-overlay {
+//           position: absolute;
+//           inset: 0;
+//           background: rgba(0, 0, 0, 0.45);
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           padding: 1.5rem;
+//         }
+//         .modern-info {
+//           max-width: 880px;
+//           text-align: center;
+//           color: white;
+//         }
+//         .modern-info h3 {
+//           font-size: 28px;
+//           line-height: 1.05;
+//           margin-bottom: 0.6rem;
+//           text-transform: uppercase;
+//         }
+//         .modern-info h5 {
+//           font-size: 16px;
+//           max-width: 680px;
+//           margin: 0 auto;
+//           opacity: 0.95;
+//         }
+//         .modern-arrow {
+//           position: absolute;
+//           top: 50%;
+//           transform: translateY(-50%);
+//           width: 48px;
+//           height: 48px;
+//           background: rgba(0,0,0,0.45);
+//           border-radius: 999px;
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           color: #fff;
+//           z-index: 40;
+//           cursor: pointer;
+//         }
+//         .modern-arrow.left { left: 10px; }
+//         .modern-arrow.right { right: 10px; }
+
+//         @media (max-width: 768px) {
+//           .modern-info h3 { font-size: 20px; }
+//           .modern-info h5 { font-size: 14px; }
+//         }
+//       `}</style>
+//     </main>
+//   );
+// }
+
+// /* ========== BannerSlider (page-level banner) ========== */
+// function BannerSlider() {
+//   const slides = [
+//     { id: "b1", img: "/images/banner2.jpg", title: "Slick slider animation with animate.css", cta: { text: "Start a Project", href: "#" }, color: "#ff4056" },
+//     { id: "b2", img: "/images/banner3.jpg", title: "Launch global digital brands", cta: { text: "Contact Now!!", href: "#" }, color: "#ffc5c5" },
+//     { id: "b3", img: "/images/banner4.jpg", title: "Digital transformation driven by technology", cta: null, color: "#3dffc1" },
+//     { id: "b4", img: "/images/team1.jpg", title: "Will Do Anything For html.", cta: null, color: "#000000" },
+//   ];
+
+//   const [index, setIndex] = useState(0);
+//   const len = slides.length;
+//   const autoplayRef = useRef(null);
+
+//   useEffect(() => {
+//     autoplayRef.current = setInterval(() => setIndex((i) => (i + 1) % len), 6000);
+//     return () => clearInterval(autoplayRef.current);
+//   }, [len]);
+
+//   function prev() {
+//     clearInterval(autoplayRef.current);
+//     setIndex((i) => (i - 1 + len) % len);
+//   }
+//   function next() {
+//     clearInterval(autoplayRef.current);
+//     setIndex((i) => (i + 1) % len);
+//   }
+
+//   return (
+//     <section className="relative overflow-hidden">
+//       {/* page-level arrows */}
+//       <button onClick={prev} aria-label="Prev banner" className="absolute left-4 top-1/2 z-40 -translate-y-1/2 rounded-full bg-white shadow-lg w-12 h-12 flex items-center justify-center hover:scale-105 transition">
+//         <FaChevronLeft />
+//       </button>
+//       <button onClick={next} aria-label="Next banner" className="absolute right-4 top-1/2 z-40 -translate-y-1/2 rounded-full bg-white shadow-lg w-12 h-12 flex items-center justify-center hover:scale-105 transition">
+//         <FaChevronRight />
+//       </button>
+
+//       <div className="relative h-[480px] md:h-[680px] w-full">
+//         <AnimatePresence mode="wait">
+//           <motion.div key={slides[index].id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }} className="absolute inset-0">
+//             <Image src={slides[index].img} alt={slides[index].title} fill className="object-cover" unoptimized />
+//             <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/20" />
+//             <div className="absolute inset-0 flex items-center">
+//               <div className="container mx-auto max-w-6xl px-6">
+//                 <div className="max-w-3xl text-white">
+//                   <motion.h2 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.18 }} style={{ color: slides[index].color }} className={`${playfair.className} text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight`}>
+//                     {slides[index].title}
+//                   </motion.h2>
+
+//                   {slides[index].cta && (
+//                     <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.35 }}>
+//                       <Link href={slides[index].cta.href} className="inline-block mt-6 rounded-full bg-amber-400 px-6 py-3 font-bold shadow text-black hover:scale-105 transition">
+//                         {slides[index].cta.text}
+//                       </Link>
+//                     </motion.div>
+//                   )}
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* bottom wave */}
+//             <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+//               <svg viewBox="0 0 1440 120" width="100%" height="100%" preserveAspectRatio="none">
+//                 <path d="M0,40 C180,120 360,0 540,40 C720,80 900,10 1080,40 C1260,70 1440,30 1440,30 L1440,120 L0,120 Z" fill="#ffffff" />
+//               </svg>
+//             </div>
+//           </motion.div>
+//         </AnimatePresence>
+//       </div>
+
+//       {/* dots */}
+//       <div className="flex items-center justify-center gap-3 py-6">
+//         {slides.map((s, i) => (
+//           <button key={s.id} onClick={() => setIndex(i)} className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"}`} aria-label={`Go to ${i + 1}`} />
+//         ))}
+//       </div>
+//     </section>
+//   );
+// }
+
+// /* ========== ModernSlider (converted from your HTML/CSS/JS) ========== */
+// function ModernSlider() {
+//   const slides = [
+//     { id: "m1", img: "/images/slide1.jpg", title: "Full Width Slider With Layers", subtitle: "You can easily add image, html formatted texts and video layers over each slide and each layer accepts unique animation." },
+//     { id: "m2", img: "/images/slide2.jpg", title: "Fully responsive Scales with its container", subtitle: "Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet." },
+//     { id: "m3", img: "/images/slide3.jpg", title: "Awesome Transtions With CSS3", subtitle: "Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet." },
+//     { id: "m4", img: "/images/banner3.jpg", title: "Separate settings per breakpoint", subtitle: "Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet." },
+//   ];
+
+//   const [index, setIndex] = useState(0);
+//   const len = slides.length;
+//   const autoplay = useRef(null);
+
+//   useEffect(() => {
+//     autoplay.current = setInterval(() => setIndex((i) => (i + 1) % len), 8000);
+//     return () => clearInterval(autoplay.current);
+//   }, [len]);
+
+//   function prev() {
+//     clearInterval(autoplay.current);
+//     setIndex((i) => (i - 1 + len) % len);
+//   }
+//   function next() {
+//     clearInterval(autoplay.current);
+//     setIndex((i) => (i + 1) % len);
+//   }
+
+//   return (
+//     <section className="modern-wrap relative mb-12">
+//       {/* arrows positioned left/right of page */}
+//       <div className="modern-arrow left" onClick={prev}><FaChevronLeft /></div>
+//       <div className="modern-arrow right" onClick={next}><FaChevronRight /></div>
+
+//       <div className="relative h-[80vh] md:h-[100vh]">
+//         <AnimatePresence mode="wait">
+//           <motion.div key={slides[index].id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }} className="modern-slide">
+//             <Image src={slides[index].img} alt={slides[index].title} className="modern-img" fill unoptimized />
+//             <div className="modern-overlay">
+//               <div className="modern-info">
+//                 <motion.h3 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.12 }} className={`${playfair.className}`}>{slides[index].title}</motion.h3>
+//                 <motion.h5 initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }} className="mt-3">
+//                   {slides[index].subtitle}
+//                 </motion.h5>
+//               </div>
+//             </div>
+//           </motion.div>
+//         </AnimatePresence>
+//       </div>
+
+//       <p className="text-center mt-6">Slick slider simple and easy to use — converted to React.</p>
+//     </section>
+//   );
+// }
+
+// /* ========== CategoryCarousel ========== */
+
+// function CategoryCarousel() {
+//   const items = [
+//     {
+//       id: "kachi",
+//       title: "Kachi Ghani Mustard Oil",
+//       img: "/images/bgim.png",
+//       desc: `कची घानी सरसों का तेल — परंपरा और तीखापन दोनों में संतुलन। हमारी cold-press विधि से निकला यह तेल अपनी सुगंध और स्वाद के लिये मशहूर है।`,
+//     },
+//     {
+//       id: "soya",
+//       title: "Soyabean Oil — Light & Healthy",
+//       img: "/images/slide2.jpg",
+//       desc: `Soyabean oil हल्का, पौष्टिक और रोज़ाना के लिए उपयुक्त। इसमें Vitamin E और अनसैचुरेटेड फैटी एसिड्स होते हैं।`,
+//     },
+//     {
+//       id: "rice",
+//       title: "Rice Bran Oil — Heart Friendly",
+//       img: "/images/slide1.jpg",
+//       desc: `Rice bran oil उच्च स्मोक पॉइंट और हृदय-हितकर प्रोफाइल के साथ आता है।`,
+//     },
+//   ];
+
+//   const [index, setIndex] = useState(0);
+//   const len = items.length;
+//   const animGuard = useRef(false); // prevent rapid clicks that break animation
+
+//   // Manual navigation only — no autoplay here (more predictable)
+//   function prev() {
+//     if (animGuard.current) return;
+//     animGuard.current = true;
+//     setIndex((i) => (i - 1 + len) % len);
+//     setTimeout(() => (animGuard.current = false), 700);
+//   }
+//   function next() {
+//     if (animGuard.current) return;
+//     animGuard.current = true;
+//     setIndex((i) => (i + 1) % len);
+//     setTimeout(() => (animGuard.current = false), 700);
+//   }
+
+//   return (
+//     <section className="py-12 my-bg relative overflow-visible">
+//       <div className="container mx-auto max-w-7xl px-6 relative z-10">
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+//           {/* LEFT: Big visible image (not hidden by overlays) */}
+//           <div className="relative h-[420px] md:h-[520px] overflow-hidden rounded-xl shadow-lg">
+//             <AnimatePresence mode="wait">
+//               <motion.div
+//                 key={items[index].id}
+//                 initial={{ opacity: 0, x: 80 }}
+//                 animate={{ opacity: 1, x: 0 }}
+//                 exit={{ opacity: 0, x: -80 }}
+//                 transition={{ duration: 0.6, ease: "easeOut" }}
+//                 className="absolute inset-0"
+//               >
+//                 <Image
+//                   src={items[index].img}
+//                   alt={items[index].title}
+//                   fill
+//                   className="object-cover object-center"
+//                   unoptimized
+//                 />
+//               </motion.div>
+//             </AnimatePresence>
+//           </div>
+
+//           {/* RIGHT: Title + Description */}
+//           <div className="relative z-20">
+//             <motion.h3
+//               key={items[index].id + "-title"}
+//               initial={{ y: 18, opacity: 0 }}
+//               animate={{ y: 0, opacity: 1 }}
+//               transition={{ duration: 0.5 }}
+//               className="text-2xl md:text-4xl font-extrabold mb-4 text-[#0b0d11]"
+//             >
+//               {items[index].title}
+//             </motion.h3>
+
+//             <motion.p
+//               key={items[index].id + "-desc"}
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               transition={{ duration: 0.5, delay: 0.08 }}
+//               className="text-lg text-gray-800 leading-relaxed whitespace-pre-line"
+//             >
+//               {items[index].desc}
+//             </motion.p>
+//           </div>
+//         </div>
+
+//         {/* Dots Indicators */}
+//         <div className="mt-8 flex items-center justify-center gap-3">
+//           {items.map((it, i) => (
+//             <button
+//               key={it.id}
+//               onClick={() => {
+//                 if (animGuard.current || i === index) return;
+//                 animGuard.current = true;
+//                 setIndex(i);
+//                 setTimeout(() => (animGuard.current = false), 700);
+//               }}
+//               className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"} transition`}
+//               aria-label={`Go to ${i + 1}`}
+//             />
+//           ))}
+//         </div>
+//       </div>
+
+//       {/* Prev / Next buttons placed on the section edges for clear visibility */}
+//       <button
+//         onClick={prev}
+//         aria-label="Prev"
+//         className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
+//       >
+//         <FaChevronLeft className="text-[#0b0d11] w-5 h-5" />
+//       </button>
+
+//       <button
+//         onClick={next}
+//         aria-label="Next"
+//         className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
+//       >
+//         <FaChevronRight className="text-[#0b0d11] w-5 h-5" />
+//       </button>
+
+//       {/* small unobtrusive backdrop to help readability but NOT covering images */}
+//       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+//     </section>
+//   );
+// }
+
+
+// /* ========== MovingShowcase ========== */
+// function MovingShowcase() {
+//   const slides = [
+//     { id: "s-soya", img: "/images/slide2.jpg", title: "Soyabean Oil — हल्का, स्वास्थ्यवर्धक", subtitle: "Vitamin E • Light Texture • Daily Cooking", cta: { text: "Explore Soyabean", href: "/products/soyabean-oil" } },
+//     { id: "s-mustard", img: "/images/slide1.jpg", title: "Kachi Ghani Mustard Oil — परंपरा का स्वाद", subtitle: "Cold Pressed • Strong Aroma • Authentic Taste", cta: { text: "Explore Mustard", href: "/products/kachi-ghani-mustard-oil" } },
+//     { id: "s-banner3", img: "/images/banner3.jpg", title: "Healthy Frying — Rice Bran Oil", subtitle: "High Smoke Point • Neutral Taste • Heart Friendly", cta: { text: "Explore Rice Bran", href: "/products/rice-bran-oil" } },
+//   ];
+
+//   const [idx, setIdx] = React.useState(0);
+//   const len = slides.length;
+//   const autoplayRef = React.useRef(null);
+//   const animGuard = React.useRef(false);
+
+//   // Preload images (safe in SSR)
+//   React.useEffect(() => {
+//     if (typeof window === "undefined") return;
+//     slides.forEach((s) => {
+//       try {
+//         const pre = new window.Image();
+//         pre.src = s.img;
+//       } catch (e) {
+//         // ignore preload failures
+//       }
+//     });
+//   }, []);
+
+//   // autoplay
+//   React.useEffect(() => {
+//     autoplayRef.current = setInterval(() => {
+//       setIdx((i) => (i + 1) % len);
+//     }, 7000);
+//     return () => clearInterval(autoplayRef.current);
+//   }, [len]);
+
+//   function prev() {
+//     if (animGuard.current) return;
+//     clearInterval(autoplayRef.current);
+//     animGuard.current = true;
+//     setIdx((i) => (i - 1 + len) % len);
+//     setTimeout(() => {
+//       animGuard.current = false;
+//       autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
+//     }, 650);
+//   }
+
+//   function next() {
+//     if (animGuard.current) return;
+//     clearInterval(autoplayRef.current);
+//     animGuard.current = true;
+//     setIdx((i) => (i + 1) % len);
+//     setTimeout(() => {
+//       animGuard.current = false;
+//       autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
+//     }, 650);
+//   }
+
+//   const slide = slides[idx];
+
+//   return (
+//     <section className="relative w-full min-h-[62vh] md:min-h-[72vh] overflow-hidden bg-white">
+//       {/* Layered background images with fade */}
+//       <div className="absolute inset-0 -z-10">
+//         {slides.map((s, i) => (
+//           <img
+//             key={s.id}
+//             src={s.img}
+//             alt={s.title}
+//             style={{
+//               position: "absolute",
+//               inset: 0,
+//               width: "100%",
+//               height: "100%",
+//               objectFit: "cover",
+//               objectPosition: "center",
+//               transition: "opacity 0.9s ease, transform 0.9s ease",
+//               opacity: i === idx ? 1 : 0,
+//               transform: i === idx ? "scale(1)" : "scale(1.02)",
+//               willChange: "opacity, transform",
+//             }}
+//           />
+//         ))}
+
+//         {/* subtle gradient to help text readability */}
+//         <div
+//           style={{
+//             position: "absolute",
+//             inset: 0,
+//             background:
+//               "linear-gradient(to bottom, rgba(0,0,0,0.22), rgba(0,0,0,0.04) 35%, rgba(255,255,255,0.6) 100%)",
+//             pointerEvents: "none",
+//           }}
+//         />
+//       </div>
+
+//       {/* Content: keep card on the right, image visible on left */}
+//       <div className="relative z-10 container mx-auto max-w-7xl px-6 py-20 md:py-28">
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+//           {/* LEFT: Visible image block for strong product display (keeps image large and uncropped) */}
+//           <div className="flex items-center justify-center w-full">
+//             <div
+//               className="relative rounded-lg overflow-hidden shadow-2xl"
+//               style={{
+//                 width: "100%",
+//                 maxWidth: 720,
+//                 height: "min(60vh, 520px)",
+//                 backgroundColor: "#f7f7f7",
+//               }}
+//             >
+//               <img
+//                 src={slide.img}
+//                 alt={slide.title}
+//                 className="w-full h-full object-cover object-center block"
+//                 style={{ display: "block" }}
+//               />
+
+//               {/* optional small title badge on image */}
+//               <div
+//                 style={{
+//                   position: "absolute",
+//                   left: 16,
+//                   top: 16,
+//                   background: "rgba(255,255,255,0.95)",
+//                   padding: "6px 10px",
+//                   borderRadius: 999,
+//                   fontSize: 14,
+//                   boxShadow: "0 6px 18px rgba(2,6,23,0.08)",
+//                   color: "#0b0d11",
+//                 }}
+//               >
+//                 {slide.title.split("—")[0].trim()}
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* RIGHT: Card with textual content and controls */}
+//           <div>
+//             <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-gray-900">{slide.title}</h2>
+//             <p className="text-sm md:text-base text-gray-700 font-semibold mb-4">{slide.subtitle}</p>
+
+//             <p className="text-sm text-gray-600 leading-relaxed mb-6">
+//               Veer Bharat की excellence और modern quality control के साथ आपके किचन तक शुद्ध और भरोसेमंद तेल पहुँचाने का वादा।
+//             </p>
+
+//             <div className="flex items-center gap-3">
+//               <a
+//                 href={slide.cta.href}
+//                 className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-5 py-2.5 font-bold shadow-md hover:scale-105 transition"
+//               >
+//                 {slide.cta.text}
+//               </a>
+
+//               <button onClick={prev} className="px-4 py-2 rounded-full border border-gray-200">
+//                 ‹ Prev
+//               </button>
+//               <button onClick={next} className="px-4 py-2 rounded-full border border-gray-200">
+//                 Next ›
+//               </button>
+//             </div>
+
+//             {/* small dots indicator */}
+//             <div className="mt-6 flex items-center gap-3">
+//               {slides.map((_, i) => (
+//                 <button
+//                   key={i}
+//                   onClick={() => {
+//                     if (animGuard.current || i === idx) return;
+//                     clearInterval(autoplayRef.current);
+//                     animGuard.current = true;
+//                     setIdx(i);
+//                     setTimeout(() => {
+//                       animGuard.current = false;
+//                       autoplayRef.current = setInterval(() => setIdx((j) => (j + 1) % len), 7000);
+//                     }, 600);
+//                   }}
+//                   aria-label={`Go to ${i + 1}`}
+//                   style={{
+//                     width: 10,
+//                     height: 10,
+//                     borderRadius: 999,
+//                     background: i === idx ? "#0b0d11" : "#d1d5db",
+//                     border: "none",
+//                     padding: 0,
+//                     transition: "background 200ms",
+//                   }}
+//                 />
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Prev / Next overlay buttons for larger screens */}
+//       <button
+//         onClick={prev}
+//         aria-label="Prev slide"
+//         className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition"
+//       >
+//         ‹
+//       </button>
+//       <button
+//         onClick={next}
+//         aria-label="Next slide"
+//         className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition"
+//       >
+//         ›
+//       </button>
+//     </section>
+//   );
+// }
+
+
+// /* ========== SignatureCollection ========== */
+// function SignatureCollection() {
+//   const list = [
+//     { id: "c1", name: "Fruits & Vegetables", img: "/images/Unknown-1.jpeg" },
+//     { id: "c2", name: "Bakery Dairy & Fresh Chicken", img: "/images/Unknown-2.jpeg" },
+//     { id: "c3", name: "Packaged Food & Beverages", img: "/images/Unknown-3.jpeg" },
+//     { id: "c4", name: "Rice Dals & More", img: "/images/Unknown-5.jpeg" },
+//   ];
+
+//   return (
+//     <section className="py-12 md:py-20 bg-gray-50">
+//       <div className="container mx-auto max-w-7xl px-6">
+//         <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-center text-gray-900">
+//           Categories
+//         </h2>
+
+//         {/* Responsive grid */}
+//         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+//           {list.map((item) => (
+//             <div
+//               key={item.id}
+//               className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow hover:shadow-xl transform transition duration-300 hover:scale-105"
+//             >
+//               {/* Fixed size image container */}
+//               <div className="relative w-full h-[250px]">
+//                 <img
+//                   src={item.img}
+//                   alt={item.name}
+//                   className="w-full h-full object-cover object-center"
+//                 />
+//               </div>
+
+//               {/* Title */}
+//               <div className="py-4 text-center">
+//                 <h3 className="text-base md:text-lg font-semibold text-gray-800">
+//                   {item.name}
+//                 </h3>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+// /* ========== Branches ========== */
+// function Branches() {
+//   const imgs = [
+//     "/images/banner4.jpg",
+//     "/images/banner3.jpg",
+//     "/images/team1.jpg",
+//   ];
+
+//   return (
+//     <section className="py-20 bg-white">
+//       <div className="container mx-auto max-w-7xl px-6">
+//         <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
+//           Our Branches & Gallery
+//         </motion.h2>
+
+//         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+//           {imgs.map((src, i) => (
+//             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * i }} className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
+//               <Image src={src} alt={`Gallery ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-700" unoptimized />
+//             </motion.div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
 //   );
 // }
 
 
 
-/// Final code after this line 
 
+// /* ========== VideoHero ========== */
+// function VideoHero({ videos = [] }) {
+//   const vidRef = useRef(null);
+//   const [playing, setPlaying] = useState(true);
 
+//   useEffect(() => {
+//     const v = vidRef.current;
+//     if (!v) return;
+//     v.muted = true;
+//     v.playsInline = true;
+//     v.preload = "metadata";
+//     v.play().catch(() => setPlaying(false));
+//   }, [videos]);
 
+//   function toggle() {
+//     const v = vidRef.current;
+//     if (!v) return;
+//     if (v.paused) {
+//       v.play().catch(() => setPlaying(false));
+//       setPlaying(true);
+//     } else {
+//       v.pause();
+//       setPlaying(false);
+//     }
+//   }
 
-"use client";
-import AnimatedSlickSlider from "../components/AnimatedSlickSlider";
+//   return (
+//     <section className="relative w-full overflow-hidden bg-black border-b border-white/6">
+//       <div className="relative h-[60vh] md:h-[72vh] lg:h-[82vh]">
+//         <video ref={vidRef} src={videos[0]} className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
 
-import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Poppins, Playfair_Display } from "next/font/google";
-import { FaWhatsapp, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import ProductSlider from "../components/ProductSlider";
+//         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/30 pointer-events-none" />
 
+//         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
+//           <motion.h1 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} className={`${playfair.className} text-3xl md:text-5xl lg:text-6xl font-extrabold text-white`}>
+//             Welcome to Veer Bharat
+//           </motion.h1>
+//           <motion.h2 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.8 }} className={`${poppins.className} text-lg md:text-2xl font-bold text-amber-300 mt-3`}>
+//             मज़ा आ गया
+//           </motion.h2>
+//         </div>
 
+//         <button onClick={toggle} className="absolute right-6 top-6 z-30 flex items-center gap-2 rounded-full bg-white/20 backdrop-blur px-4 py-2 text-sm font-semibold border border-white/10 hover:scale-105 transition">
+//           {playing ? "Pause" : "Play"}
+//         </button>
+//       </div>
 
 
+//     </section>
+//   );
+// }
 
-/* ---------- Fonts & easing ---------- */
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"] });
-const ease = [0.22, 1, 0.36, 1];
 
-export default function Home() {
-  return (
-    <main className={`${poppins.className} bg-white text-[#0b0d11]`}>
-      {/* Video hero */}
-      <VideoHero videos={["/images/hero-video.mp4"]} />
 
-      {/* Heading for Category */}
-      <div className="py-12 md:py-16 text-center">
-        <motion.h1
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease }}
-          viewport={{ once: true }}
-          className={`${playfair.className} text-3xl md:text-5xl font-extrabold tracking-tight`}
-        >
-          Veer Bharat Oill — Category
-        </motion.h1>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.7, ease }}
-          viewport={{ once: true }}
-          className="mt-4 w-32 md:w-40 mx-auto h-1 rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600"
-        />
-      </div>
 
-      {/* Category carousel (Image Left + Text Right) */}
-      <CategoryCarousel />
 
-      {/* gap + heading */}
-      <div className="h-6" />
-      <div className="text-center mb-8">
-        <h2 className={`${playfair.className} text-2xl md:text-3xl font-extrabold`}>Our Product</h2>
-        <div className="mx-auto mt-3 w-20 h-1 rounded-full bg-amber-400" />
-      </div>
 
-      {/* Banner slider (page-level) */}
-      <BannerSlider />
-
-      {/* Modern full-screen style slider (your 'modern-slider' converted to React) */}
-      <ModernSlider />
-
-      {/* Moving/Showcase */}
-      <MovingShowcase />
-
-      {/* Signature collection */}
-      <SignatureCollection />
-
-      {/* Branches / Gallery */}
-      <Branches />
-
-<AnimatedSlickSlider />
-
-      {/* Fixed WhatsApp button — update number */}
-
-      <ProductSlider/>
-      
-      <a
-        href="https://wa.me/6205771930"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed right-5 bottom-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-green-500 shadow-lg text-white hover:scale-105 transition"
-        aria-label="WhatsApp"
-      >
-        <FaWhatsapp className="w-6 h-6" />
-      </a>
-
-      {/* small local CSS for ModernSlider visuals */}
-      <style jsx>{`
-        /* Modern slider custom CSS (kept small, responsive) */
-        .modern-wrap {
-          position: relative;
-          overflow: hidden;
-        }
-        .modern-slide {
-          position: absolute;
-          inset: 0;
-          display: grid;
-          place-items: center;
-        }
-        .modern-img {
-          width: 100%;
-          height: 100vh;
-          object-fit: cover;
-          filter: blur(4px);
-          transform: scale(1.03);
-        }
-        .modern-overlay {
-          position: absolute;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.45);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 1.5rem;
-        }
-        .modern-info {
-          max-width: 880px;
-          text-align: center;
-          color: white;
-        }
-        .modern-info h3 {
-          font-size: 28px;
-          line-height: 1.05;
-          margin-bottom: 0.6rem;
-          text-transform: uppercase;
-        }
-        .modern-info h5 {
-          font-size: 16px;
-          max-width: 680px;
-          margin: 0 auto;
-          opacity: 0.95;
-        }
-        .modern-arrow {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 48px;
-          height: 48px;
-          background: rgba(0,0,0,0.45);
-          border-radius: 999px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          z-index: 40;
-          cursor: pointer;
-        }
-        .modern-arrow.left { left: 10px; }
-        .modern-arrow.right { right: 10px; }
-
-        @media (max-width: 768px) {
-          .modern-info h3 { font-size: 20px; }
-          .modern-info h5 { font-size: 14px; }
-        }
-      `}</style>
-    </main>
-  );
-}
-
-/* ========== BannerSlider (page-level banner) ========== */
-function BannerSlider() {
-  const slides = [
-    { id: "b1", img: "/images/banner2.jpg", title: "Slick slider animation with animate.css", cta: { text: "Start a Project", href: "#" }, color: "#ff4056" },
-    { id: "b2", img: "/images/banner3.jpg", title: "Launch global digital brands", cta: { text: "Contact Now!!", href: "#" }, color: "#ffc5c5" },
-    { id: "b3", img: "/images/banner4.jpg", title: "Digital transformation driven by technology", cta: null, color: "#3dffc1" },
-    { id: "b4", img: "/images/team1.jpg", title: "Will Do Anything For html.", cta: null, color: "#000000" },
-  ];
-
-  const [index, setIndex] = useState(0);
-  const len = slides.length;
-  const autoplayRef = useRef(null);
-
-  useEffect(() => {
-    autoplayRef.current = setInterval(() => setIndex((i) => (i + 1) % len), 6000);
-    return () => clearInterval(autoplayRef.current);
-  }, [len]);
-
-  function prev() {
-    clearInterval(autoplayRef.current);
-    setIndex((i) => (i - 1 + len) % len);
-  }
-  function next() {
-    clearInterval(autoplayRef.current);
-    setIndex((i) => (i + 1) % len);
-  }
-
-  return (
-    <section className="relative overflow-hidden">
-      {/* page-level arrows */}
-      <button onClick={prev} aria-label="Prev banner" className="absolute left-4 top-1/2 z-40 -translate-y-1/2 rounded-full bg-white shadow-lg w-12 h-12 flex items-center justify-center hover:scale-105 transition">
-        <FaChevronLeft />
-      </button>
-      <button onClick={next} aria-label="Next banner" className="absolute right-4 top-1/2 z-40 -translate-y-1/2 rounded-full bg-white shadow-lg w-12 h-12 flex items-center justify-center hover:scale-105 transition">
-        <FaChevronRight />
-      </button>
-
-      <div className="relative h-[480px] md:h-[680px] w-full">
-        <AnimatePresence mode="wait">
-          <motion.div key={slides[index].id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }} className="absolute inset-0">
-            <Image src={slides[index].img} alt={slides[index].title} fill className="object-cover" unoptimized />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/20" />
-            <div className="absolute inset-0 flex items-center">
-              <div className="container mx-auto max-w-6xl px-6">
-                <div className="max-w-3xl text-white">
-                  <motion.h2 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.18 }} style={{ color: slides[index].color }} className={`${playfair.className} text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight`}>
-                    {slides[index].title}
-                  </motion.h2>
-
-                  {slides[index].cta && (
-                    <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.35 }}>
-                      <Link href={slides[index].cta.href} className="inline-block mt-6 rounded-full bg-amber-400 px-6 py-3 font-bold shadow text-black hover:scale-105 transition">
-                        {slides[index].cta.text}
-                      </Link>
-                    </motion.div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* bottom wave */}
-            <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-              <svg viewBox="0 0 1440 120" width="100%" height="100%" preserveAspectRatio="none">
-                <path d="M0,40 C180,120 360,0 540,40 C720,80 900,10 1080,40 C1260,70 1440,30 1440,30 L1440,120 L0,120 Z" fill="#ffffff" />
-              </svg>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* dots */}
-      <div className="flex items-center justify-center gap-3 py-6">
-        {slides.map((s, i) => (
-          <button key={s.id} onClick={() => setIndex(i)} className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"}`} aria-label={`Go to ${i + 1}`} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ========== ModernSlider (converted from your HTML/CSS/JS) ========== */
-function ModernSlider() {
-  const slides = [
-    { id: "m1", img: "/images/slide1.jpg", title: "Full Width Slider With Layers", subtitle: "You can easily add image, html formatted texts and video layers over each slide and each layer accepts unique animation." },
-    { id: "m2", img: "/images/slide2.jpg", title: "Fully responsive Scales with its container", subtitle: "Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet." },
-    { id: "m3", img: "/images/slide3.jpg", title: "Awesome Transtions With CSS3", subtitle: "Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet." },
-    { id: "m4", img: "/images/banner3.jpg", title: "Separate settings per breakpoint", subtitle: "Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet." },
-  ];
-
-  const [index, setIndex] = useState(0);
-  const len = slides.length;
-  const autoplay = useRef(null);
-
-  useEffect(() => {
-    autoplay.current = setInterval(() => setIndex((i) => (i + 1) % len), 8000);
-    return () => clearInterval(autoplay.current);
-  }, [len]);
-
-  function prev() {
-    clearInterval(autoplay.current);
-    setIndex((i) => (i - 1 + len) % len);
-  }
-  function next() {
-    clearInterval(autoplay.current);
-    setIndex((i) => (i + 1) % len);
-  }
-
-  return (
-    <section className="modern-wrap relative mb-12">
-      {/* arrows positioned left/right of page */}
-      <div className="modern-arrow left" onClick={prev}><FaChevronLeft /></div>
-      <div className="modern-arrow right" onClick={next}><FaChevronRight /></div>
-
-      <div className="relative h-[80vh] md:h-[100vh]">
-        <AnimatePresence mode="wait">
-          <motion.div key={slides[index].id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }} className="modern-slide">
-            <Image src={slides[index].img} alt={slides[index].title} className="modern-img" fill unoptimized />
-            <div className="modern-overlay">
-              <div className="modern-info">
-                <motion.h3 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.12 }} className={`${playfair.className}`}>{slides[index].title}</motion.h3>
-                <motion.h5 initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }} className="mt-3">
-                  {slides[index].subtitle}
-                </motion.h5>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      <p className="text-center mt-6">Slick slider simple and easy to use — converted to React.</p>
-    </section>
-  );
-}
-
-/* ========== CategoryCarousel ========== */
-
-function CategoryCarousel() {
-  const items = [
-    {
-      id: "kachi",
-      title: "Kachi Ghani Mustard Oil",
-      img: "/images/bgim.png",
-      desc: `कची घानी सरसों का तेल — परंपरा और तीखापन दोनों में संतुलन। हमारी cold-press विधि से निकला यह तेल अपनी सुगंध और स्वाद के लिये मशहूर है।`,
-    },
-    {
-      id: "soya",
-      title: "Soyabean Oil — Light & Healthy",
-      img: "/images/slide2.jpg",
-      desc: `Soyabean oil हल्का, पौष्टिक और रोज़ाना के लिए उपयुक्त। इसमें Vitamin E और अनसैचुरेटेड फैटी एसिड्स होते हैं।`,
-    },
-    {
-      id: "rice",
-      title: "Rice Bran Oil — Heart Friendly",
-      img: "/images/slide1.jpg",
-      desc: `Rice bran oil उच्च स्मोक पॉइंट और हृदय-हितकर प्रोफाइल के साथ आता है।`,
-    },
-  ];
-
-  const [index, setIndex] = useState(0);
-  const len = items.length;
-  const animGuard = useRef(false); // prevent rapid clicks that break animation
-
-  // Manual navigation only — no autoplay here (more predictable)
-  function prev() {
-    if (animGuard.current) return;
-    animGuard.current = true;
-    setIndex((i) => (i - 1 + len) % len);
-    setTimeout(() => (animGuard.current = false), 700);
-  }
-  function next() {
-    if (animGuard.current) return;
-    animGuard.current = true;
-    setIndex((i) => (i + 1) % len);
-    setTimeout(() => (animGuard.current = false), 700);
-  }
-
-  return (
-    <section className="py-12 my-bg relative overflow-visible">
-      <div className="container mx-auto max-w-7xl px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* LEFT: Big visible image (not hidden by overlays) */}
-          <div className="relative h-[420px] md:h-[520px] overflow-hidden rounded-xl shadow-lg">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={items[index].id}
-                initial={{ opacity: 0, x: 80 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -80 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={items[index].img}
-                  alt={items[index].title}
-                  fill
-                  className="object-cover object-center"
-                  unoptimized
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* RIGHT: Title + Description */}
-          <div className="relative z-20">
-            <motion.h3
-              key={items[index].id + "-title"}
-              initial={{ y: 18, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl md:text-4xl font-extrabold mb-4 text-[#0b0d11]"
-            >
-              {items[index].title}
-            </motion.h3>
-
-            <motion.p
-              key={items[index].id + "-desc"}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.08 }}
-              className="text-lg text-gray-800 leading-relaxed whitespace-pre-line"
-            >
-              {items[index].desc}
-            </motion.p>
-          </div>
-        </div>
-
-        {/* Dots Indicators */}
-        <div className="mt-8 flex items-center justify-center gap-3">
-          {items.map((it, i) => (
-            <button
-              key={it.id}
-              onClick={() => {
-                if (animGuard.current || i === index) return;
-                animGuard.current = true;
-                setIndex(i);
-                setTimeout(() => (animGuard.current = false), 700);
-              }}
-              className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"} transition`}
-              aria-label={`Go to ${i + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Prev / Next buttons placed on the section edges for clear visibility */}
-      <button
-        onClick={prev}
-        aria-label="Prev"
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
-      >
-        <FaChevronLeft className="text-[#0b0d11] w-5 h-5" />
-      </button>
-
-      <button
-        onClick={next}
-        aria-label="Next"
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
-      >
-        <FaChevronRight className="text-[#0b0d11] w-5 h-5" />
-      </button>
-
-      {/* small unobtrusive backdrop to help readability but NOT covering images */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
-    </section>
-  );
-}
-
-
-/* ========== MovingShowcase ========== */
-function MovingShowcase() {
-  const slides = [
-    { id: "s-soya", img: "/images/slide2.jpg", title: "Soyabean Oil — हल्का, स्वास्थ्यवर्धक", subtitle: "Vitamin E • Light Texture • Daily Cooking", cta: { text: "Explore Soyabean", href: "/products/soyabean-oil" } },
-    { id: "s-mustard", img: "/images/slide1.jpg", title: "Kachi Ghani Mustard Oil — परंपरा का स्वाद", subtitle: "Cold Pressed • Strong Aroma • Authentic Taste", cta: { text: "Explore Mustard", href: "/products/kachi-ghani-mustard-oil" } },
-    { id: "s-banner3", img: "/images/banner3.jpg", title: "Healthy Frying — Rice Bran Oil", subtitle: "High Smoke Point • Neutral Taste • Heart Friendly", cta: { text: "Explore Rice Bran", href: "/products/rice-bran-oil" } },
-  ];
-
-  const [idx, setIdx] = React.useState(0);
-  const len = slides.length;
-  const autoplayRef = React.useRef(null);
-  const animGuard = React.useRef(false);
-
-  // Preload images (safe in SSR)
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    slides.forEach((s) => {
-      try {
-        const pre = new window.Image();
-        pre.src = s.img;
-      } catch (e) {
-        // ignore preload failures
-      }
-    });
-  }, []);
-
-  // autoplay
-  React.useEffect(() => {
-    autoplayRef.current = setInterval(() => {
-      setIdx((i) => (i + 1) % len);
-    }, 7000);
-    return () => clearInterval(autoplayRef.current);
-  }, [len]);
-
-  function prev() {
-    if (animGuard.current) return;
-    clearInterval(autoplayRef.current);
-    animGuard.current = true;
-    setIdx((i) => (i - 1 + len) % len);
-    setTimeout(() => {
-      animGuard.current = false;
-      autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
-    }, 650);
-  }
-
-  function next() {
-    if (animGuard.current) return;
-    clearInterval(autoplayRef.current);
-    animGuard.current = true;
-    setIdx((i) => (i + 1) % len);
-    setTimeout(() => {
-      animGuard.current = false;
-      autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
-    }, 650);
-  }
-
-  const slide = slides[idx];
-
-  return (
-    <section className="relative w-full min-h-[62vh] md:min-h-[72vh] overflow-hidden bg-white">
-      {/* Layered background images with fade */}
-      <div className="absolute inset-0 -z-10">
-        {slides.map((s, i) => (
-          <img
-            key={s.id}
-            src={s.img}
-            alt={s.title}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center",
-              transition: "opacity 0.9s ease, transform 0.9s ease",
-              opacity: i === idx ? 1 : 0,
-              transform: i === idx ? "scale(1)" : "scale(1.02)",
-              willChange: "opacity, transform",
-            }}
-          />
-        ))}
-
-        {/* subtle gradient to help text readability */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.22), rgba(0,0,0,0.04) 35%, rgba(255,255,255,0.6) 100%)",
-            pointerEvents: "none",
-          }}
-        />
-      </div>
-
-      {/* Content: keep card on the right, image visible on left */}
-      <div className="relative z-10 container mx-auto max-w-7xl px-6 py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          {/* LEFT: Visible image block for strong product display (keeps image large and uncropped) */}
-          <div className="flex items-center justify-center w-full">
-            <div
-              className="relative rounded-lg overflow-hidden shadow-2xl"
-              style={{
-                width: "100%",
-                maxWidth: 720,
-                height: "min(60vh, 520px)",
-                backgroundColor: "#f7f7f7",
-              }}
-            >
-              <img
-                src={slide.img}
-                alt={slide.title}
-                className="w-full h-full object-cover object-center block"
-                style={{ display: "block" }}
-              />
-
-              {/* optional small title badge on image */}
-              <div
-                style={{
-                  position: "absolute",
-                  left: 16,
-                  top: 16,
-                  background: "rgba(255,255,255,0.95)",
-                  padding: "6px 10px",
-                  borderRadius: 999,
-                  fontSize: 14,
-                  boxShadow: "0 6px 18px rgba(2,6,23,0.08)",
-                  color: "#0b0d11",
-                }}
-              >
-                {slide.title.split("—")[0].trim()}
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT: Card with textual content and controls */}
-          <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-gray-900">{slide.title}</h2>
-            <p className="text-sm md:text-base text-gray-700 font-semibold mb-4">{slide.subtitle}</p>
-
-            <p className="text-sm text-gray-600 leading-relaxed mb-6">
-              Veer Bharat की excellence और modern quality control के साथ आपके किचन तक शुद्ध और भरोसेमंद तेल पहुँचाने का वादा।
-            </p>
-
-            <div className="flex items-center gap-3">
-              <a
-                href={slide.cta.href}
-                className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-5 py-2.5 font-bold shadow-md hover:scale-105 transition"
-              >
-                {slide.cta.text}
-              </a>
-
-              <button onClick={prev} className="px-4 py-2 rounded-full border border-gray-200">
-                ‹ Prev
-              </button>
-              <button onClick={next} className="px-4 py-2 rounded-full border border-gray-200">
-                Next ›
-              </button>
-            </div>
-
-            {/* small dots indicator */}
-            <div className="mt-6 flex items-center gap-3">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (animGuard.current || i === idx) return;
-                    clearInterval(autoplayRef.current);
-                    animGuard.current = true;
-                    setIdx(i);
-                    setTimeout(() => {
-                      animGuard.current = false;
-                      autoplayRef.current = setInterval(() => setIdx((j) => (j + 1) % len), 7000);
-                    }, 600);
-                  }}
-                  aria-label={`Go to ${i + 1}`}
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 999,
-                    background: i === idx ? "#0b0d11" : "#d1d5db",
-                    border: "none",
-                    padding: 0,
-                    transition: "background 200ms",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Prev / Next overlay buttons for larger screens */}
-      <button
-        onClick={prev}
-        aria-label="Prev slide"
-        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition"
-      >
-        ‹
-      </button>
-      <button
-        onClick={next}
-        aria-label="Next slide"
-        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition"
-      >
-        ›
-      </button>
-    </section>
-  );
-}
-
-
-/* ========== SignatureCollection ========== */
-function SignatureCollection() {
-  const list = [
-    { id: "c1", name: "Fruits & Vegetables", img: "/images/cat4.jpeg" },
-    { id: "c2", name: "Bakery Dairy & Fresh Chicken", img: "/images/cat5.jpg" },
-    { id: "c3", name: "Packaged Food & Beverages", img: "/images/cat6.jpg" },
-    { id: "c4", name: "Rice Dals & More", img: "/images/cat7.jpg" },
-  ];
-
-  return (
-    <section className="py-12 md:py-20 bg-gray-50">
-      <div className="container mx-auto max-w-7xl px-6">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-center text-gray-900">
-          Categories
-        </h2>
-
-        {/* Responsive grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {list.map((item) => (
-            <div
-              key={item.id}
-              className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow hover:shadow-xl transform transition duration-300 hover:scale-105"
-            >
-              {/* Fixed size image container */}
-              <div className="relative w-full h-[280px]">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
-
-              {/* Title */}
-              <div className="py-4 text-center">
-                <h3 className="text-base md:text-lg font-semibold text-gray-800">
-                  {item.name}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-/* ========== Branches ========== */
-function Branches() {
-  const imgs = [
-    "/images/banner4.jpg",
-    "/images/banner3.jpg",
-    "/images/team1.jpg",
-  ];
-
-  return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto max-w-7xl px-6">
-        <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
-          Our Branches & Gallery
-        </motion.h2>
-
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {imgs.map((src, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * i }} className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-              <Image src={src} alt={`Gallery ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-700" unoptimized />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-
-
-/* ========== VideoHero ========== */
-function VideoHero({ videos = [] }) {
-  const vidRef = useRef(null);
-  const [playing, setPlaying] = useState(true);
-
-  useEffect(() => {
-    const v = vidRef.current;
-    if (!v) return;
-    v.muted = true;
-    v.playsInline = true;
-    v.preload = "metadata";
-    v.play().catch(() => setPlaying(false));
-  }, [videos]);
-
-  function toggle() {
-    const v = vidRef.current;
-    if (!v) return;
-    if (v.paused) {
-      v.play().catch(() => setPlaying(false));
-      setPlaying(true);
-    } else {
-      v.pause();
-      setPlaying(false);
-    }
-  }
-
-  return (
-    <section className="relative w-full overflow-hidden bg-black border-b border-white/6">
-      <div className="relative h-[60vh] md:h-[72vh] lg:h-[82vh]">
-        <video ref={vidRef} src={videos[0]} className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
-
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/30 pointer-events-none" />
-
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
-          <motion.h1 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} className={`${playfair.className} text-3xl md:text-5xl lg:text-6xl font-extrabold text-white`}>
-            Welcome to Veer Bharat
-          </motion.h1>
-          <motion.h2 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.8 }} className={`${poppins.className} text-lg md:text-2xl font-bold text-amber-300 mt-3`}>
-            मज़ा आ गया
-          </motion.h2>
-        </div>
-
-        <button onClick={toggle} className="absolute right-6 top-6 z-30 flex items-center gap-2 rounded-full bg-white/20 backdrop-blur px-4 py-2 text-sm font-semibold border border-white/10 hover:scale-105 transition">
-          {playing ? "Pause" : "Play"}
-        </button>
-      </div>
-
-
-    </section>
-  );
-}
 
 
 ////////// Final code above this line //////////
@@ -3358,3 +3370,433 @@ function VideoHero({ videos = [] }) {
 //     </footer>
 //   );
 // }
+
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Poppins, Playfair_Display } from "next/font/google";
+import { FaWhatsapp } from "react-icons/fa";
+
+/* ---------- Fonts ---------- */
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"] });
+
+export default function Home() {
+  return (
+    <main className={`${poppins.className} bg-[#fef9c3] text-[#0b0d11]`}>
+      {/* Video Hero */}
+      <VideoHero videos={["/images/hero-video.mp4"]} />
+
+      {/* Heading */}
+      <div className="py-12 md:py-16 text-center">
+        <motion.h1
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className={`${playfair.className} text-3xl md:text-5xl font-extrabold tracking-tight`}
+        >
+          Veer Bharat Oil — Category & Highlights
+        </motion.h1>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="mt-4 w-32 md:w-40 mx-auto h-1 rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-green-600"
+        />
+      </div>
+
+      {/* Category Carousel */}
+      <CategoryCarousel />
+
+      {/* Categories Grid */}
+      <CategoriesGrid />
+
+      {/* Moving Showcase */}
+      <MovingShowcase />
+
+      {/* ====== FEATURED IMAGE (REPLACES PREVIOUS BRANCHES) ====== */}
+      <FeaturedImageSection />
+
+      {/* ====== BRANCHES & GALLERY (REPLACES PREVIOUS FEATURED IMAGE) ====== */}
+      <Branches />
+
+      {/* WhatsApp button */}
+      <a
+        href="https://wa.me/6205771930"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed right-5 bottom-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-green-500 shadow-lg text-white hover:scale-105 transition"
+        aria-label="WhatsApp"
+      >
+        <FaWhatsapp className="w-6 h-6" />
+      </a>
+
+      <style jsx>{`
+        .featured-heading {
+          text-shadow: 0 6px 24px rgba(0,0,0,0.5);
+        }
+      `}</style>
+    </main>
+  );
+}
+
+/* ================= CategoryCarousel ================= */
+function CategoryCarousel() {
+  const items = [
+    { id: "kachi", title: "Kachi Ghani Mustard Oil", img: "/images/bgim.png", desc: `कची घानी सरसों का तेल — परंपरा और तीखापन दोनों में संतुलन।` },
+    { id: "soya", title: "Soyabean Oil — Light & Healthy", img: "/images/slide2.jpg", desc: `Soyabean oil हल्का, पौष्टिक और रोज़ाना के लिए उपयुक्त।` },
+    { id: "rice", title: "Rice Bran Oil — Heart Friendly", img: "/images/slide1.jpg", desc: `Rice bran oil उच्च स्मोक पॉइंट और हृदय-हितकर प्रोफाइल के साथ आता है।` },
+  ];
+
+  const [index, setIndex] = useState(0);
+  const animGuard = useRef(false);
+
+  function prev() {
+    if (animGuard.current) return;
+    animGuard.current = true;
+    setIndex((i) => (i - 1 + items.length) % items.length);
+    setTimeout(() => (animGuard.current = false), 700);
+  }
+  function next() {
+    if (animGuard.current) return;
+    animGuard.current = true;
+    setIndex((i) => (i + 1) % items.length);
+    setTimeout(() => (animGuard.current = false), 700);
+  }
+
+  return (
+    <section className="py-12 my-bg relative overflow-visible">
+      <div className="container mx-auto max-w-7xl px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="relative h-[420px] md:h-[520px] overflow-hidden rounded-xl shadow-lg">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={items[index].id}
+                initial={{ opacity: 0, x: 80 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -80 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0"
+              >
+                <Image src={items[index].img} alt={items[index].title} fill className="object-cover object-center" unoptimized />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="relative z-20">
+            <motion.h3 initial={{ y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }} className="text-2xl md:text-4xl font-extrabold mb-4">
+              {items[index].title}
+            </motion.h3>
+
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.08 }} className="text-lg text-gray-800 leading-relaxed">
+              {items[index].desc}
+            </motion.p>
+
+            <div className="mt-6 flex items-center gap-3">
+              <Link href={`/products/${items[index].id}`} className="rounded-full bg-amber-400 px-5 py-2.5 font-bold shadow text-black hover:scale-105 transition">
+                View Product
+              </Link>
+
+              <div className="flex gap-2">
+                <button onClick={prev} className="w-10 h-10 rounded-full bg-white/95 shadow flex items-center justify-center">‹</button>
+                <button onClick={next} className="w-10 h-10 rounded-full bg-white/95 shadow flex items-center justify-center">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 flex items-center justify-center gap-3">
+          {items.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { if (animGuard.current || i === index) return; animGuard.current = true; setIndex(i); setTimeout(() => (animGuard.current = false), 700); }}
+              className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"}`}
+              aria-label={`Go to ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      <button onClick={() => setIndex((i) => (i - 1 + items.length) % items.length)} aria-label="Prev" className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">‹</button>
+      <button onClick={() => setIndex((i) => (i + 1) % items.length)} aria-label="Next" className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">›</button>
+    </section>
+  );
+}
+
+/* ================= CategoriesGrid ================= */
+function CategoriesGrid() {
+  const cats = [
+    { id: "cat-1", name: "Cooking Oils", img: "/images/Unknown-1.jpeg", desc: "Mustard, Soyabean, Rice Bran — quality you can trust." },
+    { id: "cat-2", name: "Edible Ghee", img: "/images/Unknown-2.jpeg", desc: "Pure ghee for traditional taste." },
+    { id: "cat-3", name: "Packaged Products", img: "/images/Unknown-3.jpeg", desc: "Convenient pack sizes for modern kitchens." },
+    { id: "cat-4", name: "Wholesale & Bulk", img: "/images/Unknown-5.jpeg", desc: "Solutions for restaurants & stores." },
+  ];
+
+  return (
+    <section className="py-12 md:py-20 bg-gray-50">
+      <div className="container mx-auto max-w-7xl px-6">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Categories</h2>
+          <Link href="/products" className="text-sm font-semibold underline">View all products</Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {cats.map((c) => (
+            <div key={c.id} className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow hover:shadow-xl transform transition hover:scale-105">
+              <div className="relative w-full h-44">
+                <Image src={c.img} alt={c.name} fill className="object-cover" unoptimized />
+              </div>
+              <div className="p-4">
+                <h3 className="font-semibold text-lg mb-2">{c.name}</h3>
+                <p className="text-sm text-gray-600">{c.desc}</p>
+                <div className="mt-4">
+                  <Link href={`/category/${c.id}`} className="inline-block text-sm font-bold rounded-full bg-amber-400 px-4 py-2">Explore</Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================= MovingShowcase ================= */
+function MovingShowcase() {
+  const slides = [
+    { id: "s-soya", img: "/images/slide2.jpg", title: "Soyabean Oil — हल्का, स्वास्थ्यवर्धक", subtitle: "Vitamin E • Light Texture • Daily Cooking", cta: { text: "Explore Soyabean", href: "/products/soyabean-oil" } },
+    { id: "s-mustard", img: "/images/slide1.jpg", title: "Kachi Ghani Mustard Oil — परंपरा का स्वाद", subtitle: "Cold Pressed • Strong Aroma • Authentic Taste", cta: { text: "Explore Mustard", href: "/products/kachi-ghani-mustard-oil" } },
+    { id: "s-banner3", img: "/images/banner3.jpg", title: "Healthy Frying — Rice Bran Oil", subtitle: "High Smoke Point • Neutral Taste • Heart Friendly", cta: { text: "Explore Rice Bran", href: "/products/rice-bran-oil" } },
+  ];
+
+  const [idx, setIdx] = useState(0);
+  const len = slides.length;
+  const autoplayRef = useRef(null);
+  const animGuard = useRef(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    slides.forEach((s) => { const pre = new window.Image(); pre.src = s.img; });
+  }, []);
+
+  useEffect(() => {
+    autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
+    return () => clearInterval(autoplayRef.current);
+  }, [len]);
+
+  function prev() {
+    if (animGuard.current) return;
+    clearInterval(autoplayRef.current);
+    animGuard.current = true;
+    setIdx((i) => (i - 1 + len) % len);
+    setTimeout(() => { animGuard.current = false; autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000); }, 650);
+  }
+
+  function next() {
+    if (animGuard.current) return;
+    clearInterval(autoplayRef.current);
+    animGuard.current = true;
+    setIdx((i) => (i + 1) % len);
+    setTimeout(() => { animGuard.current = false; autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000); }, 650);
+  }
+
+  const slide = slides[idx];
+
+  return (
+    <section className="relative w-full min-h-[62vh] md:min-h-[72vh] overflow-hidden bg-white py-12">
+      <div className="absolute inset-0 -z-10">
+        {slides.map((s, i) => (
+          <img
+            key={s.id}
+            src={s.img}
+            alt={s.title}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              transition: "opacity 0.9s ease, transform 0.9s ease",
+              opacity: i === idx ? 1 : 0,
+              transform: i === idx ? "scale(1)" : "scale(1.02)",
+              willChange: "opacity, transform",
+            }}
+          />
+        ))}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.02) 40%, rgba(255,255,255,0.6) 100%)", pointerEvents: "none" }} />
+      </div>
+
+      <div className="relative z-10 container mx-auto max-w-7xl px-6 py-20 md:py-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="flex items-center justify-center w-full">
+            <div className="relative rounded-lg overflow-hidden shadow-2xl" style={{ width: "100%", maxWidth: 720, height: "min(60vh, 520px)", backgroundColor: "#f7f7f7" }}>
+              <img src={slide.img} alt={slide.title} className="w-full h-full object-cover object-center block" />
+              <div style={{ position: "absolute", left: 16, top: 16, background: "rgba(255,255,255,0.95)", padding: "6px 10px", borderRadius: 999, fontSize: 14, boxShadow: "0 6px 18px rgba(2,6,23,0.08)", color: "#0b0d11" }}>
+                {slide.title.split("—")[0].trim()}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-gray-900">{slide.title}</h2>
+            <p className="text-sm md:text-base text-gray-700 font-semibold mb-4">{slide.subtitle}</p>
+            <p className="text-sm text-gray-600 leading-relaxed mb-6">Veer Bharat की excellence और modern quality control के साथ आपके किचन तक शुद्ध और भरोसेमंद तेल पहुँचाने का वादा।</p>
+
+            <div className="flex items-center gap-3">
+              <Link href={slide.cta.href} className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-5 py-2.5 font-bold shadow-md hover:scale-105 transition">
+                {slide.cta.text}
+              </Link>
+
+              <button onClick={prev} className="px-4 py-2 rounded-full border border-gray-200">‹ Prev</button>
+              <button onClick={next} className="px-4 py-2 rounded-full border border-gray-200">Next ›</button>
+            </div>
+
+            <div className="mt-6 flex items-center gap-3">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    if (animGuard.current || i === idx) return;
+                    clearInterval(autoplayRef.current);
+                    animGuard.current = true;
+                    setIdx(i);
+                    setTimeout(() => { animGuard.current = false; autoplayRef.current = setInterval(() => setIdx((j) => (j + 1) % len), 7000); }, 600);
+                  }}
+                  aria-label={`Go to ${i + 1}`}
+                  style={{ width: 10, height: 10, borderRadius: 999, background: i === idx ? "#0b0d11" : "#d1d5db", border: "none", padding: 0, transition: "background 200ms" }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button onClick={prev} aria-label="Prev slide" className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition">‹</button>
+      <button onClick={next} aria-label="Next slide" className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition">›</button>
+    </section>
+  );
+}
+
+/* ================= FEATURED IMAGE SECTION (bg2.jpeg) ================= */
+function FeaturedImageSection() {
+  return (
+    <section className="relative w-full">
+      <div className="relative h-[56vh] md:h-[68vh] lg:h-[76vh]">
+        {/* background image (from public/images/bg2.jpeg) */}
+        <Image src="/images/bg2.jpeg" alt="Neighbourhood freshness" fill className="object-cover" unoptimized />
+
+        {/* gradient overlay that is darker on the right side so text sits on shadow */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-black/70 pointer-events-none" />
+
+        {/* right-aligned text box sitting on shadow side */}
+        <div className="absolute inset-0 flex items-center justify-end pr-6 md:pr-20">
+          <div className="max-w-xl text-right text-white px-4 py-8">
+            <motion.h1
+              initial={{ x: 30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.7 }}
+              className="featured-heading text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight leading-tight"
+            >
+              NEIGHBOURHOOD FRESHNESS, GLOBAL STANDARDS
+            </motion.h1>
+
+            <motion.h2
+              initial={{ x: 30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.08 }}
+              className="mt-4 text-sm md:text-lg font-medium"
+            >
+              Your Reliable Stop for Quality Groceries and Convenience.
+            </motion.h2>
+
+            <div className="mt-6 flex justify-end">
+             <Link href="/contact" className="inline-block rounded-full bg-amber-400 px-5 py-2 font-bold text-black hover:scale-105 transition">
+  Find a Branch
+</Link>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================= Branches (Gallery) ================= */
+function Branches() {
+  const imgs = ["/images/banner4.jpg", "/images/banner3.jpg", "/images/team1.jpg", "/images/bgim.png"];
+
+  return (
+    <section className="py-20 bg-white">
+      <div className="container mx-auto max-w-7xl px-6">
+        <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
+          Our Branches & Gallery
+        </motion.h2>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {imgs.map((src, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }} className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
+              <Image src={src} alt={`Gallery ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-700" unoptimized />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================= VideoHero ================= */
+function VideoHero({ videos = [] }) {
+  const vidRef = useRef(null);
+  const [playing, setPlaying] = useState(true);
+
+  useEffect(() => {
+    const v = vidRef.current;
+    if (!v) return;
+    v.muted = true;
+    v.playsInline = true;
+    v.preload = "metadata";
+    v.play().catch(() => setPlaying(false));
+  }, [videos]);
+
+  function toggle() {
+    const v = vidRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play().catch(() => setPlaying(false));
+      setPlaying(true);
+    } else {
+      v.pause();
+      setPlaying(false);
+    }
+  }
+
+  return (
+    <section className="relative w-full overflow-hidden bg-black border-b border-white/6">
+      <div className="relative h-[60vh] md:h-[72vh] lg:h-[82vh]">
+        <video ref={vidRef} src={videos[0]} className="w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/30 pointer-events-none" />
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 text-center">
+          <motion.h1 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1 }} className={`${playfair.className} text-3xl md:text-5xl lg:text-6xl font-extrabold text-white`}>
+            Welcome to Veer Bharat
+          </motion.h1>
+          <motion.h2 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.8 }} className={`${poppins.className} text-lg md:text-2xl font-bold text-amber-300 mt-3`}>
+            मज़ा आ गया
+          </motion.h2>
+        </div>
+
+        <button onClick={toggle} className="absolute right-6 top-6 z-30 flex items-center gap-2 rounded-full bg-white/20 backdrop-blur px-4 py-2 text-sm font-semibold border border-white/10 hover:scale-105 transition">
+          {playing ? "Pause" : "Play"}
+        </button>
+      </div>
+    </section>
+  );
+}
