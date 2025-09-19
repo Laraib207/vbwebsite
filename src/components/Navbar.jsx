@@ -514,7 +514,6 @@
 // }
 
 
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -565,29 +564,52 @@ export default function Navbar() {
   return (
     <>
       <header
-        // Allow dropdown to overflow the header area: overflow-visible
-        className={`w-full transition-all duration-300 bg-white border-b border-[rgba(8,52,139,0.04)] overflow-visible ${
-          scrolled ? "fixed top-0 left-0 z-50 py-3 shadow-sm" : "relative py-5 shadow-sm"
+        // background set to #6EC1E4, allow dropdown overflow
+        className={`w-full transition-all duration-300 border-b border-[rgba(8,52,139,0.04)] overflow-visible ${
+          scrolled
+            ? "fixed top-0 left-0 z-50 py-3 shadow-sm"
+            : "relative py-5 shadow-sm"
         }`}
+        style={{ backgroundColor: "#DFC6F6" }}
       >
         <div className="container mx-auto flex items-center justify-between px-6">
           {/* logo + brand */}
-          <Link href="/" className="flex items-center gap-4" onClick={() => setOpen(false)} aria-label="Veer Bharat Home">
+          <Link
+            href="/"
+            className="flex items-center gap-4"
+            onClick={() => setOpen(false)}
+            aria-label="Veer Bharat Home"
+          >
             <div
               className={`relative overflow-hidden rounded-lg ring-2 ring-[#08348b]/8 transition-all duration-300 shadow-lg flex-shrink-0 ${
                 scrolled ? "w-14 h-14" : "w-20 h-20"
               }`}
               aria-hidden={false}
             >
-              <Image src="/logo.png" alt="Veer Bharat logo" fill style={{ objectFit: "cover" }} priority />
+              {/* Ensure /logo.png exists in public/ — this will be visible */}
+              <Image
+                src="/logo.png"
+                alt="Veer Bharat logo"
+                fill
+                style={{ objectFit: "cover" }}
+                priority
+              />
             </div>
 
             <div className="flex flex-col leading-tight">
-              <span className={`font-extrabold tracking-tight transition-all duration-300 ${scrolled ? "text-2xl" : "text-3xl"} text-[#08348b]`}>
-                {/* VEER BHARAT */}
+              <span
+                className={`font-extrabold tracking-tight transition-all duration-300 ${
+                  scrolled ? "text-2xl" : "text-3xl"
+                } text-[#08348b]`}
+              >
+                VEER BHARAT
               </span>
-              <span className={`italic text-[#aa2266] transition-all duration-300 ${scrolled ? "text-sm" : "text-base"}`}>
-                {/* वह! मज़ा आ गया */}
+              <span
+                className={`italic text-[#aa2266] transition-all duration-300 ${
+                  scrolled ? "text-sm" : "text-base"
+                }`}
+              >
+                वह! मज़ा आ गया
               </span>
             </div>
           </Link>
@@ -614,7 +636,14 @@ export default function Navbar() {
                   className="flex items-center gap-2 px-3 py-2 rounded hover:bg-white/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#08348b]"
                 >
                   Team
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className={`transition-transform ${teamOpen ? "rotate-180" : "rotate-0"}`} aria-hidden>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className={`transition-transform ${teamOpen ? "rotate-180" : "rotate-0"}`}
+                    aria-hidden
+                  >
                     <path d="M6 9l6 6 6-6" stroke="#08348b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
@@ -658,12 +687,23 @@ export default function Navbar() {
 
               <NavLink href="/about">About</NavLink>
               <NavLink href="/contact">Contact</NavLink>
+
+              {/* Manufacturing external link (opens in new tab) */}
+              <a
+                href="https://veerbharat.io"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="relative px-2 py-1 text-gray-700 hover:text-[#08348b] transition group font-semibold"
+              >
+                Manufacturing
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#08348b] via-[#aa2266] to-[#5d169e] group-hover:w-full transition-all" />
+              </a>
             </div>
 
-            {/* CTA */}
+            {/* CTA - lighter & logo-related tone */}
             <a
               href="#"
-              className="ml-4 inline-flex items-center gap-2 px-4 py-2 rounded bg-gradient-to-r from-[#08348b] via-[#aa2266] to-[#5d169e] text-white text-lg font-bold shadow-lg hover:scale-[1.05] transition"
+              className="ml-4 inline-flex items-center gap-2 px-4 py-2 rounded bg-gradient-to-r from-[#fff7cc] via-[#fde68a] to-[#ffd54f] text-[#082f63] text-lg font-bold shadow-sm hover:scale-[1.03] transition"
             >
               Shop Now
             </a>
@@ -725,9 +765,20 @@ export default function Navbar() {
               Contact
             </MobileLink>
 
+            {/* Manufacturing (mobile) - external */}
+            <a
+              href="https://veerbharat.io"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="block px-4 py-3 rounded-md text-[#08348b] hover:bg-[#08348b]/5 font-semibold transition"
+              onClick={() => setOpen(false)}
+            >
+              Manufacturing
+            </a>
+
             <a
               href="#"
-              className="mt-3 w-full text-center inline-block px-5 py-3 rounded-lg bg-gradient-to-r from-[#08348b] via-[#aa2266] to-[#5d169e] text-white font-bold shadow-lg hover:scale-[1.03] transition"
+              className="mt-3 w-full text-center inline-block px-5 py-3 rounded-lg bg-gradient-to-r from-[#fff7cc] via-[#fde68a] to-[#ffd54f] text-[#082f63] font-bold shadow-sm hover:scale-[1.03] transition"
               onClick={() => setOpen(false)}
             >
               Shop Now

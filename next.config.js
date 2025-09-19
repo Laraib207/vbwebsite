@@ -1,11 +1,21 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
+/** next.config.js **/
+/** Minimal config for static export */
 const nextConfig = {
-  output: 'export',  // 👈 ye add karna hai
+  // export static HTML to `out/`
+  output: "export",
+
+  // helps with next/image when exporting statically
   images: {
-    unoptimized: true, // agar Next/Image use kar rahe ho
-  
+    // disable built-in image optimization for static export
+    unoptimized: true,
   },
+
+  // optional: produce directories (example.com/about/index.html) — useful on some static hosts
+  trailingSlash: true,
+
+  reactStrictMode: true,
 };
 
 module.exports = nextConfig;

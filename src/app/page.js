@@ -1765,7 +1765,7 @@
 //       {/* Fixed WhatsApp button — update number */}
 
 //       <ProductSlider/>
-      
+
 //       <a
 //         href="https://wa.me/6205771930"
 //         target="_blank"
@@ -3371,6 +3371,8 @@
 //   );
 // }
 
+
+
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -3448,9 +3450,19 @@ export default function Home() {
 /* ================= CategoryCarousel ================= */
 function CategoryCarousel() {
   const items = [
-    { id: "kachi", title: "Kachi Ghani Mustard Oil", img: "/images/bgim.png", desc: `कची घानी सरसों का तेल — परंपरा और तीखापन दोनों में संतुलन।` },
-    { id: "soya", title: "Soyabean Oil — Light & Healthy", img: "/images/slide2.jpg", desc: `Soyabean oil हल्का, पौष्टिक और रोज़ाना के लिए उपयुक्त।` },
-    { id: "rice", title: "Rice Bran Oil — Heart Friendly", img: "/images/slide1.jpg", desc: `Rice bran oil उच्च स्मोक पॉइंट और हृदय-हितकर प्रोफाइल के साथ आता है।` },
+    {
+      id: "bulbul",
+      title: "Veer Bharat — Trusted Oils, Thoughtful Practices",
+      img: "/images/home-collage.png", // apni photo public/image folder me dal kar is naam se rakhna
+      desc: `Established in 2010, Veer Bharat has grown into a dependable provider of edible oils and allied products,
+       serving households, retailers, and institutional buyers across India. Built on a foundation of quality, transparency, 
+       and customer-first service, we combine traditional know-how with modern manufacturing to deliver products that are safe,
+      nutritious, and reliably consistent.
+      Our portfolio includes Kachi Ghani mustard oil, light and nutritious soybean oil, refined palm (palm kernel/pam) oil for high-heat cooking,
+      rice bran oil, sunflower oil, blended cooking oils and specialty formulations. We supply bulk institutional orders as well as retail-packed bottles 
+      and tins, meeting the needs of home kitchens, restaurants, and food manufacturers. Each product is developed to suit practical cooking uses — from gentle
+      dressings to high-stability frying — while keeping taste and health in balance.`,
+    },
   ];
 
   const [index, setIndex] = useState(0);
@@ -3460,73 +3472,94 @@ function CategoryCarousel() {
     if (animGuard.current) return;
     animGuard.current = true;
     setIndex((i) => (i - 1 + items.length) % items.length);
-    setTimeout(() => (animGuard.current = false), 700);
+    setTimeout(() => (animGuard.current = false), 600);
   }
+
   function next() {
     if (animGuard.current) return;
     animGuard.current = true;
     setIndex((i) => (i + 1) % items.length);
-    setTimeout(() => (animGuard.current = false), 700);
+    setTimeout(() => (animGuard.current = false), 600);
   }
 
   return (
-    <section className="py-12 my-bg relative overflow-visible">
+    <section className="py-12 relative overflow-visible">
       <div className="container mx-auto max-w-7xl px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[420px] md:h-[520px] overflow-hidden rounded-xl shadow-lg">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={items[index].id}
-                initial={{ opacity: 0, x: 80 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -80 }}
-                transition={{ duration: 0.6 }}
-                className="absolute inset-0"
-              >
-                <Image src={items[index].img} alt={items[index].title} fill className="object-cover object-center" unoptimized />
-              </motion.div>
-            </AnimatePresence>
+          {/* LEFT: Text */}
+          <div className="relative z-10">
+            <h2 className="text-2xl md:text-4xl font-extrabold text-[#15325a] mb-6">
+              {items[index].title}
+            </h2>
+
+            <p className="text-base md:text-lg text-[#24304a] leading-relaxed mb-4 whitespace-pre-line">
+              {items[index].desc.split("\n\n")[0]}
+            </p>
+
+            <p className="text-base md:text-lg text-[#24304a] leading-relaxed mb-6 whitespace-pre-line">
+              {items[index].desc.split("\n\n")[1]}
+            </p>
+
+            <a
+              href="/about"
+              className="inline-block rounded-md bg-[#16335f] text-white px-5 py-2.5 font-semibold shadow hover:scale-[1.02] transition"
+            >
+              About Us
+            </a>
           </div>
 
-          <div className="relative z-20">
-            <motion.h3 initial={{ y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }} className="text-2xl md:text-4xl font-extrabold mb-4">
-              {items[index].title}
-            </motion.h3>
-
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.08 }} className="text-lg text-gray-800 leading-relaxed">
-              {items[index].desc}
-            </motion.p>
-
-            <div className="mt-6 flex items-center gap-3">
-              <Link href={`/products/${items[index].id}`} className="rounded-full bg-amber-400 px-5 py-2.5 font-bold shadow text-black hover:scale-105 transition">
-                View Product
-              </Link>
-
-              <div className="flex gap-2">
-                <button onClick={prev} className="w-10 h-10 rounded-full bg-white/95 shadow flex items-center justify-center">‹</button>
-                <button onClick={next} className="w-10 h-10 rounded-full bg-white/95 shadow flex items-center justify-center">›</button>
-              </div>
+          {/* RIGHT: Image */}
+          <div className="flex justify-center md:justify-end">
+            <div className="relative w-[320px] sm:w-[380px] md:w-[460px] lg:w-[540px]">
+              <img
+                src={items[index].img}
+                alt={items[index].title}
+                className="rounded-xl shadow-2xl object-cover w-full h-auto"
+              />
             </div>
           </div>
         </div>
-
-        <div className="mt-8 flex items-center justify-center gap-3">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => { if (animGuard.current || i === index) return; animGuard.current = true; setIndex(i); setTimeout(() => (animGuard.current = false), 700); }}
-              className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"}`}
-              aria-label={`Go to ${i + 1}`}
-            />
-          ))}
-        </div>
       </div>
 
-      <button onClick={() => setIndex((i) => (i - 1 + items.length) % items.length)} aria-label="Prev" className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">‹</button>
-      <button onClick={() => setIndex((i) => (i + 1) % items.length)} aria-label="Next" className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition">›</button>
+      {/* Dots */}
+      <div className="mt-8 flex items-center justify-center gap-3">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => {
+              if (animGuard.current || i === index) return;
+              animGuard.current = true;
+              setIndex(i);
+              setTimeout(() => (animGuard.current = false), 600);
+            }}
+            className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"
+              }`}
+            aria-label={`Go to ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Arrows */}
+      <button
+        onClick={() =>
+          setIndex((i) => (i - 1 + items.length) % items.length)
+        }
+        aria-label="Prev"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
+      >
+        ‹
+      </button>
+      <button
+        onClick={() => setIndex((i) => (i + 1) % items.length)}
+        aria-label="Next"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
+      >
+        ›
+      </button>
     </section>
   );
 }
+
 
 /* ================= CategoriesGrid ================= */
 function CategoriesGrid() {
@@ -3687,42 +3720,19 @@ function MovingShowcase() {
 function FeaturedImageSection() {
   return (
     <section className="relative w-full">
-      <div className="relative h-[56vh] md:h-[68vh] lg:h-[76vh]">
+      {/* responsive height: mobile se large screens tak */}
+      <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[90vh] xl:h-screen flex items-center justify-center bg-black">
         {/* background image (from public/images/bg2.jpeg) */}
-        <Image src="/images/bg2.jpeg" alt="Neighbourhood freshness" fill className="object-cover" unoptimized />
+        <Image
+          src="/images/bg2.jpeg"
+          alt="Neighbourhood freshness"
+          fill
+          className="object-contain object-center"
+          unoptimized
+          priority
+        />
 
-        {/* gradient overlay that is darker on the right side so text sits on shadow */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-black/70 pointer-events-none" />
-
-        {/* right-aligned text box sitting on shadow side */}
-        <div className="absolute inset-0 flex items-center justify-end pr-6 md:pr-20">
-          <div className="max-w-xl text-right text-white px-4 py-8">
-            <motion.h1
-              initial={{ x: 30, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.7 }}
-              className="featured-heading text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight leading-tight"
-            >
-              NEIGHBOURHOOD FRESHNESS, GLOBAL STANDARDS
-            </motion.h1>
-
-            <motion.h2
-              initial={{ x: 30, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.08 }}
-              className="mt-4 text-sm md:text-lg font-medium"
-            >
-              Your Reliable Stop for Quality Groceries and Convenience.
-            </motion.h2>
-
-            <div className="mt-6 flex justify-end">
-             <Link href="/contact" className="inline-block rounded-full bg-amber-400 px-5 py-2 font-bold text-black hover:scale-105 transition">
-  Find a Branch
-</Link>
-
-            </div>
-          </div>
-        </div>
+        {/* agar image ke sides me khali space bachi to black bg fill karega */}
       </div>
     </section>
   );
@@ -3730,26 +3740,195 @@ function FeaturedImageSection() {
 
 /* ================= Branches (Gallery) ================= */
 function Branches() {
-  const imgs = ["/images/banner4.jpg", "/images/banner3.jpg", "/images/team1.jpg", "/images/bgim.png"];
+  const imgs = ["/images/banner4.jpg", "/images/banner3.jpg", "/images/team1.jpg"];
+
+  const cards = [
+    {
+      title: "Authentic Kachi Ghani",
+      subtitle: "Traditional cold-pressed goodness",
+      desc:
+        "Veer Bharat’s Kachi Ghani mustard oil is crafted using time-honoured cold-pressing methods that preserve the natural aroma, pungency and nutrition of mustard seeds. Sourced from trusted farmers, our cold-pressed oil is minimally processed to retain essential fatty acids, natural antioxidants and a bold, restaurant-quality flavor that elevates everyday cooking.",
+      img: imgs[0],
+    },
+    {
+      title: "Unmatched Purity",
+      subtitle: "Double filtration, zero compromise",
+      desc:
+        "Purity is non-negotiable — that’s why we maintain rigorous quality checks at every step. From seed testing to controlled extraction and double-stage filtration, each batch undergoes strict lab analysis to ensure low free fatty acid levels and optimal freshness. Our sealed packaging and batch traceability guarantee you receive oil you can trust.",
+      img: imgs[1],
+    },
+    {
+      title: "Rich, Inviting Flavor",
+      subtitle: "Pungency that defines taste",
+      desc:
+        "A single drizzle of Veer Bharat mustard oil transforms ordinary recipes into memorable meals. Its robust aroma and sustained flavor work beautifully for tempering, pickles and deep frying — delivering consistent frying performance, crisp results and a taste profile that families come back to again and again.",
+      img: imgs[2],
+    },
+  ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-transparent">
       <div className="container mx-auto max-w-7xl px-6">
-        <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-extrabold mb-10 text-center">
-          Our Branches & Gallery
+        {/* Header + long descriptive paragraph (200+ words) */}
+        <motion.h2
+          initial={{ y: 16, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-extrabold mb-4 text-center text-[#0b2b52]"
+        >
+          Why Veer Bharat Mustard Oil
         </motion.h2>
 
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.08 }}
+          className="max-w-4xl mx-auto text-center text-gray-700 mb-12 text-lg leading-relaxed"
+          style={{ textAlign: "justify" }}
+        >
+       
+        </motion.p>
+
+        {/* Three feature cards */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {imgs.map((src, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }} className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
-              <Image src={src} alt={`Gallery ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-700" unoptimized />
-            </motion.div>
+          {cards.map((c, i) => (
+            <motion.article
+              key={i}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+              className="relative rounded-2xl overflow-hidden shadow-2xl border border-amber-100 bg-white/60 backdrop-blur-sm transform transition hover:-translate-y-2 duration-300"
+            >
+              {/* Large image area */}
+              <div
+                className="relative w-full"
+                style={{ aspectRatio: "1280/700", minHeight: 180 }}
+              >
+                <Image
+                  src={c.img}
+                  alt={c.title}
+                  fill
+                  className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                  unoptimized
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 pointer-events-none" />
+              </div>
+
+              {/* Wavy divider */}
+              <div className="absolute left-0 right-0 -mt-6 pointer-events-none">
+                <svg viewBox="0 0 1440 80" className="w-full h-8 md:h-10" preserveAspectRatio="none" aria-hidden>
+                  <path d="M0,40 C120,90 360,0 720,40 C1080,80 1320,10 1440,40 L1440,80 L0,80 Z" fill="#fffaf0" />
+                </svg>
+              </div>
+
+              {/* Content */}
+              <div className="bg-[#fffaf0] px-6 py-8 pt-12 min-h-[260px]">
+                <h3 className="text-2xl md:text-3xl font-extrabold mb-1 text-amber-900">{c.title}</h3>
+                <div className="text-sm md:text-base font-semibold text-amber-700 mb-4">{c.subtitle}</div>
+
+                <p className="text-gray-700 leading-relaxed text-sm md:text-base" style={{ textAlign: "justify" }}>
+                  {c.desc}
+                </p>
+
+                <div className="mt-6 flex items-center justify-between gap-4">
+                  <a
+                    href="/products"
+                    className="inline-block text-sm md:text-base font-bold rounded-full bg-amber-500 px-5 py-3 text-black shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition"
+                    aria-label={`Explore products - ${c.title}`}
+                  >
+                    Explore Products
+                  </a>
+
+                  <a
+                    href="/contact"
+                    className="text-sm md:text-base text-amber-900 underline hover:text-amber-700"
+                  >
+                    Contact Us
+                  </a>
+                </div>
+              </div>
+
+              {/* Badge */}
+              <div className="absolute left-5 top-5 z-20">
+                <div className="inline-flex items-center gap-2 bg-white/95 px-3 py-1 rounded-full shadow-sm border border-amber-100">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+                    <circle cx="12" cy="12" r="9" stroke="#B45309" strokeWidth="1.2" />
+                    <path d="M8 12l2 2 4-4" stroke="#B45309" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span className="text-xs font-semibold text-amber-900">Quality Certified</span>
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
+
+        {/* CTA row below cards - center aligned */}
+        <div className="mt-12 text-center">
+          <h4 className="text-xl font-bold mb-3 text-[#0b2b52]">Discover our full range</h4>
+          <p className="max-w-2xl mx-auto text-gray-600 mb-6">From cold-pressed mustard to high-stability frying oils — find the right oil for your kitchen. Click any category below to explore detailed product pages and specifications.</p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a href="/products/kachi-ghani" className="px-4 py-2 rounded-full bg-[#fef3d9] text-[#0b2b52] font-semibold shadow-sm hover:scale-105 transition">Kachi Ghani Mustard Oil</a>
+            <a href="/products/soybean" className="px-4 py-2 rounded-full bg-[#fff3f0] text-[#0b2b52] font-semibold shadow-sm hover:scale-105 transition">Soybean Oil</a>
+            <a href="/products/palm" className="px-4 py-2 rounded-full bg-[#eef9ff] text-[#0b2b52] font-semibold shadow-sm hover:scale-105 transition">Palm / Pam Oil</a>
+            <a href="/products/rice-bran" className="px-4 py-2 rounded-full bg-[#f6fff4] text-[#0b2b52] font-semibold shadow-sm hover:scale-105 transition">Rice Bran Oil</a>
+          </div>
+        </div>
       </div>
+
+      {/* Category Section immediately below */}
+      {/* <CategorySection /> */}
     </section>
   );
 }
+
+/* ================== CategorySection ================== */
+// function CategorySection() {
+//   const categories = [
+//     { id: "mustard", title: "Mustard Oil", img: "/images/banner4.jpg" },
+//     { id: "soybean", title: "Soybean Oil", img: "/images/banner3.jpg" },
+//     { id: "palm", title: "Palm Oil", img: "/images/team1.jpg" },
+//     { id: "rice", title: "Rice Bran Oil", img: "/images/banner4.jpg" },
+//   ];
+
+//   return (
+//     <section className="py-12 bg-transparent mt-12">
+//       <div className="container mx-auto max-w-7xl px-6">
+//         <motion.h3 initial={{ y: 10, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#0b2b52]">
+//           Categories
+//         </motion.h3>
+
+//         <p className="text-center max-w-2xl mx-auto text-gray-600 mb-8">
+//           Browse our main product categories — each category contains carefully curated products tested for quality and cooking performance.
+//         </p>
+
+//         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+//           {categories.map((cat) => (
+//             <motion.a
+//               key={cat.id}
+//               href={`/products/category/${cat.id}`}
+//               initial={{ opacity: 0, scale: 0.98 }}
+//               whileInView={{ opacity: 1, scale: 1 }}
+//               transition={{ duration: 0.35 }}
+//               className="group block rounded-xl overflow-hidden shadow-lg bg-white/60 backdrop-blur-sm border border-[rgba(8,52,139,0.04)] hover:shadow-2xl transform hover:-translate-y-2 transition"
+//             >
+//               <div className="relative w-full h-44">
+//                 <Image src={cat.img} alt={cat.title} fill className="object-cover object-center group-hover:scale-105 transition-transform" unoptimized />
+//               </div>
+
+//               <div className="px-4 py-4">
+//                 <h4 className="text-lg font-bold text-[#0b2b52]">{cat.title}</h4>
+//                 <p className="text-sm text-gray-600 mt-1">High-quality {cat.title.toLowerCase()} for home & professional kitchens.</p>
+//               </div>
+//             </motion.a>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
 
 /* ================= VideoHero ================= */
 function VideoHero({ videos = [] }) {
