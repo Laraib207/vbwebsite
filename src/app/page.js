@@ -3381,6 +3381,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Poppins, Playfair_Display } from "next/font/google";
 import { FaWhatsapp } from "react-icons/fa";
 
+
 /* ---------- Fonts ---------- */
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"] });
