@@ -3377,11 +3377,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, reverseEasing } from "framer-motion";
 import { Poppins, Playfair_Display } from "next/font/google";
 import { FaWhatsapp } from "react-icons/fa";
 import HealthBenefits from "../components/HealthBenefits";
 import VeerBharatHero from "@/components/VeerBharatHero";
+import CategoryCarousel from "@/components/CategoryCarousel";
+
 
 
 
@@ -3420,6 +3422,7 @@ export default function Home() {
 
       {/* Category Carousel */}
       <CategoryCarousel />
+      
 
       {/* Categories Grid */}
       <CategoriesGrid />
@@ -3460,147 +3463,189 @@ export default function Home() {
 }
 
 /* ================= CategoryCarousel ================= */
-function CategoryCarousel() {
-  const items = [
-    {
-      id: "bulbul",
-      title: "Veer Bharat — Trusted Oils, Thoughtful Practices",
-      img: "/images/home-collage.png", // apni photo public/image folder me dal kar is naam se rakhna
-      desc: `Established in 2010, Veer Bharat has grown into a dependable provider of edible oils and allied products,
-       serving households, retailers, and institutional buyers across India. Built on a foundation of quality, transparency, 
-       and customer-first service, we combine traditional know-how with modern manufacturing to deliver products that are safe,
-      nutritious, and reliably consistent.
-      Our portfolio includes Kachi Ghani mustard oil, light and nutritious soybean oil, refined palm (palm kernel/pam) oil for high-heat cooking,
-      rice bran oil, sunflower oil, blended cooking oils and specialty formulations. We supply bulk institutional orders as well as retail-packed bottles 
-      and tins, meeting the needs of home kitchens, restaurants, and food manufacturers. Each product is developed to suit practical cooking uses — from gentle
-      dressings to high-stability frying — while keeping taste and health in balance.`,
-    },
-  ];
+// function CategoryCarousel() {
+//   const items = [
+//     {
+//       id: "veer Bharat",
+//       title: "Veer Bharat — Trusted Oils, Thoughtful Practices",
+//       img: "/images/bg2.jpeg", // apni photo public/image folder me dal kar is naam se rakhna
+//       desc: `Established in 2010, Veer Bharat has grown into a dependable provider of edible oils and allied products,
+//        serving households, retailers, and institutional buyers across India. Built on a foundation of quality, transparency, 
+//        and customer-first service, we combine traditional know-how with modern manufacturing to deliver products that are safe,
+//       nutritious, and reliably consistent.
+//       Our portfolio includes Kachi Ghani mustard oil, light and nutritious soybean oil, refined palm (palm kernel/pam) oil for high-heat cooking,
+//       rice bran oil, sunflower oil, blended cooking oils and specialty formulations. We supply bulk institutional orders as well as retail-packed bottles 
+//       and tins, meeting the needs of home kitchens, restaurants, and food manufacturers. Each product is developed to suit practical cooking uses — from gentle
+//       dressings to high-stability frying — while keeping taste and health in balance.`,
+//     },
+//   ];
 
-  const [index, setIndex] = useState(0);
-  const animGuard = useRef(false);
+//   const [index, setIndex] = useState(0);
+//   const animGuard = useRef(false);
 
-  function prev() {
-    if (animGuard.current) return;
-    animGuard.current = true;
-    setIndex((i) => (i - 1 + items.length) % items.length);
-    setTimeout(() => (animGuard.current = false), 600);
-  }
+//   function prev() {
+//     if (animGuard.current) return;
+//     animGuard.current = true;
+//     setIndex((i) => (i - 1 + items.length) % items.length);
+//     setTimeout(() => (animGuard.current = false), 600);
+//   }
 
-  function next() {
-    if (animGuard.current) return;
-    animGuard.current = true;
-    setIndex((i) => (i + 1) % items.length);
-    setTimeout(() => (animGuard.current = false), 600);
-  }
+//   function next() {
+//     if (animGuard.current) return;
+//     animGuard.current = true;
+//     setIndex((i) => (i + 1) % items.length);
+//     setTimeout(() => (animGuard.current = false), 600);
+//   }
 
-  return (
-    <section className="py-12 relative overflow-visible">
-      <div className="container mx-auto max-w-7xl px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* LEFT: Text */}
-          <div className="relative z-10">
-            <h2 className="text-2xl md:text-4xl font-extrabold text-[#15325a] mb-6">
-              {items[index].title}
-            </h2>
+//   return (
+//     <section className="py-12 relative overflow-visible">
+//       <div className="container mx-auto max-w-7xl px-6 relative z-10">
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+//           {/* LEFT: Text */}
+//           <div className="relative z-10">
+//             <h2 className="text-2xl md:text-4xl font-extrabold text-[#15325a] mb-6">
+//               {items[index].title}
+//             </h2>
 
-            <p className="text-base md:text-lg text-[#24304a] leading-relaxed mb-4 whitespace-pre-line">
-              {items[index].desc.split("\n\n")[0]}
-            </p>
+//             <p className="text-base md:text-lg text-[#24304a] leading-relaxed mb-4 whitespace-pre-line">
+//               {items[index].desc.split("\n\n")[0]}
+//             </p>
 
-            <p className="text-base md:text-lg text-[#24304a] leading-relaxed mb-6 whitespace-pre-line">
-              {items[index].desc.split("\n\n")[1]}
-            </p>
+//             <p className="text-base md:text-lg text-[#24304a] leading-relaxed mb-6 whitespace-pre-line">
+//               {items[index].desc.split("\n\n")[1]}
+//             </p>
 
-            <a
-              href="/about"
-              className="inline-block rounded-md bg-[#16335f] text-white px-5 py-2.5 font-semibold shadow hover:scale-[1.02] transition"
-            >
-              About Us
-            </a>
-          </div>
+//             <a
+//               href="/about"
+//               className="inline-block rounded-md bg-[#16335f] text-white px-5 py-2.5 font-semibold shadow hover:scale-[1.02] transition"
+//             >
+//               About Us
+//             </a>
+//           </div>
 
-          {/* RIGHT: Image */}
-          <div className="flex justify-center md:justify-end">
-            <div className="relative w-[320px] sm:w-[380px] md:w-[460px] lg:w-[540px]">
-              <img
-                src={items[index].img}
-                alt={items[index].title}
-                className="rounded-xl shadow-2xl object-cover w-full h-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+//           {/* RIGHT: Image */}
+//           <div className="flex justify-center md:justify-end">
+//             <div className="relative w-[320px] sm:w-[380px] md:w-[460px] lg:w-[540px]">
+//               <img
+//                 src={items[index].img}
+//                 alt={items[index].title}
+//                 className="rounded-xl shadow-2xl object-cover w-full h-auto"
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </div>
 
-      {/* Dots */}
-      <div className="mt-8 flex items-center justify-center gap-3">
-        {items.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => {
-              if (animGuard.current || i === index) return;
-              animGuard.current = true;
-              setIndex(i);
-              setTimeout(() => (animGuard.current = false), 600);
-            }}
-            className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"
-              }`}
-            aria-label={`Go to ${i + 1}`}
-          />
-        ))}
-      </div>
+//       {/* Dots */}
+//       <div className="mt-8 flex items-center justify-center gap-3">
+//         {items.map((_, i) => (
+//           <button
+//             key={i}
+//             onClick={() => {
+//               if (animGuard.current || i === index) return;
+//               animGuard.current = true;
+//               setIndex(i);
+//               setTimeout(() => (animGuard.current = false), 600);
+//             }}
+//             className={`w-3 h-3 rounded-full ${i === index ? "bg-[#0b0d11]" : "bg-gray-300"
+//               }`}
+//             aria-label={`Go to ${i + 1}`}
+//           />
+//         ))}
+//       </div>
 
-      {/* Arrows */}
-      <button
-        onClick={() =>
-          setIndex((i) => (i - 1 + items.length) % items.length)
-        }
-        aria-label="Prev"
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
-      >
-        ‹
-      </button>
-      <button
-        onClick={() => setIndex((i) => (i + 1) % items.length)}
-        aria-label="Next"
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
-      >
-        ›
-      </button>
-    </section>
-  );
-}
+//       {/* Arrows */}
+//       <button
+//         onClick={() =>
+//           setIndex((i) => (i - 1 + items.length) % items.length)
+//         }
+//         aria-label="Prev"
+//         className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
+//       >
+//         ‹
+//       </button>
+//       <button
+//         onClick={() => setIndex((i) => (i + 1) % items.length)}
+//         aria-label="Next"
+//         className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/95 shadow-lg flex items-center justify-center hover:scale-105 transition"
+//       >
+//         ›
+//       </button>
+//     </section>
+//   );
+// }
 
 
 /* ================= CategoriesGrid ================= */
 function CategoriesGrid() {
   const cats = [
-    { id: "cat-1", name: "Cooking Oils", img: "/images/Unknown-1.jpeg", desc: "Mustard, Soyabean, Rice Bran — quality you can trust." },
-    { id: "cat-2", name: "Edible Ghee", img: "/images/Unknown-2.jpeg", desc: "Pure ghee for traditional taste." },
-    { id: "cat-3", name: "Packaged Products", img: "/images/Unknown-3.jpeg", desc: "Convenient pack sizes for modern kitchens." },
-    { id: "cat-4", name: "Wholesale & Bulk", img: "/images/Unknown-5.jpeg", desc: "Solutions for restaurants & stores." },
+    {
+      id: "cat-1",
+      name: "Cooking Oils",
+      img: "/images/Unknown-1.jpeg",
+      desc: "Mustard, Soyabean, Rice Bran — quality you can trust.",
+    },
+    {
+      id: "cat-2",
+      name: "Edible Ghee",
+      img: "/images/Unknown-2.jpeg",
+      desc: "Pure ghee for traditional taste.",
+    },
+    {
+      id: "cat-3",
+      name: "Packaged Products",
+      img: "/images/Unknown-3.jpeg",
+      desc: "Convenient pack sizes for modern kitchens.",
+    },
+    {
+      id: "cat-4",
+      name: "Wholesale & Bulk",
+      img: "/images/Unknown-5.jpeg",
+      desc: "Solutions for restaurants & stores.",
+    },
+    
   ];
 
-  return (
-    <section className="py-12 md:py-20 bg-gray-50">
+return (
+    <section className="py-12 md:py-20" style={{ backgroundColor: "#DFC6F6" }}>
       <div className="container mx-auto max-w-7xl px-6">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">Categories</h2>
-          <Link href="/products" className="text-sm font-semibold underline">View all products</Link>
+        {/* Heading */}
+        <div className="flex items-center justify-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+            Categories
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {cats.map((c) => (
-            <div key={c.id} className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow hover:shadow-xl transform transition hover:scale-105">
-              <div className="relative w-full h-44">
-                <Image src={c.img} alt={c.name} fill className="object-cover" unoptimized />
+            <div
+              key={c.id}
+              className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transform transition hover:scale-105"
+              style={{ minHeight: "420px" }}
+            >
+              {/* Image */}
+              <div className="relative w-full h-64">
+                <img
+                  src={c.img}
+                  alt={c.name}
+                  className="object-cover w-full h-full"
+                />
               </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-lg mb-2">{c.name}</h3>
-                <p className="text-sm text-gray-600">{c.desc}</p>
-                <div className="mt-4">
-                  <Link href={`/category/${c.id}`} className="inline-block text-sm font-bold rounded-full bg-amber-400 px-4 py-2">Explore</Link>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col items-center text-center">
+                <h3 className="font-extrabold text-2xl mb-3 text-gray-900">
+                  {c.name}
+                </h3>
+                <p className="text-sm text-gray-700">{c.desc}</p>
+                <div className="mt-5">
+                  <a
+                    href={`/category/${c.id}`}
+                    className="inline-block text-sm font-bold rounded-full bg-amber-400 px-6 py-2 shadow-md hover:bg-amber-500 transition"
+                  >
+                    Explore
+                  </a>
                 </div>
               </div>
             </div>
@@ -3610,6 +3655,7 @@ function CategoriesGrid() {
     </section>
   );
 }
+
 
 /* ================= MovingShowcase ================= */
 function MovingShowcase() {
