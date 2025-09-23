@@ -3380,6 +3380,9 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Poppins, Playfair_Display } from "next/font/google";
 import { FaWhatsapp } from "react-icons/fa";
+import HealthBenefits from "../components/HealthBenefits";
+
+
 
 
 /* ---------- Fonts ---------- */
@@ -3426,7 +3429,12 @@ export default function Home() {
       <FeaturedImageSection />
 
       {/* ====== BRANCHES & GALLERY (REPLACES PREVIOUS FEATURED IMAGE) ====== */}
+      
+<HealthBenefits />
       <Branches />
+
+ 
+
 
       {/* WhatsApp button */}
       <a
@@ -3739,6 +3747,9 @@ function FeaturedImageSection() {
   );
 }
 
+
+  // ya tumhara existing section
+
 /* ================= Branches (Gallery) ================= */
 function Branches() {
   const imgs = ["/images/banner4.jpg", "/images/banner3.jpg", "/images/team1.jpg"];
@@ -3932,6 +3943,7 @@ function Branches() {
 
 
 /* ================= VideoHero ================= */
+
 function VideoHero({ videos = [] }) {
   const vidRef = useRef(null);
   const [playing, setPlaying] = useState(true);

@@ -1,6 +1,5 @@
-// app/brochure/page.jsx
-"use client";
 
+ "use client";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,7 +8,7 @@ function PdfIcon({ className = "w-12 h-12" }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
       <rect x="3" y="3" width="18" height="18" rx="2" fill="#fff3e0" stroke="#f6b84b" />
-      <path d="M8 8h5l3 3v6a1 1 0 0 1-1 1H8V8z" fill="#ffd6a5" />
+       <path d="M8 8h5l3 3v6a1 1 0 0 1-1 1H8V8z" fill="#ffd6a5" />
       <path d="M9 14.5h6" stroke="#b45309" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M9 11h6" stroke="#b45309" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="7.5" cy="16.5" r="0.9" fill="#b45309" />
