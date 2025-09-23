@@ -1,4 +1,4 @@
-// "use client";
+  // "use client";
 
 // import Link from "next/link";
 // import Image from "next/image";
@@ -3381,6 +3381,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Poppins, Playfair_Display } from "next/font/google";
 import { FaWhatsapp } from "react-icons/fa";
 import HealthBenefits from "../components/HealthBenefits";
+import VeerBharatHero from "@/components/VeerBharatHero";
+
 
 
 
@@ -3427,6 +3429,7 @@ export default function Home() {
 
       {/* ====== FEATURED IMAGE (REPLACES PREVIOUS BRANCHES) ====== */}
       <FeaturedImageSection />
+      <VeerBharatHero />
 
       {/* ====== BRANCHES & GALLERY (REPLACES PREVIOUS FEATURED IMAGE) ====== */}
       
