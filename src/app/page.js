@@ -3658,6 +3658,8 @@ return (
 
 
 /* ================= MovingShowcase ================= */
+
+
 function MovingShowcase() {
   const slides = [
     { id: "s-soya", img: "/images/slide2.jpg", title: "Soyabean Oil — हल्का, स्वास्थ्यवर्धक", subtitle: "Vitamin E • Light Texture • Daily Cooking", cta: { text: "Explore Soyabean", href: "/products/soyabean-oil" } },
@@ -3680,26 +3682,23 @@ function MovingShowcase() {
     return () => clearInterval(autoplayRef.current);
   }, [len]);
 
-  function prev() {
-    if (animGuard.current) return;
+  // Keep functions in case you want to programmatically control the slider later
+  function goTo(i) {
+    if (animGuard.current || i === idx) return;
     clearInterval(autoplayRef.current);
     animGuard.current = true;
-    setIdx((i) => (i - 1 + len) % len);
-    setTimeout(() => { animGuard.current = false; autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000); }, 650);
-  }
-
-  function next() {
-    if (animGuard.current) return;
-    clearInterval(autoplayRef.current);
-    animGuard.current = true;
-    setIdx((i) => (i + 1) % len);
-    setTimeout(() => { animGuard.current = false; autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000); }, 650);
+    setIdx(i);
+    setTimeout(() => {
+      animGuard.current = false;
+      autoplayRef.current = setInterval(() => setIdx((j) => (j + 1) % len), 7000);
+    }, 600);
   }
 
   const slide = slides[idx];
 
   return (
-    <section className="relative w-full min-h-[62vh] md:min-h-[72vh] overflow-hidden bg-white py-12">
+    <section className="relative w-full min-h-[62vh] md:min-h-[72vh] overflow-hidden py-12"
+      style={{ backgroundColor: "#fef9c3" /* requested background */ }}>
       <div className="absolute inset-0 -z-10">
         {slides.map((s, i) => (
           <img
@@ -3717,50 +3716,60 @@ function MovingShowcase() {
               opacity: i === idx ? 1 : 0,
               transform: i === idx ? "scale(1)" : "scale(1.02)",
               willChange: "opacity, transform",
+              filter: "contrast(0.98) saturate(0.95)",
             }}
           />
         ))}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.02) 40%, rgba(255,255,255,0.6) 100%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.02) 40%, rgba(254,249,195,0.15) 100%)", pointerEvents: "none" }} />
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-7xl px-6 py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div className="relative z-10 container mx-auto max-w-7xl px-6 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          {/* Left: Showcase image */}
           <div className="flex items-center justify-center w-full">
-            <div className="relative rounded-lg overflow-hidden shadow-2xl" style={{ width: "100%", maxWidth: 720, height: "min(60vh, 520px)", backgroundColor: "#f7f7f7" }}>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl" style={{ width: "100%", maxWidth: 780, height: "min(60vh, 520px)", backgroundColor: "#fff7dc" }}>
               <img src={slide.img} alt={slide.title} className="w-full h-full object-cover object-center block" />
-              <div style={{ position: "absolute", left: 16, top: 16, background: "rgba(255,255,255,0.95)", padding: "6px 10px", borderRadius: 999, fontSize: 14, boxShadow: "0 6px 18px rgba(2,6,23,0.08)", color: "#0b0d11" }}>
+              <div style={{ position: "absolute", left: 16, top: 16, background: "rgba(255,255,255,0.98)", padding: "8px 12px", borderRadius: 999, fontSize: 15, boxShadow: "0 8px 30px rgba(11,13,17,0.06)", color: "#0b0d11", fontWeight: 700 }}>
                 {slide.title.split("—")[0].trim()}
               </div>
             </div>
           </div>
 
+          {/* Right: Text area */}
           <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-gray-900">{slide.title}</h2>
-            <p className="text-sm md:text-base text-gray-700 font-semibold mb-4">{slide.subtitle}</p>
-            <p className="text-sm text-gray-600 leading-relaxed mb-6">Veer Bharat की excellence और modern quality control के साथ आपके किचन तक शुद्ध और भरोसेमंद तेल पहुँचाने का वादा।</p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 text-gray-900 leading-tight">
+              {slide.title}
+            </h2>
 
-            <div className="flex items-center gap-3">
-              <Link href={slide.cta.href} className="rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-5 py-2.5 font-bold shadow-md hover:scale-105 transition">
+            <p className="text-lg md:text-xl font-semibold mb-4 text-gray-800">
+              {slide.subtitle}
+            </p>
+
+            {/* Replaced Hindi line with an English positive marketing line */}
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
+              Pure, trusted oils for every kitchen — wholesome flavor, everyday health. Experience premium quality and taste that cares for your family.
+            </p>
+
+            <div className="flex items-center gap-4">
+              <Link href={slide.cta.href} className="inline-block rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-6 py-3 font-bold shadow-md hover:scale-105 transform transition">
                 {slide.cta.text}
               </Link>
-
-              <button onClick={prev} className="px-4 py-2 rounded-full border border-gray-200">‹ Prev</button>
-              <button onClick={next} className="px-4 py-2 rounded-full border border-gray-200">Next ›</button>
+              {/* Removed Prev/Next buttons per request - keeping only dot controls below */}
             </div>
 
+            {/* Dot indicators (single control type, concise and modern) */}
             <div className="mt-6 flex items-center gap-3">
               {slides.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => {
-                    if (animGuard.current || i === idx) return;
-                    clearInterval(autoplayRef.current);
-                    animGuard.current = true;
-                    setIdx(i);
-                    setTimeout(() => { animGuard.current = false; autoplayRef.current = setInterval(() => setIdx((j) => (j + 1) % len), 7000); }, 600);
-                  }}
+                  onClick={() => goTo(i)}
                   aria-label={`Go to ${i + 1}`}
-                  style={{ width: 10, height: 10, borderRadius: 999, background: i === idx ? "#0b0d11" : "#d1d5db", border: "none", padding: 0, transition: "background 200ms" }}
+                  className={`w-3.5 h-3.5 md:w-4 md:h-4 rounded-full transition-transform transform ${i === idx ? "scale-125" : "scale-100"}`}
+                  style={{
+                    background: i === idx ? "#0b0d11" : "rgba(17,24,39,0.18)",
+                    border: "none",
+                    padding: 0,
+                  }}
                 />
               ))}
             </div>
@@ -3768,11 +3777,11 @@ function MovingShowcase() {
         </div>
       </div>
 
-      <button onClick={prev} aria-label="Prev slide" className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition">‹</button>
-      <button onClick={next} aria-label="Next slide" className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-xl w-12 h-12 items-center justify-center hover:scale-105 transition">›</button>
+      {/* Note: left/right absolute arrows removed as requested */}
     </section>
   );
 }
+
 
 /* ================= FEATURED IMAGE SECTION (bg2.jpeg) ================= */
 function FeaturedImageSection() {
