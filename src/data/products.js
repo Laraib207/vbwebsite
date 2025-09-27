@@ -54,3 +54,4 @@ export const products = [
     long: "Rice Bran Oil is derived from the nutrient-rich rice bran and valued for naturally occurring γ-oryzanol. With a neutral, pleasant taste and balanced smoke point, it suits tempering, sautéing and shallow frying for families seeking practicality with mindful choices."
   }
 ];
+
