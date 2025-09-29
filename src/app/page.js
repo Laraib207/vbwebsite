@@ -3408,7 +3408,7 @@ export default function Home() {
           viewport={{ once: true }}
           className={`${playfair.className} text-3xl md:text-5xl font-extrabold tracking-tight`}
         >
-          Veer Bharat Oil — Category & Highlights
+         Veer Bharat — Trusted Oils, Thoughtful Practices, Tradition Meets Purity
         </motion.h1>
 
         <motion.div
@@ -3577,6 +3577,7 @@ export default function Home() {
 
 
 /* ================= CategoriesGrid ================= */
+
 function CategoriesGrid() {
   const cats = [
     {
@@ -3603,50 +3604,68 @@ function CategoriesGrid() {
       img: "/images/Unknown-5.jpeg",
       desc: "Solutions for restaurants & stores.",
     },
-    
   ];
 
-return (
-    <section className="py-12 md:py-20" style={{ backgroundColor: "#DFC6F6" }}>
-      <div className="container mx-auto max-w-7xl px-6">
-        {/* Heading */}
-        <div className="flex items-center justify-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
-            Categories
-          </h2>
+  return (
+    <section className="py-16 md:py-24 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #DFC6F6 0%, #E8D5F9 100%)" }}>
+      {/* Subtle background pattern for premium feel */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%239C92AC\" fill-opacity=\"0.1\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"2\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')" }}></div>
+      </div>
+      
+      <div className="container mx-auto max-w-7xl px-6 relative z-10">
+        {/* Enhanced Heading */}
+        <div className="flex items-center justify-center mb-16">
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+              Explore Categories
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-500 mx-auto rounded-full"></div>
+          </div>
         </div>
-
-        {/* Grid */}
+        
+        {/* Premium Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {cats.map((c) => (
             <div
               key={c.id}
-              className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transform transition hover:scale-105"
-              style={{ minHeight: "420px" }}
+              className="group bg-white rounded-3xl overflow-hidden border-0 shadow-xl hover:shadow-3xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 relative"
+              style={{ minHeight: "380px", maxWidth: "100%" }}
             >
-              {/* Image */}
-              <div className="relative w-full h-64">
+              {/* Enhanced Image with Overlay */}
+              <div className="relative w-full h-72 overflow-hidden">
                 <img
                   src={c.img}
                   alt={c.name}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
                 />
+                {/* Premium Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {/* Category Icon Badge - Optional premium touch */}
+                <div className="absolute top-4 right-4 bg-amber-400/90 backdrop-blur-sm rounded-full p-3 shadow-lg">
+                  <span className="text-white font-bold text-sm">★</span>
+                </div>
               </div>
-
-              {/* Content */}
-              <div className="p-6 flex flex-col items-center text-center">
-                <h3 className="font-extrabold text-2xl mb-3 text-gray-900">
+              
+              {/* Enhanced Content */}
+              <div className="p-8 flex flex-col items-center text-center relative z-10">
+                <h3 className="font-black text-2xl mb-4 text-gray-900 group-hover:text-amber-600 transition-colors duration-300 tracking-wide">
                   {c.name}
                 </h3>
-                <p className="text-sm text-gray-700">{c.desc}</p>
-                <div className="mt-5">
-                  <a
-                    href={`/category/${c.id}`}
-                    className="inline-block text-sm font-bold rounded-full bg-amber-400 px-6 py-2 shadow-md hover:bg-amber-500 transition"
-                  >
-                    Explore
-                  </a>
-                </div>
+                <p className="text-base text-gray-600 mb-6 leading-relaxed font-light">
+                  {c.desc}
+                </p>
+                {/* Premium Explore Button - Linked to /product */}
+                <a
+                  href="/products"
+                  className="inline-flex items-center text-sm font-bold rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-white px-8 py-3 shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 group/button"
+                  style={{ boxShadow: "0 4px 20px rgba(251, 191, 36, 0.4)" }}
+                >
+                  Explore Category
+                  <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
               </div>
             </div>
           ))}
