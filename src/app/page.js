@@ -1,4 +1,4 @@
-  // "use client";
+// "use client";
 
 // import Link from "next/link";
 // import Image from "next/image";
@@ -3389,6 +3389,8 @@ import CategoryCarousel from "@/components/CategoryCarousel";
 
 
 
+
+
 /* ---------- Fonts ---------- */
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"] });
@@ -3428,7 +3430,7 @@ export default function Home() {
       <CategoriesGrid />
 
       {/* Moving Showcase */}
-      <MovingShowcase />
+      <VideoShowcase />
 
       {/* ====== FEATURED IMAGE (REPLACES PREVIOUS BRANCHES) ====== */}
       <FeaturedImageSection />
@@ -3676,132 +3678,152 @@ function CategoriesGrid() {
 }
 
 
-/* ================= MovingShowcase ================= */
+/* ================= MovingShowcase & video section ================= */
 
 
-function MovingShowcase() {
-  const slides = [
-    { id: "s-soya", img: "/images/slide2.jpg", title: "Soyabean Oil — हल्का, स्वास्थ्यवर्धक", subtitle: "Vitamin E • Light Texture • Daily Cooking", cta: { text: "Explore Soyabean", href: "/products/soyabean-oil" } },
-    { id: "s-mustard", img: "/images/slide1.jpg", title: "Kachi Ghani Mustard Oil — परंपरा का स्वाद", subtitle: "Cold Pressed • Strong Aroma • Authentic Taste", cta: { text: "Explore Mustard", href: "/products/kachi-ghani-mustard-oil" } },
-    { id: "s-banner3", img: "/images/banner3.jpg", title: "Healthy Frying — Rice Bran Oil", subtitle: "High Smoke Point • Neutral Taste • Heart Friendly", cta: { text: "Explore Rice Bran", href: "/products/rice-bran-oil" } },
+function VideoShowcase() {
+  const videos = [
+    { 
+      id: "v-1", 
+      video: "/images/video1.mp4",
+      thumbnail: "/images/slide1.jpg",
+      title: "Mumbai sagie is bar Veer Bharat ke pakwalno ke saath",
+      cta: { text: "Watch Now", href: "#" }
+    },
+    { 
+      id: "v-2", 
+      video: "/images/video2.mp4",
+      thumbnail: "/images/slide2.jpg",
+      title: "veer Bharat Kachi Ghani Mustard Oil: The Heart of Healthy Indian Cooking",
+      cta: { text: "Watch Now", href: "public\images\video1.mp4" }
+    },
+    { 
+      id: "v-3", 
+      video: "/images/video3.mp4",
+      thumbnail: "/images/banner3.jpg",
+      title: "holi ho is bar veer Bharat ke saath",
+      cta: { text: "Watch Now", href: "#" }
+    },
   ];
 
-  const [idx, setIdx] = useState(0);
-  const len = slides.length;
-  const autoplayRef = useRef(null);
-  const animGuard = useRef(false);
+  const scrollContainerRef = useRef(null);
+  const [playingVideo, setPlayingVideo] = useState(null);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    slides.forEach((s) => { const pre = new window.Image(); pre.src = s.img; });
-  }, []);
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
+  };
 
-  useEffect(() => {
-    autoplayRef.current = setInterval(() => setIdx((i) => (i + 1) % len), 7000);
-    return () => clearInterval(autoplayRef.current);
-  }, [len]);
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
 
-  // Keep functions in case you want to programmatically control the slider later
-  function goTo(i) {
-    if (animGuard.current || i === idx) return;
-    clearInterval(autoplayRef.current);
-    animGuard.current = true;
-    setIdx(i);
-    setTimeout(() => {
-      animGuard.current = false;
-      autoplayRef.current = setInterval(() => setIdx((j) => (j + 1) % len), 7000);
-    }, 600);
-  }
-
-  const slide = slides[idx];
+  const handlePlayVideo = (videoId) => {
+    const videoElement = document.getElementById(videoId);
+    if (videoElement) {
+      if (playingVideo && playingVideo !== videoId) {
+        const prevVideo = document.getElementById(playingVideo);
+        if (prevVideo) prevVideo.pause();
+      }
+      videoElement.play();
+      setPlayingVideo(videoId);
+    }
+  };
 
   return (
-    <section className="relative w-full min-h-[62vh] md:min-h-[72vh] overflow-hidden py-12"
-      style={{ backgroundColor: "#fef9c3" /* requested background */ }}>
-      <div className="absolute inset-0 -z-10">
-        {slides.map((s, i) => (
-          <img
-            key={s.id}
-            src={s.img}
-            alt={s.title}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center",
-              transition: "opacity 0.9s ease, transform 0.9s ease",
-              opacity: i === idx ? 1 : 0,
-              transform: i === idx ? "scale(1)" : "scale(1.02)",
-              willChange: "opacity, transform",
-              filter: "contrast(0.98) saturate(0.95)",
-            }}
-          />
-        ))}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.02) 40%, rgba(254,249,195,0.15) 100%)", pointerEvents: "none" }} />
-      </div>
+    <section className="relative w-full min-h-[60vh] overflow-hidden py-16"
+      style={{ backgroundColor: "#fef9c3" }}>
+      
+      <div className="container mx-auto max-w-7xl px-6">
+        <h2 className="text-4xl md:text-5xl font-bold text-black text-center mb-12">
+          The Veer Bharat Video Showcase
+        </h2>
 
-      <div className="relative z-10 container mx-auto max-w-7xl px-6 py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          {/* Left: Showcase image */}
-          <div className="flex items-center justify-center w-full">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl" style={{ width: "100%", maxWidth: 780, height: "min(60vh, 520px)", backgroundColor: "#fff7dc" }}>
-              <img src={slide.img} alt={slide.title} className="w-full h-full object-cover object-center block" />
-              <div style={{ position: "absolute", left: 16, top: 16, background: "rgba(255,255,255,0.98)", padding: "8px 12px", borderRadius: 999, fontSize: 15, boxShadow: "0 8px 30px rgba(11,13,17,0.06)", color: "#0b0d11", fontWeight: 700 }}>
-                {slide.title.split("—")[0].trim()}
+        <div className="relative">
+          <button
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-110"
+            style={{ marginLeft: '-24px', backgroundColor: '#DFC6F6' }}
+          >
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-110"
+            style={{ marginRight: '-24px', backgroundColor: '#DFC6F6' }}
+          >
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {videos.map((video) => (
+              <div
+                key={video.id}
+                className="flex-shrink-0 w-full md:w-[380px] bg-white rounded-3xl overflow-hidden shadow-xl"
+              >
+                <div className="relative bg-black h-64 flex items-center justify-center">
+                  <video
+                    id={video.id}
+                    className="w-full h-full object-cover"
+                    poster={video.thumbnail}
+                    controls
+                  >
+                    <source src={video.video} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  
+                  <button 
+                    onClick={() => handlePlayVideo(video.id)}
+                    className="absolute inset-0 flex items-center justify-center group"
+                    style={{ display: playingVideo === video.id ? 'none' : 'flex' }}
+                  >
+                    <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform"
+                      style={{ backgroundColor: '#DFC6F6' }}>
+                      <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-gray-800 text-lg font-semibold mb-4 leading-snug min-h-[4rem]">
+                    {video.title}
+                  </h3>
+                  
+                  <button
+                    onClick={() => window.location.href = video.cta.href}
+                    className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-full transition-all transform hover:scale-105 shadow-md"
+                  >
+                    {video.cta.text}
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-
-          {/* Right: Text area */}
-          <div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 text-gray-900 leading-tight">
-              {slide.title}
-            </h2>
-
-            <p className="text-lg md:text-xl font-semibold mb-4 text-gray-800">
-              {slide.subtitle}
-            </p>
-
-            {/* Replaced Hindi line with an English positive marketing line */}
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-6">
-              Pure, trusted oils for every kitchen — wholesome flavor, everyday health. Experience premium quality and taste that cares for your family.
-            </p>
-
-            <div className="flex items-center gap-4">
-              <Link href={slide.cta.href} className="inline-block rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-emerald-400 px-6 py-3 font-bold shadow-md hover:scale-105 transform transition">
-                {slide.cta.text}
-              </Link>
-              {/* Removed Prev/Next buttons per request - keeping only dot controls below */}
-            </div>
-
-            {/* Dot indicators (single control type, concise and modern) */}
-            <div className="mt-6 flex items-center gap-3">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goTo(i)}
-                  aria-label={`Go to ${i + 1}`}
-                  className={`w-3.5 h-3.5 md:w-4 md:h-4 rounded-full transition-transform transform ${i === idx ? "scale-125" : "scale-100"}`}
-                  style={{
-                    background: i === idx ? "#0b0d11" : "rgba(17,24,39,0.18)",
-                    border: "none",
-                    padding: 0,
-                  }}
-                />
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Note: left/right absolute arrows removed as requested */}
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 }
-
-
 /* ================= FEATURED IMAGE SECTION (bg2.jpeg) ================= */
 function FeaturedImageSection() {
   return (
