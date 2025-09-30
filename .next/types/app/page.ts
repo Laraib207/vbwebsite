@@ -1,4 +1,4 @@
-// File: C:\Users\Admin\Desktop\you\laibu\vbwebsite\src\app\page.js
+// File: /Users/laraibd/Desktop/wwwvbb/vbwebsite/vbwebsite/vbwebsite/vbwebsite/vbwebsite/src/app/page.js
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
