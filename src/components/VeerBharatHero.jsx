@@ -479,6 +479,7 @@ export default function VeerBharatHero() {
     <section 
       className="relative overflow-hidden" 
       style={{ 
+        
         background: "#fef9c3",
         minHeight: "100vh" 
       }}

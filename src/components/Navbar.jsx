@@ -1312,11 +1312,375 @@
 
 
 
+
+
+// "use client";
+
+// import { useState, useEffect, useRef } from "react";
+// import Link from "next/link";
+// import Image from "next/image";
+
+// export default function Navbar() {
+//   const [open, setOpen] = useState(false);
+//   const [scrolled, setScrolled] = useState(false);
+//   const [teamOpen, setTeamOpen] = useState(false);
+//   const [brochureOpen, setBrochureOpen] = useState(false);
+//   const [viewerOpen, setViewerOpen] = useState(false);
+
+//   const teamRef = useRef(null);
+//   const teamButtonRef = useRef(null);
+//   const brochureRef = useRef(null);
+//   const brochureButtonRef = useRef(null);
+
+//   const pdfPath = "/docs/pdf/brochure.pdf";
+
+//   useEffect(() => {
+//     const handleScroll = () => setScrolled(window.scrollY > 50);
+//     window.addEventListener("scroll", handleScroll, { passive: true });
+//     return () => window.removeEventListener("scroll", handleScroll);
+//   }, []);
+
+//   useEffect(() => {
+//     const onDoc = (e) => {
+//       if (
+//         teamRef.current &&
+//         !teamRef.current.contains(e.target) &&
+//         teamButtonRef.current &&
+//         !teamButtonRef.current.contains(e.target)
+//       ) {
+//         setTeamOpen(false);
+//       }
+//       if (
+//         brochureRef.current &&
+//         !brochureRef.current.contains(e.target) &&
+//         brochureButtonRef.current &&
+//         !brochureButtonRef.current.contains(e.target)
+//       ) {
+//         setBrochureOpen(false);
+//       }
+//     };
+//     document.addEventListener("click", onDoc);
+//     return () => document.removeEventListener("click", onDoc);
+//   }, []);
+
+//   useEffect(() => {
+//     const onKey = (e) => {
+//       if (e.key === "Escape") {
+//         setTeamOpen(false);
+//         setBrochureOpen(false);
+//         setOpen(false);
+//         setViewerOpen(false);
+//       }
+//     };
+//     document.addEventListener("keydown", onKey);
+//     return () => document.removeEventListener("keydown", onKey);
+//   }, []);
+
+//   return (
+//     <>
+//       <header
+//         className={`w-full transition-all duration-300 border-b border-[rgba(8,52,139,0.04)] ${
+//           scrolled ? "fixed top-0 left-0 z-50 py-2 shadow-sm" : "relative py-4 shadow-sm"
+//         }`}
+//         style={{ backgroundColor: "#DFC6F6" }}
+//       >
+//         {/* full-width bar so logo sits left-most */}
+//         <div className="w-full flex items-center px-2 md:px-4">
+//           {/* LEFT: Logo (fixed left-most) */}
+//           <div className="flex items-center flex-shrink-0">
+//             <Link href="/" aria-label="Veer Bharat Home" className="block">
+//               <div style={{ width: 150, height: 120 }} className="overflow-hidden">
+//                 <Image
+//                   src="/logo.png"
+//                   alt="Veer Bharat logo"
+//                   width={200}
+//                   height={124}
+//                   style={{ objectFit: "contain" }}
+//                   priority
+//                 />
+//               </div>
+//             </Link>
+//             {/* Brand text to the right of logo (kept small on mobile) */}
+//             <div className="hidden sm:flex flex-col leading-tight ml-2">
+//               <span className="font-extrabold text-2xl md:text-3xl tracking-tight text-[#08348b]">VEER BHARAT</span>
+//               <span className="italic text-sm md:text-base text-[#aa2266]">वाह! मज़ा आ गया</span>
+//             </div>
+//           </div>
+
+//           {/* CENTER: nav (centered on desktop) */}
+//           <nav className="hidden md:flex flex-1 justify-center items-center">
+//             <ul className="flex items-center gap-8 text-lg font-semibold">
+//               <li><NavLink href="/">Home</NavLink></li>
+//               <li><NavLink href="/blog">Blog</NavLink></li>
+//               <li><NavLink href="/products">Products</NavLink></li>
+
+//               {/* Brochure (desktop dropdown) */}
+//               <li className="relative" ref={brochureRef}>
+//                 <button
+//                   ref={brochureButtonRef}
+//                   onClick={() => setBrochureOpen((s) => !s)}
+//                   onMouseEnter={() => setBrochureOpen(true)}
+//                   onFocus={() => setBrochureOpen(true)}
+//                   className="flex items-center gap-2 px-2 py-1 rounded hover:bg-white/30 focus:outline-none"
+//                 >
+//                   Brochure <ChevronIcon open={brochureOpen} />
+//                 </button>
+
+//                 <div
+//                   className={`absolute top-full mt-2 left-1/2 transform -translate-x-1/2 min-w-[220px] rounded-md bg-white text-[#082f63] shadow-lg ring-1 ring-black/10 transition-all z-50 ${
+//                     brochureOpen ? "opacity-100 pointer-events-auto translate-y-0 scale-100" : "opacity-0 pointer-events-none -translate-y-1 scale-95"
+//                   }`}
+//                   onMouseEnter={() => setBrochureOpen(true)}
+//                   onMouseLeave={() => setBrochureOpen(false)}
+//                 >
+//                   <ul className="py-2">
+//                     <li>
+//                       <button
+//                         onClick={() => {
+//                           setViewerOpen(true);
+//                           setBrochureOpen(false);
+//                           setOpen(false);
+//                         }}
+//                         className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+//                       >
+//                         View Brochure
+//                       </button>
+//                     </li>
+//                     <li>
+//                       <a href={pdfPath} download className="block px-4 py-2 hover:bg-gray-100 text-sm">Download Brochure</a>
+//                     </li>
+//                   </ul>
+//                 </div>
+//               </li>
+
+//               <li className="relative" ref={teamRef}>
+//                 <button
+//                   ref={teamButtonRef}
+//                   onClick={() => setTeamOpen((s) => !s)}
+//                   onMouseEnter={() => setTeamOpen(true)}
+//                   onFocus={() => setTeamOpen(true)}
+//                   className="flex items-center gap-2 px-2 py-1 rounded hover:bg-white/30 focus:outline-none"
+//                 >
+//                   Team <ChevronIcon open={teamOpen} />
+//                 </button>
+
+//                 <div
+//                   className={`absolute top-full mt-2 left-1/2 transform -translate-x-1/2 min-w-[180px] rounded-md bg-white text-[#082f63] shadow-lg ring-1 ring-black/10 transition-all z-50 ${
+//                     teamOpen ? "opacity-100 pointer-events-auto translate-y-0 scale-100" : "opacity-0 pointer-events-none -translate-y-1 scale-95"
+//                   }`}
+//                   onMouseEnter={() => setTeamOpen(true)}
+//                   onMouseLeave={() => setTeamOpen(false)}
+//                 >
+//                   <ul className="py-2">
+//                     <li>
+//                       <Link href="/team" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => { setOpen(false); setTeamOpen(false); }}>
+//                         Our Team
+//                       </Link>
+//                     </li>
+//                     <li>
+//                       <Link href="/gallery" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => { setOpen(false); setTeamOpen(false); }}>
+//                         Gallery
+//                       </Link>
+//                     </li>
+//                   </ul>
+//                 </div>
+//               </li>
+
+//               <li><NavLink href="/about">About</NavLink></li>
+//               <li><NavLink href="/contact">Contact</NavLink></li>
+//             </ul>
+//           </nav>
+
+//           {/* RIGHT: shop + social + mobile hamburger */}
+//           <div className="flex items-center gap-4 flex-shrink-0">
+//             <div className="hidden md:flex items-center gap-2">
+//               <a
+//                 href="#"
+//                 className="inline-flex items-center px-4 py-2 rounded bg-gradient-to-r from-[#fff7cc] to-[#ffd54f] text-[#082f63] text-lg font-bold shadow-sm"
+//               >
+//                 Shop Now
+//               </a>
+
+//               {/* desktop socials */}
+//               <IconLink href="https://www.instagram.com/veerbharatofficial" ariaLabel="Instagram" svg={<SvgInstagram />} />
+//               <IconLink href="https://www.facebook.com/veerbharatofficial" ariaLabel="Facebook" svg={<SvgFacebook />} />
+//               <IconLink href="https://www.linkedin.com/company/veer-bharat" ariaLabel="LinkedIn" svg={<SvgLinkedIn />} />
+//               <IconLink href="https://www.youtube.com/@Veerbharatofficial1" ariaLabel="YouTube" svg={<SvgYouTube />} />
+//               <IconLink href="https://twitter.com/veerbharat" ariaLabel="Twitter" svg={<SvgTwitter />} />
+//             </div>
+
+//             {/* mobile hamburger */}
+//             <div className="md:hidden">
+//               <button
+//                 onClick={() => setOpen((s) => !s)}
+//                 aria-label={open ? "Close menu" : "Open menu"}
+//                 className="w-10 h-10 flex items-center justify-center"
+//               >
+//                 <svg className="w-7 h-7 text-[#08348b]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+//                   {open ? (
+//                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+//                   ) : (
+//                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+//                   )}
+//                 </svg>
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Mobile menu (slide down) */}
+//         <div className={`md:hidden bg-white border-t shadow-inner overflow-hidden transition-all duration-300 ${open ? "max-h-[1000px] py-6" : "max-h-0 py-0"}`}>
+//           <div className="px-4 flex flex-col gap-3 text-lg font-medium">
+//             <MobileLink href="/" onClick={() => setOpen(false)}>Home</MobileLink>
+//             <MobileLink href="/blog" onClick={() => setOpen(false)}>Blog</MobileLink>
+//             <MobileLink href="/products" onClick={() => setOpen(false)}>Products</MobileLink>
+
+//             <div className="flex flex-col gap-2">
+//               <button onClick={() => { setViewerOpen(true); setOpen(false); }} className="px-4 py-3 rounded-md text-[#08348b] hover:bg-[#08348b]/5 font-semibold">
+//                 View Brochure
+//               </button>
+//               <a href={pdfPath} download className="px-4 py-3 text-center rounded-md bg-gradient-to-r from-[#08348b] to-[#5d169e] text-white font-semibold">
+//                 Download Brochure
+//               </a>
+//             </div>
+
+//             <MobileLink href="/about" onClick={() => setOpen(false)}>About</MobileLink>
+
+//             <details className="group bg-transparent rounded-md">
+//               <summary className="px-4 py-3 cursor-pointer list-none flex items-center justify-between">
+//                 Team <span className="group-open:rotate-180">▾</span>
+//               </summary>
+//               <div className="pl-4 pr-4 pb-2 flex flex-col gap-1">
+//                 <MobileLink href="/team" onClick={() => setOpen(false)}>Our Team</MobileLink>
+//                 <MobileLink href="/gallery" onClick={() => setOpen(false)}>Gallery</MobileLink>
+//               </div>
+//             </details>
+
+//             <MobileLink href="/contact" onClick={() => setOpen(false)}>Contact</MobileLink>
+
+//             <a href="#" className="mt-3 px-5 py-3 rounded-lg bg-gradient-to-r from-[#fff7cc] to-[#ffd54f] text-[#082f63] font-bold text-center">
+//               Shop Now
+//             </a>
+
+//             {/* MOBILE SOCIAL ICONS — show only inside mobile menu at bottom */}
+//             <div className="flex items-center gap-3 pt-4 pb-2 border-t mt-4">
+//               <IconLink href="https://www.instagram.com/veerbharatofficial" ariaLabel="Instagram" svg={<SvgInstagram />} />
+//               <IconLink href="https://www.facebook.com/veerbharatofficial" ariaLabel="Facebook" svg={<SvgFacebook />} />
+//               <IconLink href="https://www.linkedin.com/company/veer-bharat" ariaLabel="LinkedIn" svg={<SvgLinkedIn />} />
+//               <IconLink href="https://www.youtube.com/@Veerbharatofficial1" ariaLabel="YouTube" svg={<SvgYouTube />} />
+//               <IconLink href="https://twitter.com/veerbharat" ariaLabel="Twitter" svg={<SvgTwitter />} />
+//             </div>
+//           </div>
+//         </div>
+//       </header>
+
+//       {/* Brochure modal */}
+//       {viewerOpen && (
+//         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+//           <div className="absolute inset-0 bg-black/50" onClick={() => setViewerOpen(false)} />
+//           <div className="relative w-full max-w-6xl h-[80vh] bg-white rounded shadow-lg overflow-hidden">
+//             <div className="flex items-center justify-between px-4 py-3 border-b">
+//               <h3 className="text-lg font-semibold text-[#082f63]">Brochure Preview</h3>
+//               <div className="flex items-center gap-2">
+//                 <a href={pdfPath} download className="px-3 py-1 text-sm rounded border hover:bg-gray-50">Download</a>
+//                 <button onClick={() => setViewerOpen(false)} className="px-3 py-1 text-sm rounded border hover:bg-gray-50">Close</button>
+//               </div>
+//             </div>
+//             <iframe src={`${pdfPath}#view=FitH`} className="w-full h-full" />
+//           </div>
+//         </div>
+//       )}
+//     </>
+//   );
+// }
+
+// /* ---------- helpers ---------- */
+// function NavLink({ href, children }) {
+//   return (
+//     <Link href={href} className="px-2 py-1 text-gray-700 hover:text-[#08348b] transition">
+//       {children}
+//     </Link>
+//   );
+// }
+// function MobileLink({ href, children, onClick }) {
+//   return (
+//     <Link href={href} onClick={onClick} className="px-4 py-3 rounded-md text-[#08348b] hover:bg-[#08348b]/5 font-semibold">
+//       {children}
+//     </Link>
+//   );
+// }
+// function ChevronIcon({ open }) {
+//   return (
+//     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className={`transition-transform ${open ? "rotate-180" : ""}`}>
+//       <path d="M6 9l6 6 6-6" stroke="#08348b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+//     </svg>
+//   );
+// }
+// function IconLink({ href, ariaLabel, svg }) {
+//   return (
+//     <a href={href} target="_blank" rel="noreferrer noopener" aria-label={ariaLabel} className="w-9 h-9 flex items-center justify-center">
+//       {svg}
+//     </a>
+//   );
+// }
+
+// /* --- SVGs --- */
+// function SvgInstagram() {
+//   return (
+//     <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+//       <defs>
+//         <linearGradient id="ig" x1="0" x2="1">
+//           <stop offset="0" stopColor="#f58529" />
+//           <stop offset="0.5" stopColor="#dd2a7b" />
+//           <stop offset="1" stopColor="#515bd4" />
+//         </linearGradient>
+//       </defs>
+//       <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)" />
+//       <circle cx="12" cy="12" r="3.2" fill="#fff" />
+//       <circle cx="17" cy="7" r="0.9" fill="#fff" />
+//     </svg>
+//   );
+// }
+// function SvgFacebook() {
+//   return (
+//     <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+//       <rect x="2" y="2" width="20" height="20" rx="3" fill="#1877F2" />
+//       <path d="M15 8.5h1.8V6.2H15c-.9 0-1.3.4-1.3 1.2V9H12v2.1h1.7v6.6h2.1v-6.6H17l.3-2.1h-1.6V7.8c0-.5.2-1.3 1.1-1.3z" fill="#fff" />
+//     </svg>
+//   );
+// }
+// function SvgLinkedIn() {
+//   return (
+//     <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+//       <rect x="2" y="2" width="20" height="20" rx="3" fill="#0A66C2" />
+//       <path d="M8.1 17H5.5V9.5h2.6V17zm-1.3-8.6c-.8 0-1.3-.6-1.3-1.3 0-.8.6-1.3 1.3-1.3.8 0 1.3.6 1.3 1.3 0 .7-.5 1.3-1.3 1.3zM19 17h-2.6v-3.7c0-.9-.3-1.5-1.1-1.5-.6 0-.9.4-1.1.8-.1.2-.1.5-.1.7V17h-2.6s.1-6.7 0-7.5h2.6v1.1c.3-.5.8-1.2 2-1.2 1.5 0 2.7 1 2.7 3.3V17z" fill="#fff" />
+//     </svg>
+//   );
+// }
+// function SvgYouTube() {
+//   return (
+//     <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+//       <rect x="2" y="6" width="20" height="12" rx="3" fill="#FF0000" />
+//       <polygon points="10,9 16,12 10,15" fill="#fff" />
+//     </svg>
+//   );
+// }
+// function SvgTwitter() {
+//   return (
+//     <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+//       <rect x="2" y="2" width="20" height="20" rx="4" fill="#1DA1F2" />
+//       <path d="M7.9 18c7.5 0 11.6-6.3 11.6-11.7v-.5A8.3 8.3 0 0 0 20 5.4a8.1 8.1 0 0 1-2.3.6 4.1 4.1 0 0 0 1.8-2.3 8.2 8.2 0 0 1-2.6 1A4.1 4.1 0 0 0 9.6 8.9a11.6 11.6 0 0 1-8.4-4.2 4.1 4.1 0 0 0 1.2 5.5 4 4 0 0 1-1.9-.5v.1c0 1.9 1.3 3.6 3.1 4a4.2 4.2 0 0 1-1.9.1c.5 1.6 2 2.7 3.8 2.8A8.3 8.3 0 0 1 5 17.6 11.7 11.7 0 0 0 12 19" fill="#fff" />
+//     </svg>
+//   );
+// }
+
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
+// Use the LogoLink you created earlier (path assumes src/app/components/LogoLink.jsx)
+import LogoLink from "@/components/LogoLink";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -1386,7 +1750,7 @@ export default function Navbar() {
         <div className="w-full flex items-center px-2 md:px-4">
           {/* LEFT: Logo (fixed left-most) */}
           <div className="flex items-center flex-shrink-0">
-            <Link href="/" aria-label="Veer Bharat Home" className="block">
+            <LogoLink href="/" aria-label="Veer Bharat Home" className="block">
               <div style={{ width: 150, height: 120 }} className="overflow-hidden">
                 <Image
                   src="/logo.png"
@@ -1397,7 +1761,7 @@ export default function Navbar() {
                   priority
                 />
               </div>
-            </Link>
+            </LogoLink>
             {/* Brand text to the right of logo (kept small on mobile) */}
             <div className="hidden sm:flex flex-col leading-tight ml-2">
               <span className="font-extrabold text-2xl md:text-3xl tracking-tight text-[#08348b]">VEER BHARAT</span>
@@ -1471,14 +1835,22 @@ export default function Navbar() {
                 >
                   <ul className="py-2">
                     <li>
-                      <Link href="/team" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => { setOpen(false); setTeamOpen(false); }}>
+                      <LogoLink
+                        href="/team"
+                        className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                        onClick={() => { setOpen(false); setTeamOpen(false); }}
+                      >
                         Our Team
-                      </Link>
+                      </LogoLink>
                     </li>
                     <li>
-                      <Link href="/gallery" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => { setOpen(false); setTeamOpen(false); }}>
+                      <LogoLink
+                        href="/gallery"
+                        className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                        onClick={() => { setOpen(false); setTeamOpen(false); }}
+                      >
                         Gallery
-                      </Link>
+                      </LogoLink>
                     </li>
                   </ul>
                 </div>
@@ -1595,16 +1967,16 @@ export default function Navbar() {
 /* ---------- helpers ---------- */
 function NavLink({ href, children }) {
   return (
-    <Link href={href} className="px-2 py-1 text-gray-700 hover:text-[#08348b] transition">
+    <LogoLink href={href} className="px-2 py-1 text-gray-700 hover:text-[#08348b] transition">
       {children}
-    </Link>
+    </LogoLink>
   );
 }
 function MobileLink({ href, children, onClick }) {
   return (
-    <Link href={href} onClick={onClick} className="px-4 py-3 rounded-md text-[#08348b] hover:bg-[#08348b]/5 font-semibold">
+    <LogoLink href={href} className="px-4 py-3 rounded-md text-[#08348b] hover:bg-[#08348b]/5 font-semibold" onClick={onClick}>
       {children}
-    </Link>
+    </LogoLink>
   );
 }
 function ChevronIcon({ open }) {
