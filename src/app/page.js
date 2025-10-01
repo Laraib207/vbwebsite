@@ -3385,12 +3385,6 @@ import VeerBharatHero from "@/components/VeerBharatHero";
 import CategoryCarousel from "@/components/CategoryCarousel";
 
 
-
-
-
-
-
-
 /* ---------- Fonts ---------- */
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "800"] });
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"] });
