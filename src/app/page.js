@@ -3383,6 +3383,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import HealthBenefits from "../components/HealthBenefits";
 import VeerBharatHero from "@/components/VeerBharatHero";
 import CategoryCarousel from "@/components/CategoryCarousel";
+import WhyUsSection from '@/components/WhyUsSection';
 
 
 /* ---------- Fonts ---------- */
@@ -3433,7 +3434,8 @@ export default function Home() {
       {/* ====== BRANCHES & GALLERY (REPLACES PREVIOUS FEATURED IMAGE) ====== */}
       
 <HealthBenefits />
-      <Branches />
+      <WhyUsSection />
+      {/* <Branches /> */}
 
  
 
@@ -3667,6 +3669,7 @@ function CategoriesGrid() {
           ))}
         </div>
       </div>
+
     </section>
   );  
 }
@@ -4336,6 +4339,7 @@ function FeaturedImageSection() {
   // ya tumhara existing section
 
 /* ================= Branches (Gallery) ================= */
+
 function Branches() {
   const imgs = ["/images/banner4.jpg", "/images/banner3.jpg", "/images/team1.jpg"];
 
@@ -4362,6 +4366,12 @@ function Branches() {
       img: imgs[2],
     },
   ];
+
+
+
+
+
+
 
   return (
     <section className="py-20 bg-transparent">
@@ -4480,51 +4490,60 @@ function Branches() {
   );
 }
 
+
+
+
+
+
+
+
+
+
 /* ================== CategorySection ================== */
-// function CategorySection() {
-//   const categories = [
-//     { id: "mustard", title: "Mustard Oil", img: "/images/banner4.jpg" },
-//     { id: "soybean", title: "Soybean Oil", img: "/images/banner3.jpg" },
-//     { id: "palm", title: "Palm Oil", img: "/images/team1.jpg" },
-//     { id: "rice", title: "Rice Bran Oil", img: "/images/banner4.jpg" },
-//   ];
+function CategorySection() {
+  const categories = [
+    { id: "mustard", title: "Mustard Oil", img: "/images/banner4.jpg" },
+    { id: "soybean", title: "Soybean Oil", img: "/images/banner3.jpg" },
+    { id: "palm", title: "Palm Oil", img: "/images/team1.jpg" },
+    { id: "rice", title: "Rice Bran Oil", img: "/images/banner4.jpg" },
+  ];
 
-//   return (
-//     <section className="py-12 bg-transparent mt-12">
-//       <div className="container mx-auto max-w-7xl px-6">
-//         <motion.h3 initial={{ y: 10, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#0b2b52]">
-//           Categories
-//         </motion.h3>
+  return (
+    <section className="py-12 bg-transparent mt-12">
+      <div className="container mx-auto max-w-7xl px-6">
+        <motion.h3 initial={{ y: 10, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} className="text-2xl md:text-3xl font-extrabold text-center mb-6 text-[#0b2b52]">
+          Categories
+        </motion.h3>
 
-//         <p className="text-center max-w-2xl mx-auto text-gray-600 mb-8">
-//           Browse our main product categories — each category contains carefully curated products tested for quality and cooking performance.
-//         </p>
+        <p className="text-center max-w-2xl mx-auto text-gray-600 mb-8">
+          Browse our main product categories — each category contains carefully curated products tested for quality and cooking performance.
+        </p>
 
-//         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-//           {categories.map((cat) => (
-//             <motion.a
-//               key={cat.id}
-//               href={`/products/category/${cat.id}`}
-//               initial={{ opacity: 0, scale: 0.98 }}
-//               whileInView={{ opacity: 1, scale: 1 }}
-//               transition={{ duration: 0.35 }}
-//               className="group block rounded-xl overflow-hidden shadow-lg bg-white/60 backdrop-blur-sm border border-[rgba(8,52,139,0.04)] hover:shadow-2xl transform hover:-translate-y-2 transition"
-//             >
-//               <div className="relative w-full h-44">
-//                 <Image src={cat.img} alt={cat.title} fill className="object-cover object-center group-hover:scale-105 transition-transform" unoptimized />
-//               </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {categories.map((cat) => (
+            <motion.a
+              key={cat.id}
+              href={`/products/category/${cat.id}`}
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.35 }}
+              className="group block rounded-xl overflow-hidden shadow-lg bg-white/60 backdrop-blur-sm border border-[rgba(8,52,139,0.04)] hover:shadow-2xl transform hover:-translate-y-2 transition"
+            >
+              <div className="relative w-full h-44">
+                <Image src={cat.img} alt={cat.title} fill className="object-cover object-center group-hover:scale-105 transition-transform" unoptimized />
+              </div>
 
-//               <div className="px-4 py-4">
-//                 <h4 className="text-lg font-bold text-[#0b2b52]">{cat.title}</h4>
-//                 <p className="text-sm text-gray-600 mt-1">High-quality {cat.title.toLowerCase()} for home & professional kitchens.</p>
-//               </div>
-//             </motion.a>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
+              <div className="px-4 py-4">
+                <h4 className="text-lg font-bold text-[#0b2b52]">{cat.title}</h4>
+                <p className="text-sm text-gray-600 mt-1">High-quality {cat.title.toLowerCase()} for home & professional kitchens.</p>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 
 /* ================= VideoHero ================= */
