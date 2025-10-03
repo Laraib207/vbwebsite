@@ -2096,17 +2096,11 @@ export default function Navbar() {
   useEffect(() => {
     const onDoc = (e) => {
       if (teamRef.current && !teamRef.current.contains(e.target) &&
-          teamButtonRef.current && !teamButtonRef.current.contains(e.target)) {
-        setTeamOpen(false);
-      }
+          teamButtonRef.current && !teamButtonRef.current.contains(e.target)) setTeamOpen(false);
       if (brochureRef.current && !brochureRef.current.contains(e.target) &&
-          brochureButtonRef.current && !brochureButtonRef.current.contains(e.target)) {
-        setBrochureOpen(false);
-      }
+          brochureButtonRef.current && !brochureButtonRef.current.contains(e.target)) setBrochureOpen(false);
       if (productsRef.current && !productsRef.current.contains(e.target) &&
-          productsButtonRef.current && !productsButtonRef.current.contains(e.target)) {
-        setProductsOpen(false);
-      }
+          productsButtonRef.current && !productsButtonRef.current.contains(e.target)) setProductsOpen(false);
     };
     document.addEventListener("click", onDoc);
     return () => document.removeEventListener("click", onDoc);
@@ -2178,6 +2172,9 @@ export default function Navbar() {
                   onMouseLeave={() => setProductsOpen(false)}
                 >
                   <ul className="py-2">
+                    <li>
+                      <LogoLink href="/products" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>All Products</LogoLink>
+                    </li>
                     <li>
                       <LogoLink href="/products/soyabean-oil" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Soyabean Oil</LogoLink>
                     </li>
@@ -2260,7 +2257,7 @@ export default function Navbar() {
             </ul>
           </nav>
 
-          {/* Right section omitted for brevity; remains same as your existing code */}
+          {/* Right section (shop & socials) remain same as your previous code */}
         </div>
 
         {/* Mobile menu */}
@@ -2269,12 +2266,12 @@ export default function Navbar() {
             <MobileLink href="/" onClick={() => setOpen(false)}>Home</MobileLink>
             <MobileLink href="/blog" onClick={() => setOpen(false)}>Blog</MobileLink>
 
-            {/* Mobile Products dropdown */}
             <details className="group bg-transparent rounded-md">
               <summary className="px-4 py-3 cursor-pointer list-none flex items-center justify-between">
                 Products <span className="group-open:rotate-180">▾</span>
               </summary>
               <div className="pl-4 pr-4 pb-2 flex flex-col gap-1">
+                <MobileLink href="/products" onClick={() => setOpen(false)}>All Products</MobileLink>
                 <MobileLink href="/products/soyabean-oil" onClick={() => setOpen(false)}>Soyabean Oil</MobileLink>
                 <MobileLink href="/products/mustard-oil" onClick={() => setOpen(false)}>Mustard Oil</MobileLink>
                 <MobileLink href="/products/palm-oil" onClick={() => setOpen(false)}>Palm Oil</MobileLink>
@@ -2282,7 +2279,7 @@ export default function Navbar() {
               </div>
             </details>
 
-            {/* Other mobile links remain same */}
+            {/* Other mobile links remain the same */}
           </div>
         </div>
       </header>
