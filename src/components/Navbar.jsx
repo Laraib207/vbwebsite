@@ -2176,16 +2176,16 @@ export default function Navbar() {
                       <LogoLink href="/products" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>All Products</LogoLink>
                     </li>
                     <li>
-                      <LogoLink href="/products/soyabean-oil" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Soyabean Oil</LogoLink>
+                      <LogoLink href="/soyabean-oil" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Soyabean Oil</LogoLink>
                     </li>
                     <li>
-                      <LogoLink href="/products/mustard-oil" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Mustard Oil</LogoLink>
+                      <LogoLink href="/mustard-oil" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Mustard Oil</LogoLink>
                     </li>
                     <li>
-                      <LogoLink href="/products/palm-oil" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Palm Oil</LogoLink>
+                      <LogoLink href="/palm-oil" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Palm Oil</LogoLink>
                     </li>
                     <li>
-                      <LogoLink href="/products/brander-rice" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Brander Rice</LogoLink>
+                      <LogoLink href="/brand-rice" className="block px-4 py-2 hover:bg-gray-100 text-sm" onClick={() => setProductsOpen(false)}>Brand Rice</LogoLink>
                     </li>
                   </ul>
                 </div>
@@ -2272,10 +2272,10 @@ export default function Navbar() {
               </summary>
               <div className="pl-4 pr-4 pb-2 flex flex-col gap-1">
                 <MobileLink href="/products" onClick={() => setOpen(false)}>All Products</MobileLink>
-                <MobileLink href="/products/soyabean-oil" onClick={() => setOpen(false)}>Soyabean Oil</MobileLink>
-                <MobileLink href="/products/mustard-oil" onClick={() => setOpen(false)}>Mustard Oil</MobileLink>
-                <MobileLink href="/products/palm-oil" onClick={() => setOpen(false)}>Palm Oil</MobileLink>
-                <MobileLink href="/products/brander-rice" onClick={() => setOpen(false)}>Brander Rice</MobileLink>
+                <MobileLink href="/soyabean-oil" onClick={() => setOpen(false)}>Soyabean Oil</MobileLink>
+                <MobileLink href="/mustard-oil" onClick={() => setOpen(false)}>Mustard Oil</MobileLink>
+                <MobileLink href="/palm-oil" onClick={() => setOpen(false)}>Palm Oil</MobileLink>
+                <MobileLink href="/brand-rice" onClick={() => setOpen(false)}>Brand Rice</MobileLink>
               </div>
             </details>
 
