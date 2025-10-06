@@ -346,27 +346,365 @@
 
 
 
+// "use client";
+// import React, { useState, useEffect, useRef } from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { products } from "../../data/products";
+
+// /* Helper */
+// function generateLongCaption(name = "This product", short = "") {
+//   return `${name} from Veer Bharat is crafted to blend tradition with modern quality. ${short || ""}`;
+// }
+
+// /* ---------------- Rotating Showcase (positioning via sin/cos so images stay upright) ---------------- */
+// function RotatingShowcase({ items = [] }) {
+//   const n = items.length || 1;
+//   const [index, setIndex] = useState(0);
+//   const [radius, setRadius] = useState(160);
+//   const containerRef = useRef(null);
+
+//   // CLOCKWISE rotation: positive degrees -> clockwise
+//   const rotationDeg = index * (360 / n);
+
+//   // Measure available space and set radius responsively
+//   useEffect(() => {
+//     function setFromWidth() {
+//       if (!containerRef.current) return;
+//       const w = containerRef.current.clientWidth;
+//       // radius is a fraction of container with clamps
+//       const r = Math.min(Math.max(w * 0.18, 90), 240);
+//       setRadius(r);
+//     }
+//     setFromWidth();
+//     window.addEventListener("resize", setFromWidth);
+//     return () => window.removeEventListener("resize", setFromWidth);
+//   }, []);
+
+//   useEffect(() => {
+//     const onKey = (e) => {
+//       if (e.key === "ArrowRight") setIndex((i) => (i + 1) % n);
+//       if (e.key === "ArrowLeft") setIndex((i) => (i - 1 + n) % n);
+//     };
+//     window.addEventListener("keydown", onKey);
+//     return () => window.removeEventListener("keydown", onKey);
+//   }, [n]);
+
+//   if (!items.length) return null;
+
+//   // textual content (200-300 words split into 3 parts)
+//   const longText = {
+//     goodness:
+//       "Veer Bharat oils are crafted with careful attention to purity and traditional techniques. Our Kachi Ghani and refined ranges are made from selected seeds and processed using temperature and hygiene controls to preserve natural flavour and nutrients. We prioritise full lab testing, clear labelling and tamper-evident packaging so the family can trust every bottle on the shelf.",
+//     benefits:
+//       "Health-forward and versatile — our oils bring balanced fatty-acid profiles suitable for a variety of Indian recipes. They help achieve crisp, golden textures for fried foods, retain aroma in shallow frying and contribute to overall dietary fat needs with quality fats. We source responsibly and work with small farmers so you get consistent taste with improved transparency and fair pricing.",
+//     rating:
+//       "Market reception has been strong in regional pilots — customers praise the authentic aroma and consistent performance across cooking methods. With quality assurance measures and an expanding distribution network, Veer Bharat is steadily gaining recognition as a reliable value brand in the edible oils segment.",
+//   };
+
+//   return (
+//     <section ref={containerRef} className="max-w-7xl mx-auto px-6 mb-12">
+//       <div className="grid gap-8 md:grid-cols-2 items-center">
+//         {/* LEFT: text + controls */}
+//         <div className="space-y-5">
+//           <h2 className="text-4xl md:text-5xl font-extrabold text-[#1b2a3a]">
+//             {items[index].name}
+//           </h2>
+
+//           <p className="text-lg text-slate-700 max-w-xl">{items[index].short}</p>
+
+//           {/* big visible content split */}
+//           <div className="mt-4 p-6 bg-white rounded-2xl shadow-sm border">
+//             <h3 className="text-xl font-semibold mb-2">Goodness</h3>
+//             <p className="text-sm text-slate-700 leading-relaxed">{longText.goodness}</p>
+
+//             <h3 className="text-xl font-semibold mt-4 mb-2">Benefits</h3>
+//             <p className="text-sm text-slate-700 leading-relaxed">{longText.benefits}</p>
+
+//             <h3 className="text-xl font-semibold mt-4 mb-2">Market Rating</h3>
+//             <p className="text-sm text-slate-700 leading-relaxed">{longText.rating}</p>
+//           </div>
+
+//           <div className="mt-4 flex items-center gap-3">
+//             <button
+//               onClick={() => setIndex((i) => (i - 1 + n) % n)}
+//               aria-label="Previous"
+//               className="w-12 h-12 rounded-full bg-white shadow-md border hover:scale-105 transition flex items-center justify-center text-2xl"
+//             >
+//               ‹
+//             </button>
+//             <button
+//               onClick={() => setIndex((i) => (i + 1) % n)}
+//               aria-label="Next"
+//               className="w-12 h-12 rounded-full bg-white shadow-md border hover:scale-105 transition flex items-center justify-center text-2xl"
+//             >
+//               ›
+//             </button>
+
+//             <Link
+//               href={`/products/${items[index].slug}`}
+//               className="ml-4 inline-flex items-center gap-2 rounded-full px-4 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-semibold shadow"
+//             >
+//               View Product →
+//             </Link>
+//           </div>
+//         </div>
+
+//         {/* RIGHT: orbit visuals (positioned with left/top so images stay upright) */}
+//         <div className="relative w-full flex justify-center md:justify-end">
+//           <div
+//             className="relative w-[320px] h-[320px] md:w-[520px] md:h-[520px] rounded-3xl p-6 flex items-center justify-center"
+//             style={{ borderRadius: 28 }}
+//           >
+//             {/* dashed circle (subtle rotating motion) */}
+//             <motion.svg
+//               viewBox="0 0 300 300"
+//               className="absolute inset-0 w-full h-full pointer-events-none"
+//               animate={{ rotate: rotationDeg * 0.25 }}
+//               transition={{ type: "spring", stiffness: 140, damping: 22 }}
+//             >
+//               <circle cx="150" cy="150" r="108" stroke="#F6C85F" strokeWidth="6" fill="none" strokeDasharray="6 8" />
+//             </motion.svg>
+
+//             {/* Place each item using left/top computed from angle + rotationDeg */}
+//             {items.map((it, i) => {
+//               // base angle for this item
+//               const baseAngle = (i * 360) / n;
+//               // total angle includes rotation (clockwise positive)
+//               const totalAngle = baseAngle + rotationDeg;
+//               // convert to radians and rotate so 0deg = top (-90)
+//               const rad = ((totalAngle - 90) * Math.PI) / 180;
+//               // compute x/y relative to center
+//               const x = Math.cos(rad) * radius;
+//               const y = Math.sin(rad) * radius;
+//               const isActive = i === index;
+//               const size = isActive ? 220 : 96;
+//               const scale = isActive ? 1 : 0.78;
+
+//               return (
+//                 <div
+//                   key={it.slug}
+//                   className="absolute"
+//                   style={{
+//                     left: `calc(50% + ${x}px)`,
+//                     top: `calc(50% + ${y}px)`,
+//                     transform: `translate(-50%, -50%) scale(${scale})`,
+//                     transition: "left 0.45s, top 0.45s, transform 0.35s",
+//                     zIndex: isActive ? 50 : 10,
+//                     width: size,
+//                     height: size,
+//                   }}
+//                 >
+//                   <div
+//                     className="relative rounded-2xl overflow-hidden bg-white"
+//                     style={{
+//                       width: "100%",
+//                       height: "100%",
+//                       boxShadow: isActive ? "0 18px 34px rgba(0,0,0,0.18)" : "0 8px 18px rgba(0,0,0,0.09)",
+//                       border: "1px solid rgba(0,0,0,0.06)",
+//                     }}
+//                   >
+//                     {/* Image stays upright because we do not rotate it */}
+//                     <Image src={it.image} alt={it.name} fill style={{ objectFit: "cover" }} priority={isActive} />
+//                   </div>
+//                 </div>
+//               );
+//             })}
+
+//             {/* decorative mini at top center */}
+//             <div className="absolute left-1/2 top-3 -translate-x-1/2 z-40">
+//               <div className="w-12 h-12 rounded-full overflow-hidden border shadow-sm bg-white">
+//                 <Image src={items[(index + 1) % n].image} alt="mini" width={48} height={48} style={{ objectFit: "cover" }} />
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// /* ---------------- Main ProductsPage ---------------- */
+// export default function ProductsPage() {
+//   const [selectedSlug, setSelectedSlug] = useState(null);
+//   const [modalVideo, setModalVideo] = useState(null);
+//   const closeModal = () => setModalVideo(null);
+
+//   useEffect(() => {
+//     const onKey = (e) => {
+//       if (e.key === "Escape") {
+//         closeModal();
+//         setSelectedSlug(null);
+//       }
+//     };
+//     window.addEventListener("keydown", onKey);
+//     return () => window.removeEventListener("keydown", onKey);
+//   }, []);
+
+//   const selectedProduct = products.find((p) => p.slug === selectedSlug) || null;
+
+//   /* ---------- Showcase items: using your two images in public/images/ ---------- */
+//   const showcaseItems = (products || [])
+//     .slice(0, 2)
+//     .map((p, i) => ({
+//       ...p,
+//       // IMPORTANT: these must exist as /public/images/...
+//       image: i === 0 ? "/images/musterddd.jpg" : "/images/soyabeennnn.jpg",
+//     }));
+
+//   return (
+//     // background applied to whole page as requested
+//     <main style={{ background: "#fef9c3" }} className="min-h-screen py-12">
+//       <div className="max-w-7xl mx-auto px-6 relative">
+//         {/* ROTATING SHOWCASE (top) */}
+//         <RotatingShowcase items={showcaseItems} />
+
+//         {/* PAGE HEADER */}
+//         <header className="mb-8 text-center">
+//           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">Our Full Range of Products</h1>
+//           <p className="mt-2 text-gray-800 max-w-2xl mx-auto">
+//             Handpicked edible oils & culinary essentials — crafted for taste, health and everyday confidence.
+//           </p>
+//         </header>
+
+//         {/* PRODUCTS GRID */}
+//         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+//           {products.map((p) => (
+//             <article key={p.slug} className="relative group bg-white rounded-2xl shadow-lg overflow-hidden">
+//               <div className="relative h-64 md:h-72 w-full overflow-hidden">
+//                 <Image src={p.image} alt={p.name} fill className="object-cover" />
+//               </div>
+
+//               <div className="p-5 md:p-6">
+//                 <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">{p.name}</h2>
+//                 <p className="mt-1 text-gray-600 text-sm md:text-base">{p.short}</p>
+
+//                 <div className="mt-3 flex items-center gap-2">
+//                   {p.price && (
+//                     <span className="text-sm font-semibold px-3 py-1 rounded-full bg-amber-50 text-amber-700 border">₹{p.price}</span>
+//                   )}
+//                 </div>
+
+//                 <div className="mt-4 flex items-center gap-2">
+//                   <Link href={`/products/${p.slug}`} className="rounded-full px-4 py-2 bg-amber-400 text-black font-bold shadow">View Product →</Link>
+//                   <button onClick={() => setModalVideo({ src: p.video || "/product-demo.mp4", name: p.name })} className="rounded-full px-3 py-2 border">Demo</button>
+//                 </div>
+//               </div>
+//             </article>
+//           ))}
+//         </div>
+
+//         {/* VIDEO MODAL */}
+//         <AnimatePresence>
+//           {modalVideo && (
+//             <motion.div
+//               key="video-modal"
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               exit={{ opacity: 0 }}
+//               transition={{ duration: 0.18 }}
+//               className="fixed inset-0 z-50 flex items-center justify-center p-6"
+//             >
+//               <div className="absolute inset-0 bg-black/70" onClick={closeModal} />
+//               <motion.div initial={{ scale: 0.96, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.96, opacity: 0 }} transition={{ duration: 0.18 }} className="relative max-w-4xl w-full rounded-2xl overflow-hidden shadow-2xl bg-black">
+//                 <div className="absolute right-3 top-3 z-20">
+//                   <button onClick={closeModal} className="rounded-full bg-white/90 px-3 py-2">Close</button>
+//                 </div>
+//                 <video src={modalVideo.src} controls autoPlay className="w-full h-[60vh] md:h-[72vh] object-cover bg-black" />
+//                 <div className="p-4 bg-gradient-to-t from-black/40 to-transparent text-white flex items-center justify-between">
+//                   <div>
+//                     <div className="text-lg font-bold">{modalVideo.name}</div>
+//                     <div className="text-sm text-white/80">Veer Bharat — product demo</div>
+//                   </div>
+//                 </div>
+//               </motion.div>
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
+//       </div>
+//     </main>
+//   );
+// }
+
+
+
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { products } from "../../data/products";
+import Link from "next/link";
+
+
+/* Mock products data */
+const products = [
+  {
+    slug: "soyabean-oil",
+    name: "Soyabean Oil",
+    short: "Light, versatile and nutrition-forward—lets ingredients shine without heaviness.",
+    image: "/images/soyabeennnn.jpg",
+    price: "180",
+    video: "/product-demo.mp4"
+  },
+  {
+    slug: "mustard-oil",
+    name: "Kachi Ghani Mustard Oil",
+    short: "Traditional cold-pressed purity with authentic aroma and robust flavor.",
+    image: "/images/musterddd.jpg",
+    price: "220",
+    video: "/product-demo.mp4"
+  },
+  {
+    slug: "rice-bran-oil",
+    name: "Rice Bran Oil",
+    short: "Heart-healthy choice with balanced nutrition, high smoke point ideal for deep frying.",
+    image: "/images/soyabeennnn.jpg",
+    price: "195",
+    video: "/product-demo.mp4"
+  },
+  {
+    slug: "palm-oil",
+    name: "Palm Oil",
+    short: "Rich, versatile cooking oil perfect for traditional recipes.",
+    image: "/images/musterddd.jpg",
+    price: "165",
+    video: "/product-demo.mp4"
+  },
+  {
+    slug: "sunflower-oil",
+    name: "Sunflower Oil",
+    short: "Light golden oil with neutral taste, perfect for all-purpose cooking.",
+    image: "/images/soyabeennnn.jpg",
+    price: "175",
+    video: "/product-demo.mp4"
+  },
+  {
+    slug: "brand-rice",
+    name: "Brand Rice",
+    short: "Premium quality rice with authentic aroma and perfect texture.",
+    image: "/images/musterddd.jpg",
+    price: "210",
+    video: "/product-demo.mp4"
+  }
+];
+
 
 /* Helper */
 function generateLongCaption(name = "This product", short = "") {
   return `${name} from Veer Bharat is crafted to blend tradition with modern quality. ${short || ""}`;
 }
 
+
 /* ---------------- Rotating Showcase (positioning via sin/cos so images stay upright) ---------------- */
 function RotatingShowcase({ items = [] }) {
   const n = items.length || 1;
   const [index, setIndex] = useState(0);
-  const [radius, setRadius] = useState(160);
+  const [radius, setRadius] = useState(180);
   const containerRef = useRef(null);
+
 
   // CLOCKWISE rotation: positive degrees -> clockwise
   const rotationDeg = index * (360 / n);
+
 
   // Measure available space and set radius responsively
   useEffect(() => {
@@ -374,13 +712,14 @@ function RotatingShowcase({ items = [] }) {
       if (!containerRef.current) return;
       const w = containerRef.current.clientWidth;
       // radius is a fraction of container with clamps
-      const r = Math.min(Math.max(w * 0.18, 90), 240);
+      const r = Math.min(Math.max(w * 0.2, 120), 280);
       setRadius(r);
     }
     setFromWidth();
     window.addEventListener("resize", setFromWidth);
     return () => window.removeEventListener("resize", setFromWidth);
   }, []);
+
 
   useEffect(() => {
     const onKey = (e) => {
@@ -391,7 +730,9 @@ function RotatingShowcase({ items = [] }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [n]);
 
+
   if (!items.length) return null;
+
 
   // textual content (200-300 words split into 3 parts)
   const longText = {
@@ -403,197 +744,330 @@ function RotatingShowcase({ items = [] }) {
       "Market reception has been strong in regional pilots — customers praise the authentic aroma and consistent performance across cooking methods. With quality assurance measures and an expanding distribution network, Veer Bharat is steadily gaining recognition as a reliable value brand in the edible oils segment.",
   };
 
+
   return (
-    <section ref={containerRef} className="max-w-7xl mx-auto px-6 mb-12">
-      <div className="grid gap-8 md:grid-cols-2 items-center">
-        {/* LEFT: text + controls */}
-        <div className="space-y-5">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[#1b2a3a]">
+    <section ref={containerRef} className="max-w-7xl mx-auto px-6 mb-16">
+      <div className="grid gap-12 md:grid-cols-2 items-center">
+        {/* LEFT: text content */}
+        <div className="space-y-6">
+          <h2 className="text-5xl md:text-6xl font-extrabold text-[#1b2a3a] tracking-tight leading-tight">
             {items[index].name}
           </h2>
 
-          <p className="text-lg text-slate-700 max-w-xl">{items[index].short}</p>
 
-          {/* big visible content split */}
-          <div className="mt-4 p-6 bg-white rounded-2xl shadow-sm border">
-            <h3 className="text-xl font-semibold mb-2">Goodness</h3>
-            <p className="text-sm text-slate-700 leading-relaxed">{longText.goodness}</p>
+          <p className="text-xl md:text-2xl text-slate-700 max-w-xl leading-relaxed font-medium">
+            {items[index].short}
+          </p>
 
-            <h3 className="text-xl font-semibold mt-4 mb-2">Benefits</h3>
-            <p className="text-sm text-slate-700 leading-relaxed">{longText.benefits}</p>
 
-            <h3 className="text-xl font-semibold mt-4 mb-2">Market Rating</h3>
-            <p className="text-sm text-slate-700 leading-relaxed">{longText.rating}</p>
+          {/* Enhanced content card with premium styling */}
+          <div className="mt-6 p-8 bg-white rounded-3xl shadow-xl border-2 border-amber-100 backdrop-blur-sm">
+            <h3 className="text-2xl font-bold mb-3 text-amber-600 flex items-center gap-2">
+              <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+              Goodness
+            </h3>
+            <p className="text-base md:text-lg text-slate-700 leading-relaxed">{longText.goodness}</p>
+
+
+            <h3 className="text-2xl font-bold mt-6 mb-3 text-amber-600 flex items-center gap-2">
+              <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+              Benefits
+            </h3>
+            <p className="text-base md:text-lg text-slate-700 leading-relaxed">{longText.benefits}</p>
+
+
+            <h3 className="text-2xl font-bold mt-6 mb-3 text-amber-600 flex items-center gap-2">
+              <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+              Market Rating
+            </h3>
+            <p className="text-base md:text-lg text-slate-700 leading-relaxed">{longText.rating}</p>
           </div>
 
-          <div className="mt-4 flex items-center gap-3">
-            <button
-              onClick={() => setIndex((i) => (i - 1 + n) % n)}
-              aria-label="Previous"
-              className="w-12 h-12 rounded-full bg-white shadow-md border hover:scale-105 transition flex items-center justify-center text-2xl"
-            >
-              ‹
-            </button>
-            <button
-              onClick={() => setIndex((i) => (i + 1) % n)}
-              aria-label="Next"
-              className="w-12 h-12 rounded-full bg-white shadow-md border hover:scale-105 transition flex items-center justify-center text-2xl"
-            >
-              ›
-            </button>
 
+          <div className="mt-6">
             <Link
-              href={`/products/${items[index].slug}`}
-              className="ml-4 inline-flex items-center gap-2 rounded-full px-4 py-2 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-semibold shadow"
+              href={`/${items[index].slug}`}
+              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-lg"
             >
               View Product →
             </Link>
           </div>
         </div>
 
-        {/* RIGHT: orbit visuals (positioned with left/top so images stay upright) */}
-        <div className="relative w-full flex justify-center md:justify-end">
-          <div
-            className="relative w-[320px] h-[320px] md:w-[520px] md:h-[520px] rounded-3xl p-6 flex items-center justify-center"
-            style={{ borderRadius: 28 }}
+
+        {/* RIGHT: orbit visuals with navigation buttons on LEFT and RIGHT sides */}
+        <div className="relative w-full flex justify-center md:justify-end items-center gap-4">
+          {/* PREVIOUS BUTTON - LEFT SIDE */}
+          <button
+            onClick={() => setIndex((i) => (i - 1 + n) % n)}
+            aria-label="Previous"
+            className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-amber-400 hover:bg-amber-50 hover:scale-110 transition-all duration-300 flex items-center justify-center text-3xl md:text-4xl font-bold text-amber-600 z-50"
           >
-            {/* dashed circle (subtle rotating motion) */}
+            ‹
+          </button>
+
+
+          <div
+            className="relative w-[340px] h-[340px] md:w-[560px] md:h-[560px] rounded-3xl p-6 flex items-center justify-center"
+            style={{ borderRadius: 32 }}
+          >
+            {/* Animated gradient circle background */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: "radial-gradient(circle, rgba(251,191,36,0.1) 0%, rgba(251,191,36,0.05) 50%, transparent 100%)",
+              }}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+
+            {/* Enhanced dashed circle with glow effect */}
             <motion.svg
               viewBox="0 0 300 300"
               className="absolute inset-0 w-full h-full pointer-events-none"
               animate={{ rotate: rotationDeg * 0.25 }}
               transition={{ type: "spring", stiffness: 140, damping: 22 }}
             >
-              <circle cx="150" cy="150" r="108" stroke="#F6C85F" strokeWidth="6" fill="none" strokeDasharray="6 8" />
+              <defs>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle 
+                cx="150" 
+                cy="150" 
+                r="115" 
+                stroke="#F59E0B" 
+                strokeWidth="8" 
+                fill="none" 
+                strokeDasharray="8 12" 
+                filter="url(#glow)"
+                opacity="0.8"
+              />
             </motion.svg>
+
 
             {/* Place each item using left/top computed from angle + rotationDeg */}
             {items.map((it, i) => {
-              // base angle for this item
               const baseAngle = (i * 360) / n;
-              // total angle includes rotation (clockwise positive)
               const totalAngle = baseAngle + rotationDeg;
-              // convert to radians and rotate so 0deg = top (-90)
               const rad = ((totalAngle - 90) * Math.PI) / 180;
-              // compute x/y relative to center
               const x = Math.cos(rad) * radius;
               const y = Math.sin(rad) * radius;
               const isActive = i === index;
-              const size = isActive ? 220 : 96;
-              const scale = isActive ? 1 : 0.78;
+              const size = isActive ? 240 : 110;
+              const scale = isActive ? 1 : 0.75;
+
 
               return (
                 <div
                   key={it.slug}
-                  className="absolute"
+                  className="absolute cursor-pointer"
+                  onClick={() => setIndex(i)}
                   style={{
                     left: `calc(50% + ${x}px)`,
                     top: `calc(50% + ${y}px)`,
                     transform: `translate(-50%, -50%) scale(${scale})`,
-                    transition: "left 0.45s, top 0.45s, transform 0.35s",
+                    transition: "left 0.5s cubic-bezier(0.4, 0, 0.2, 1), top 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                     zIndex: isActive ? 50 : 10,
                     width: size,
                     height: size,
                   }}
                 >
                   <div
-                    className="relative rounded-2xl overflow-hidden bg-white"
+                    className="relative rounded-3xl overflow-hidden bg-white"
                     style={{
                       width: "100%",
                       height: "100%",
-                      boxShadow: isActive ? "0 18px 34px rgba(0,0,0,0.18)" : "0 8px 18px rgba(0,0,0,0.09)",
-                      border: "1px solid rgba(0,0,0,0.06)",
+                      boxShadow: isActive 
+                        ? "0 25px 50px rgba(245, 158, 11, 0.35), 0 10px 30px rgba(0,0,0,0.2)" 
+                        : "0 10px 25px rgba(0,0,0,0.12)",
+                      border: isActive ? "3px solid #F59E0B" : "2px solid rgba(0,0,0,0.08)",
                     }}
                   >
-                    {/* Image stays upright because we do not rotate it */}
-                    <Image src={it.image} alt={it.name} fill style={{ objectFit: "cover" }} priority={isActive} />
+                    <img 
+                      src={it.image} 
+                      alt={it.name}
+                      style={{ 
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
+                      className={isActive ? "brightness-105" : "brightness-95"}
+                    />
+                    {isActive && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 to-transparent pointer-events-none" />
+                    )}
                   </div>
                 </div>
               );
             })}
 
-            {/* decorative mini at top center */}
-            <div className="absolute left-1/2 top-3 -translate-x-1/2 z-40">
-              <div className="w-12 h-12 rounded-full overflow-hidden border shadow-sm bg-white">
-                <Image src={items[(index + 1) % n].image} alt="mini" width={48} height={48} style={{ objectFit: "cover" }} />
+
+            {/* Enhanced decorative mini at top center */}
+            <div className="absolute left-1/2 top-4 -translate-x-1/2 z-40">
+              <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-xl bg-white ring-4 ring-amber-400/30">
+                <img 
+                  src={items[(index + 1) % n].image} 
+                  alt="mini"
+                  style={{ 
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
               </div>
             </div>
           </div>
+
+
+          {/* NEXT BUTTON - RIGHT SIDE */}
+          <button
+            onClick={() => setIndex((i) => (i + 1) % n)}
+            aria-label="Next"
+            className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-amber-400 hover:bg-amber-50 hover:scale-110 transition-all duration-300 flex items-center justify-center text-3xl md:text-4xl font-bold text-amber-600 z-50"
+          >
+            ›
+          </button>
         </div>
       </div>
     </section>
   );
 }
 
+
 /* ---------------- Main ProductsPage ---------------- */
+
+
 export default function ProductsPage() {
-  const [selectedSlug, setSelectedSlug] = useState(null);
   const [modalVideo, setModalVideo] = useState(null);
   const closeModal = () => setModalVideo(null);
+
 
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") {
         closeModal();
-        setSelectedSlug(null);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const selectedProduct = products.find((p) => p.slug === selectedSlug) || null;
 
-  /* ---------- Showcase items: using your two images in public/images/ ---------- */
-  const showcaseItems = (products || [])
-    .slice(0, 2)
-    .map((p, i) => ({
-      ...p,
-      // IMPORTANT: these must exist as /public/images/...
-      image: i === 0 ? "/images/musterddd.jpg" : "/images/soyabeennnn.jpg",
-    }));
+  /* ---------- Showcase items: 4 products ---------- */
+  const showcaseItems = [
+    {
+      slug: "soyabean-oil",
+      name: "Soyabean Oil",
+      short: "Light, versatile and nutrition-forward—lets ingredients shine without heaviness.",
+      image: "/images/soyabeennnn.jpg",
+      price: "180",
+      video: "/product-demo.mp4"
+    },
+    {
+      slug: "mustard-oil",
+      name: "Kachi Ghani Mustard Oil",
+      short: "Traditional cold-pressed purity with authentic aroma and robust flavor for authentic Indian cooking.",
+      image: "/images/musterddd.jpg",
+      price: "220",
+      video: "/product-demo.mp4"
+    },
+    {
+      slug: "rice-bran-oil",
+      name: "Rice Bran Oil",
+      short: "Heart-healthy choice with balanced nutrition, high smoke point ideal for deep frying and everyday cooking.",
+      image: "/images/soyabeennnn.jpg",
+      price: "195",
+      video: "/product-demo.mp4"
+    },
+    {
+      slug: "palm-oil",
+      name: "Palm Oil",
+      short: "Rich, versatile cooking oil perfect for traditional recipes, delivering consistent taste and texture.",
+      image: "/images/musterddd.jpg",
+      price: "165",
+      video: "/product-demo.mp4"
+    }
+  ];
+
 
   return (
     // background applied to whole page as requested
     <main style={{ background: "#fef9c3" }} className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-6 relative">
-        {/* ROTATING SHOWCASE (top) */}
+        {/* ROTATING SHOWCASE (top) - 4 PRODUCTS */}
         <RotatingShowcase items={showcaseItems} />
 
-        {/* PAGE HEADER */}
-        <header className="mb-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">Our Full Range of Products</h1>
-          <p className="mt-2 text-gray-800 max-w-2xl mx-auto">
+
+        {/* PAGE HEADER with enhanced styling */}
+        <header className="mb-12 text-center">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Our Full Range of Premium Products
+          </h1>
+          <p className="mt-3 text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
             Handpicked edible oils & culinary essentials — crafted for taste, health and everyday confidence.
           </p>
         </header>
 
-        {/* PRODUCTS GRID */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+        {/* PRODUCTS GRID with enhanced styling */}
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
-            <article key={p.slug} className="relative group bg-white rounded-2xl shadow-lg overflow-hidden">
-              <div className="relative h-64 md:h-72 w-full overflow-hidden">
-                <Image src={p.image} alt={p.name} fill className="object-cover" />
+            <article key={p.slug} className="relative group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+              <div className="relative h-72 md:h-80 w-full overflow-hidden">
+                <img 
+                  src={p.image} 
+                  alt={p.name}
+                  style={{ 
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                  className="group-hover:scale-110 transition-transform duration-500" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
-              <div className="p-5 md:p-6">
-                <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">{p.name}</h2>
-                <p className="mt-1 text-gray-600 text-sm md:text-base">{p.short}</p>
 
-                <div className="mt-3 flex items-center gap-2">
+              <div className="p-6 md:p-8">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3">{p.name}</h2>
+                <p className="mt-2 text-gray-600 text-base md:text-lg leading-relaxed">{p.short}</p>
+
+
+                <div className="mt-4 flex items-center gap-3">
                   {p.price && (
-                    <span className="text-sm font-semibold px-3 py-1 rounded-full bg-amber-50 text-amber-700 border">₹{p.price}</span>
+                    <span className="text-base md:text-lg font-bold px-4 py-2 rounded-full bg-gradient-to-r from-amber-50 to-amber-100 text-amber-700 border-2 border-amber-200">
+                      ₹{p.price}
+                    </span>
                   )}
                 </div>
 
-                <div className="mt-4 flex items-center gap-2">
-                  <Link href={`/products/${p.slug}`} className="rounded-full px-4 py-2 bg-amber-400 text-black font-bold shadow">View Product →</Link>
-                  <button onClick={() => setModalVideo({ src: p.video || "/product-demo.mp4", name: p.name })} className="rounded-full px-3 py-2 border">Demo</button>
+
+                <div className="mt-6 flex items-center gap-3">
+                  <Link 
+                    href={`/${p.slug}`}
+                    className="flex-1 text-center rounded-full px-6 py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-base md:text-lg"
+                  >
+                    View Product →
+                  </Link>
+                  <button 
+                    onClick={() => setModalVideo({ src: p.video || "/product-demo.mp4", name: p.name })} 
+                    className="rounded-full px-5 py-3 border-2 border-amber-400 hover:bg-amber-50 transition-all duration-300 font-semibold text-base md:text-lg"
+                  >
+                    Demo
+                  </button>
                 </div>
               </div>
             </article>
           ))}
         </div>
+
 
         {/* VIDEO MODAL */}
         <AnimatePresence>
@@ -609,7 +1083,7 @@ export default function ProductsPage() {
               <div className="absolute inset-0 bg-black/70" onClick={closeModal} />
               <motion.div initial={{ scale: 0.96, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.96, opacity: 0 }} transition={{ duration: 0.18 }} className="relative max-w-4xl w-full rounded-2xl overflow-hidden shadow-2xl bg-black">
                 <div className="absolute right-3 top-3 z-20">
-                  <button onClick={closeModal} className="rounded-full bg-white/90 px-3 py-2">Close</button>
+                  <button onClick={closeModal} className="rounded-full bg-white/90 px-3 py-2 hover:bg-white transition">Close</button>
                 </div>
                 <video src={modalVideo.src} controls autoPlay className="w-full h-[60vh] md:h-[72vh] object-cover bg-black" />
                 <div className="p-4 bg-gradient-to-t from-black/40 to-transparent text-white flex items-center justify-between">
@@ -626,3 +1100,442 @@ export default function ProductsPage() {
     </main>
   );
 }
+
+// "use client";
+// import React, { useState, useEffect, useRef } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+
+// /* Mock products data */
+// const products = [
+//   {
+//     slug: "soyabean-oil",
+//     name: "Soyabean Oil",
+//     short: "Light, versatile and nutrition-forward—lets ingredients shine without heaviness.",
+//     image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
+//     price: "180",
+//     video: "/product-demo.mp4"
+//   },
+//   {
+//     slug: "mustard-oil",
+//     name: "Mustard Oil",
+//     short: "Traditional cold-pressed purity with authentic aroma and robust flavor.",
+//     image: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=800&q=80",
+//     price: "220",
+//     video: "/product-demo.mp4"
+//   },
+//   {
+//     slug: "rice-bran",
+//     name: "Rice Bran Oil",
+//     short: "Heart-healthy choice with balanced nutrition, high smoke point ideal for deep frying.",
+//     image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
+//     price: "195",
+//     video: "/product-demo.mp4"
+//   },
+//   {
+//     slug: "palm-oil",
+//     name: "Palm Oil",
+//     short: "Rich, versatile cooking oil perfect for traditional recipes.",
+//     image: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=800&q=80",
+//     price: "165",
+//     video: "/product-demo.mp4"
+//   },
+//   {
+//     slug: "sunflower-oil",
+//     name: "Sunflower Oil",
+//     short: "Light golden oil with neutral taste, perfect for all-purpose cooking.",
+//     image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
+//     price: "175",
+//     video: "/product-demo.mp4"
+//   },
+//   {
+//     slug: "groundnut-oil",
+//     name: "Groundnut Oil",
+//     short: "Rich nutty flavor, ideal for high-heat cooking and authentic taste.",
+//     image: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=800&q=80",
+//     price: "210",
+//     video: "/product-demo.mp4"
+//   }
+// ];
+
+// /* ---------------- Rotating Showcase (positioning via sin/cos so images stay upright) ---------------- */
+// function RotatingShowcase({ items = [] }) {
+//   const n = items.length || 1;
+//   const [index, setIndex] = useState(0);
+//   const [radius, setRadius] = useState(180);
+//   const containerRef = useRef(null);
+
+//   // CLOCKWISE rotation: positive degrees -> clockwise
+//   const rotationDeg = index * (360 / n);
+
+//   // Measure available space and set radius responsively
+//   useEffect(() => {
+//     function setFromWidth() {
+//       if (!containerRef.current) return;
+//       const w = containerRef.current.clientWidth;
+//       // radius is a fraction of container with clamps
+//       const r = Math.min(Math.max(w * 0.2, 120), 280);
+//       setRadius(r);
+//     }
+//     setFromWidth();
+//     window.addEventListener("resize", setFromWidth);
+//     return () => window.removeEventListener("resize", setFromWidth);
+//   }, []);
+
+//   useEffect(() => {
+//     const onKey = (e) => {
+//       if (e.key === "ArrowRight") setIndex((i) => (i + 1) % n);
+//       if (e.key === "ArrowLeft") setIndex((i) => (i - 1 + n) % n);
+//     };
+//     window.addEventListener("keydown", onKey);
+//     return () => window.removeEventListener("keydown", onKey);
+//   }, [n]);
+
+//   if (!items.length) return null;
+
+//   // textual content (200-300 words split into 3 parts)
+//   const longText = {
+//     goodness:
+//       "Veer Bharat oils are crafted with careful attention to purity and traditional techniques. Our Kachi Ghani and refined ranges are made from selected seeds and processed using temperature and hygiene controls to preserve natural flavour and nutrients. We prioritise full lab testing, clear labelling and tamper-evident packaging so the family can trust every bottle on the shelf.",
+//     benefits:
+//       "Health-forward and versatile — our oils bring balanced fatty-acid profiles suitable for a variety of Indian recipes. They help achieve crisp, golden textures for fried foods, retain aroma in shallow frying and contribute to overall dietary fat needs with quality fats. We source responsibly and work with small farmers so you get consistent taste with improved transparency and fair pricing.",
+//     rating:
+//       "Market reception has been strong in regional pilots — customers praise the authentic aroma and consistent performance across cooking methods. With quality assurance measures and an expanding distribution network, Veer Bharat is steadily gaining recognition as a reliable value brand in the edible oils segment.",
+//   };
+
+//   return (
+//     <section ref={containerRef} className="max-w-7xl mx-auto px-6 mb-16">
+//       <div className="grid gap-12 md:grid-cols-2 items-center">
+//         {/* LEFT: text content */}
+//         <div className="space-y-6">
+//           <h2 className="text-5xl md:text-6xl font-extrabold text-[#1b2a3a] tracking-tight leading-tight">
+//             {items[index].name}
+//           </h2>
+
+//           <p className="text-xl md:text-2xl text-slate-700 max-w-xl leading-relaxed font-medium">
+//             {items[index].short}
+//           </p>
+
+//           {/* Enhanced content card with premium styling */}
+//           <div className="mt-6 p-8 bg-white rounded-3xl shadow-xl border-2 border-amber-100 backdrop-blur-sm">
+//             <h3 className="text-2xl font-bold mb-3 text-amber-600 flex items-center gap-2">
+//               <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+//               Goodness
+//             </h3>
+//             <p className="text-base md:text-lg text-slate-700 leading-relaxed">{longText.goodness}</p>
+
+//             <h3 className="text-2xl font-bold mt-6 mb-3 text-amber-600 flex items-center gap-2">
+//               <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+//               Benefits
+//             </h3>
+//             <p className="text-base md:text-lg text-slate-700 leading-relaxed">{longText.benefits}</p>
+
+//             <h3 className="text-2xl font-bold mt-6 mb-3 text-amber-600 flex items-center gap-2">
+//               <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+//               Market Rating
+//             </h3>
+//             <p className="text-base md:text-lg text-slate-700 leading-relaxed">{longText.rating}</p>
+//           </div>
+
+//           <div className="mt-6">
+//             <a
+//               href={`/${items[index].slug}`}
+//               className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-lg"
+//             >
+//               View Product →
+//             </a>
+//           </div>
+//         </div>
+
+//         {/* RIGHT: orbit visuals with navigation buttons on LEFT and RIGHT sides */}
+//         <div className="relative w-full flex justify-center md:justify-end items-center gap-4">
+//           {/* PREVIOUS BUTTON - LEFT SIDE */}
+//           <button
+//             onClick={() => setIndex((i) => (i - 1 + n) % n)}
+//             aria-label="Previous"
+//             className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-amber-400 hover:bg-amber-50 hover:scale-110 transition-all duration-300 flex items-center justify-center text-3xl md:text-4xl font-bold text-amber-600 z-50"
+//           >
+//             ‹
+//           </button>
+
+//           <div
+//             className="relative w-[340px] h-[340px] md:w-[560px] md:h-[560px] rounded-3xl p-6 flex items-center justify-center"
+//             style={{ borderRadius: 32 }}
+//           >
+//             {/* Animated gradient circle background */}
+//             <motion.div
+//               className="absolute inset-0 rounded-full"
+//               style={{
+//                 background: "radial-gradient(circle, rgba(251,191,36,0.1) 0%, rgba(251,191,36,0.05) 50%, transparent 100%)",
+//               }}
+//               animate={{ scale: [1, 1.05, 1] }}
+//               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+//             />
+
+//             {/* Enhanced dashed circle with glow effect */}
+//             <motion.svg
+//               viewBox="0 0 300 300"
+//               className="absolute inset-0 w-full h-full pointer-events-none"
+//               animate={{ rotate: rotationDeg * 0.25 }}
+//               transition={{ type: "spring", stiffness: 140, damping: 22 }}
+//             >
+//               <defs>
+//                 <filter id="glow">
+//                   <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+//                   <feMerge>
+//                     <feMergeNode in="coloredBlur"/>
+//                     <feMergeNode in="SourceGraphic"/>
+//                   </feMerge>
+//                 </filter>
+//               </defs>
+//               <circle 
+//                 cx="150" 
+//                 cy="150" 
+//                 r="115" 
+//                 stroke="#F59E0B" 
+//                 strokeWidth="8" 
+//                 fill="none" 
+//                 strokeDasharray="8 12" 
+//                 filter="url(#glow)"
+//                 opacity="0.8"
+//               />
+//             </motion.svg>
+
+//             {/* Place each item using left/top computed from angle + rotationDeg */}
+//             {items.map((it, i) => {
+//               const baseAngle = (i * 360) / n;
+//               const totalAngle = baseAngle + rotationDeg;
+//               const rad = ((totalAngle - 90) * Math.PI) / 180;
+//               const x = Math.cos(rad) * radius;
+//               const y = Math.sin(rad) * radius;
+//               const isActive = i === index;
+//               const size = isActive ? 240 : 110;
+//               const scale = isActive ? 1 : 0.75;
+
+//               return (
+//                 <div
+//                   key={it.slug}
+//                   className="absolute cursor-pointer"
+//                   onClick={() => setIndex(i)}
+//                   style={{
+//                     left: `calc(50% + ${x}px)`,
+//                     top: `calc(50% + ${y}px)`,
+//                     transform: `translate(-50%, -50%) scale(${scale})`,
+//                     transition: "left 0.5s cubic-bezier(0.4, 0, 0.2, 1), top 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+//                     zIndex: isActive ? 50 : 10,
+//                     width: size,
+//                     height: size,
+//                   }}
+//                 >
+//                   <div
+//                     className="relative rounded-3xl overflow-hidden bg-white"
+//                     style={{
+//                       width: "100%",
+//                       height: "100%",
+//                       boxShadow: isActive 
+//                         ? "0 25px 50px rgba(245, 158, 11, 0.35), 0 10px 30px rgba(0,0,0,0.2)" 
+//                         : "0 10px 25px rgba(0,0,0,0.12)",
+//                       border: isActive ? "3px solid #F59E0B" : "2px solid rgba(0,0,0,0.08)",
+//                     }}
+//                   >
+//                     <img 
+//                       src={it.image} 
+//                       alt={it.name}
+//                       loading="eager"
+//                       style={{ 
+//                         width: '100%',
+//                         height: '100%',
+//                         objectFit: 'cover',
+//                         display: 'block'
+//                       }}
+//                       className={isActive ? "brightness-105" : "brightness-95"}
+//                     />
+//                     {isActive && (
+//                       <div className="absolute inset-0 bg-gradient-to-t from-amber-900/20 to-transparent pointer-events-none" />
+//                     )}
+//                   </div>
+//                 </div>
+//               );
+//             })}
+
+//             {/* Enhanced decorative mini at top center */}
+//             <div className="absolute left-1/2 top-4 -translate-x-1/2 z-40">
+//               <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-xl bg-white ring-4 ring-amber-400/30">
+//                 <img 
+//                   src={items[(index + 1) % n].image} 
+//                   alt="mini"
+//                   loading="eager"
+//                   style={{ 
+//                     width: '100%',
+//                     height: '100%',
+//                     objectFit: 'cover',
+//                     display: 'block'
+//                   }}
+//                 />
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* NEXT BUTTON - RIGHT SIDE */}
+//           <button
+//             onClick={() => setIndex((i) => (i + 1) % n)}
+//             aria-label="Next"
+//             className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 rounded-full bg-white shadow-lg hover:shadow-xl border-2 border-amber-400 hover:bg-amber-50 hover:scale-110 transition-all duration-300 flex items-center justify-center text-3xl md:text-4xl font-bold text-amber-600 z-50"
+//           >
+//             ›
+//           </button>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// /* ---------------- Main ProductsPage ---------------- */
+// export default function ProductsPage() {
+//   const [modalVideo, setModalVideo] = useState(null);
+//   const closeModal = () => setModalVideo(null);
+
+//   useEffect(() => {
+//     const onKey = (e) => {
+//       if (e.key === "Escape") {
+//         closeModal();
+//       }
+//     };
+//     window.addEventListener("keydown", onKey);
+//     return () => window.removeEventListener("keydown", onKey);
+//   }, []);
+
+//   /* ---------- Showcase items: 4 products ---------- */
+//   const showcaseItems = [
+//     {
+//       slug: "soyabean-oil",
+//       name: "Soyabean Oil",
+//       short: "Light, versatile and nutrition-forward—lets ingredients shine without heaviness.",
+//       image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
+//       price: "180",
+//       video: "/product-demo.mp4"
+//     },
+//     {
+//       slug: "mustard-oil",
+//       name: "Mustard Oil",
+//       short: "Traditional cold-pressed purity with authentic aroma and robust flavor for authentic Indian cooking.",
+//       image: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=800&q=80",
+//       price: "220",
+//       video: "/product-demo.mp4"
+//     },
+//     {
+//       slug: "rice-bran",
+//       name: "Rice Bran Oil",
+//       short: "Heart-healthy choice with balanced nutrition, high smoke point ideal for deep frying and everyday cooking.",
+//       image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80",
+//       price: "195",
+//       video: "/product-demo.mp4"
+//     },
+//     {
+//       slug: "palm-oil",
+//       name: "Palm Oil",
+//       short: "Rich, versatile cooking oil perfect for traditional recipes, delivering consistent taste and texture.",
+//       image: "https://images.unsplash.com/photo-1608797178974-15b35a64ede9?w=800&q=80",
+//       price: "165",
+//       video: "/product-demo.mp4"
+//     }
+//   ];
+
+//   return (
+//     // background applied to whole page as requested
+//     <main style={{ background: "#fef9c3" }} className="min-h-screen py-12">
+//       <div className="max-w-7xl mx-auto px-6 relative">
+//         {/* ROTATING SHOWCASE (top) - 4 PRODUCTS */}
+//         <RotatingShowcase items={showcaseItems} />
+
+//         {/* PAGE HEADER with enhanced styling */}
+//         <header className="mb-12 text-center">
+//           <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4 tracking-tight">
+//             Our Full Range of Premium Products
+//           </h1>
+//           <p className="mt-3 text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium">
+//             Handpicked edible oils & culinary essentials — crafted for taste, health and everyday confidence.
+//           </p>
+//         </header>
+
+//         {/* PRODUCTS GRID with enhanced styling */}
+//         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+//           {products.map((p) => (
+//             <article key={p.slug} className="relative group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+//               <div className="relative h-72 md:h-80 w-full overflow-hidden bg-gray-100">
+//                 <img 
+//                   src={p.image} 
+//                   alt={p.name}
+//                   loading="lazy"
+//                   style={{ 
+//                     width: '100%',
+//                     height: '100%',
+//                     objectFit: 'cover',
+//                     display: 'block'
+//                   }}
+//                   className="group-hover:scale-110 transition-transform duration-500" 
+//                 />
+//                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+//               </div>
+
+//               <div className="p-6 md:p-8">
+//                 <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3">{p.name}</h2>
+//                 <p className="mt-2 text-gray-600 text-base md:text-lg leading-relaxed">{p.short}</p>
+
+//                 <div className="mt-4 flex items-center gap-3">
+//                   {p.price && (
+//                     <span className="text-base md:text-lg font-bold px-4 py-2 rounded-full bg-gradient-to-r from-amber-50 to-amber-100 text-amber-700 border-2 border-amber-200">
+//                       ₹{p.price}
+//                     </span>
+//                   )}
+//                 </div>
+
+//                 <div className="mt-6 flex items-center gap-3">
+//                   <a 
+//                     href={`/${p.slug}`}
+//                     className="flex-1 text-center rounded-full px-6 py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-base md:text-lg"
+//                   >
+//                     View Product →
+//                   </a>
+//                   <button 
+//                     onClick={() => setModalVideo({ src: p.video || "/product-demo.mp4", name: p.name })} 
+//                     className="rounded-full px-5 py-3 border-2 border-amber-400 hover:bg-amber-50 transition-all duration-300 font-semibold text-base md:text-lg"
+//                   >
+//                     Demo
+//                   </button>
+//                 </div>
+//               </div>
+//             </article>
+//           ))}
+//         </div>
+
+//         {/* VIDEO MODAL */}
+//         <AnimatePresence>
+//           {modalVideo && (
+//             <motion.div
+//               key="video-modal"
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               exit={{ opacity: 0 }}
+//               transition={{ duration: 0.18 }}
+//               className="fixed inset-0 z-50 flex items-center justify-center p-6"
+//             >
+//               <div className="absolute inset-0 bg-black/70" onClick={closeModal} />
+//               <motion.div initial={{ scale: 0.96, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.96, opacity: 0 }} transition={{ duration: 0.18 }} className="relative max-w-4xl w-full rounded-2xl overflow-hidden shadow-2xl bg-black">
+//                 <div className="absolute right-3 top-3 z-20">
+//                   <button onClick={closeModal} className="rounded-full bg-white/90 px-3 py-2 hover:bg-white transition">Close</button>
+//                 </div>
+//                 <video src={modalVideo.src} controls autoPlay className="w-full h-[60vh] md:h-[72vh] object-cover bg-black" />
+//                 <div className="p-4 bg-gradient-to-t from-black/40 to-transparent text-white flex items-center justify-between">
+//                   <div>
+//                     <div className="text-lg font-bold">{modalVideo.name}</div>
+//                     <div className="text-sm text-white/80">Veer Bharat — product demo</div>
+//                   </div>
+//                 </div>
+//               </motion.div>
+//             </motion.div>
+//           )}
+//         </AnimatePresence>
+//       </div>
+//     </main>
+//   );
+// }
