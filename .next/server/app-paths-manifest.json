@@ -1,5 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/Managing-Director/page": "app/Managing-Director/page.js",
-  "/page": "app/page.js"
+  "/palm-oil/page": "app/palm-oil/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/about/page": "app/about/page.js",
+  "/products/page": "app/products/page.js",
+  "/blog/page": "app/blog/page.js"
 }

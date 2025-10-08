@@ -1,4 +1,3 @@
-// "use client";
 // import React from "react";
 // import Image from "next/image";
 // import Link from "next/link";
@@ -760,90 +759,7 @@ export default function SingleBlogPage({ params }) {
         </div>
       </main>
 
-      {/* Global Styles */}
-      <style jsx global>{`
-        .blog-content p {
-          font-size: 1.125rem;
-          line-height: 1.8;
-          color: #374151;
-          margin-bottom: 1.5rem;
-          text-align: justify;
-        }
 
-        .blog-content h2 {
-          font-size: 1.875rem;
-          font-weight: 800;
-          color: #0b2b52;
-          margin-top: 2.5rem;
-          margin-bottom: 1.25rem;
-          line-height: 1.3;
-        }
-
-        .blog-content h3 {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #1f2937;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
-        }
-
-        .blog-content strong {
-          font-weight: 700;
-          color: #111827;
-        }
-
-        .blog-content ul,
-        .blog-content ol {
-          margin-bottom: 1.5rem;
-          padding-left: 1.5rem;
-        }
-
-        .blog-content li {
-          font-size: 1.125rem;
-          line-height: 1.8;
-          color: #374151;
-          margin-bottom: 0.75rem;
-        }
-
-        .blog-content blockquote {
-          border-left: 4px solid #f59e0b;
-          padding-left: 1.5rem;
-          margin: 2rem 0;
-          font-style: italic;
-          color: #6b7280;
-        }
-
-        @media (max-width: 768px) {
-          .blog-content p,
-          .blog-content li {
-            font-size: 1rem;
-            line-height: 1.7;
-          }
-
-          .blog-content h2 {
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-          }
-
-          .blog-content h3 {
-            font-size: 1.25rem;
-            margin-top: 1.5rem;
-          }
-        }
-
-        @media (max-width: 640px) {
-          .blog-content p,
-          .blog-content li {
-            font-size: 0.9375rem;
-            text-align: left;
-          }
-
-          .blog-content h2 {
-            font-size: 1.375rem;
-          }
-        }
-      `}</style>
     </>
   );
 }
