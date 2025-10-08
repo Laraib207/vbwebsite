@@ -2529,6 +2529,9 @@ export default function Navbar() {
                     <li>
                       <LogoLink href="/gallery" className="block px-5 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 text-base font-semibold" onClick={() => setTeamOpen(false)}>Gallery</LogoLink>
                     </li>
+                    <li>
+                      <LogoLink href="/Managing-Director" className="block px-5 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 text-base font-semibold" onClick={() => setTeamOpen(false)}>Managing Director</LogoLink>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -2669,6 +2672,7 @@ export default function Navbar() {
                 <div className="pl-8 pr-4 pb-2 pt-3 flex flex-col gap-2">
                   <SubMenuLink href="/team" onClick={() => setOpen(false)}>Our Team</SubMenuLink>
                   <SubMenuLink href="/gallery" onClick={() => setOpen(false)}>Gallery</SubMenuLink>
+                  <SubMenuLink href="/Managing-Director" onClick={() => setOpen(false)}>Managing Director</SubMenuLink>
                 </div>
               </details>
 

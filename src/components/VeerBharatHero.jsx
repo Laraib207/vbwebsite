@@ -312,18 +312,936 @@
 // }
 
 
+
+
+
+
+// import React from "react";
+// import { motion } from "framer-motion";
+
+// /**
+//  * Put these files in public/images/ exactly as named:
+//  * - Veer Bharat Post (1).png (Main product image - ONLY ONE USED)
+//  * - WhatsApp Image 2025-09-23 at 13.35.21.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.21-2.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.21-3.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.21-4.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.21-5.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.20-3.jpeg
+//  */
+
+// const benefitsData = [
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21.jpeg", 
+//     alt: "Reduces Cholesterol", 
+//     label: "Reduces\nCholesterol" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.20-3.jpeg", 
+//     alt: "High Smoke Point", 
+//     label: "High Smoke\nPoint" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21-5.jpeg", 
+//     alt: "Skin-Improving Benefits", 
+//     label: "Skin-Improving\nBenefits" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21-2.jpeg", 
+//     alt: "Natural Antioxidants", 
+//     label: "Natural\nAntioxidants" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21-3.jpeg", 
+//     alt: "Physically Refined", 
+//     label: "Physically\nRefined" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21-4.jpeg", 
+//     alt: "Balanced MUFA & PUFA", 
+//     label: "Balanced\nMUFA & PUFA" 
+//   },
+// ];
+
+// // Desktop positions - exact replica of King's Rice Bran Oil layout
+// const desktopPositions = [
+//   { left: "6%", top: "42%" },      // Left side - top
+//   { left: "18%", top: "12%" },     // Left upper
+//   { left: "24%", top: "70%" },     // Left lower
+//   { right: "18%", top: "16%" },    // Right upper
+//   { right: "24%", top: "66%" },    // Right lower
+//   { right: "6%", top: "42%" }      // Right side - top
+// ];
+
+// function BenefitBubble({ src, alt, label, stylePos, i }) {
+//   const desktopSize = 240;
+//   const mobileSize = 120;
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, scale: 0.5 }}
+//       whileInView={{ opacity: 1, scale: 1 }}
+//       viewport={{ once: true }}
+//       transition={{ 
+//         duration: 0.7, 
+//         delay: i * 0.12,
+//         type: "spring",
+//         stiffness: 180
+//       }}
+//       whileHover={{ scale: 1.1, y: -10 }}
+//       style={{
+//         position: stylePos ? "absolute" : "relative",
+//         zIndex: 20,
+//         ...stylePos,
+//       }}
+//       className={stylePos ? "hidden xl:block" : "block xl:hidden"}
+//     >
+//       <motion.div
+//         animate={{
+//           y: [0, -15, 0],
+//         }}
+//         transition={{
+//           duration: 3.5 + (i % 3) * 0.6,
+//           repeat: Infinity,
+//           ease: "easeInOut",
+//           delay: i * 0.25,
+//         }}
+//         className="flex flex-col items-center"
+//       >
+//         {/* Blinking outer glow */}
+//         <motion.div
+//           animate={{
+//             opacity: [0.6, 1, 0.6],
+//             scale: [1, 1.08, 1],
+//             boxShadow: [
+//               "0 0 30px rgba(251,191,36,0.4)",
+//               "0 0 50px rgba(251,191,36,0.8)",
+//               "0 0 30px rgba(251,191,36,0.4)",
+//             ]
+//           }}
+//           transition={{
+//             duration: 2.5,
+//             repeat: Infinity,
+//             ease: "easeInOut",
+//             delay: i * 0.3,
+//           }}
+//           className="rounded-full"
+//           style={{
+//             width: stylePos ? desktopSize : mobileSize,
+//             height: stylePos ? desktopSize : mobileSize,
+//             background: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #f97316 100%)",
+//             padding: "8px",
+//             boxShadow: "0 20px 50px rgba(0,0,0,0.25)",
+//           }}
+//         >
+//           <div
+//             className="rounded-full overflow-hidden flex items-center justify-center w-full h-full"
+//             style={{
+//               backgroundColor: "#fef9c3",
+//             }}
+//           >
+//             <img 
+//               src={src} 
+//               alt={alt} 
+//               className="w-[75%] h-[75%] object-contain"
+//               style={{
+//                 mixBlendMode: "normal",
+//               }}
+//             />
+//           </div>
+//         </motion.div>
+
+//         {/* Label below bubble - desktop only */}
+//         {stylePos && (
+//           <motion.div
+//             initial={{ opacity: 0, y: 10 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             viewport={{ once: true }}
+//             transition={{ delay: 0.3 + i * 0.1 }}
+//             className="mt-5 text-center font-black leading-tight px-2"
+//             style={{
+//               fontSize: "17px",
+//               maxWidth: desktopSize,
+//               whiteSpace: "pre-line",
+//               color: "#0f172a",
+//               fontFamily: "'Arial Black', sans-serif",
+//               textShadow: "0 2px 4px rgba(0,0,0,0.1)",
+//             }}
+//           >
+//             {label}
+//           </motion.div>
+//         )}
+//       </motion.div>
+//     </motion.div>
+//   );
+// }
+
+// export default function VeerBharatHero() {
+//   const productImg = "/images/Veer Bharat Post (1).png";
+
+//   return (
+//     <section 
+//       className="relative overflow-hidden" 
+//       style={{ 
+        
+//         background: "#fef9c3",
+//         minHeight: "100vh" 
+//       }}
+//     >
+//       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-16 py-12 md:py-16 lg:py-20 xl:py-24">
+        
+//         {/* HEADER SECTION - Premium Typography */}
+//         <motion.div
+//           initial={{ opacity: 0, y: -50 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 1 }}
+//           className="text-center mb-10 md:mb-14 lg:mb-16"
+//         >
+//           <h1 
+//             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight mb-6 md:mb-8 lg:mb-10 leading-tight"
+//             style={{
+//               fontFamily: "'Arial Black', 'Helvetica', sans-serif",
+//               color: "#000000",
+//               letterSpacing: "0.01em",
+//               textTransform: "uppercase",
+//             }}
+//           >
+//             VEER BHARAT KACHI GHANI
+//             <br />
+//             MUSTARD OIL
+//           </h1>
+          
+//           {/* Description paragraphs with premium styling */}
+//           <div className="max-w-6xl mx-auto space-y-5 md:space-y-7 px-4 md:px-8">
+//             <motion.p
+//               initial={{ opacity: 0 }}
+//               whileInView={{ opacity: 1 }}
+//               viewport={{ once: true }}
+//               transition={{ duration: 0.9, delay: 0.2 }}
+//               className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed font-medium"
+//               style={{
+//                 fontFamily: "'Georgia', 'Times New Roman', serif",
+//                 color: "#1e293b",
+//                 lineHeight: "1.75",
+//                 fontWeight: "500",
+//               }}
+//             >
+//               Made from 100% pure mustard seeds, Veer Bharat Kachi Ghani Mustard Oil is a heart-healthy cooking oil rich in natural goodness, which helps reduce cholesterol levels and improve overall health.
+//             </motion.p>
+
+//             <motion.p
+//               initial={{ opacity: 0 }}
+//               whileInView={{ opacity: 1 }}
+//               viewport={{ once: true }}
+//               transition={{ duration: 0.9, delay: 0.4 }}
+//               className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed font-medium"
+//               style={{
+//                 fontFamily: "'Georgia', 'Times New Roman', serif",
+//                 color: "#1e293b",
+//                 lineHeight: "1.75",
+//                 fontWeight: "500",
+//               }}
+//             >
+//               It's ideal for everyday cooking with a balanced blend of monounsaturated and polyunsaturated fats. Free from harmful chemicals, it's packed with antioxidants and offers a mild flavour, making it perfect for frying, sautéing, and more. Choose Veer Bharat Kachi Ghani Mustard Oil for a healthier, cholesterol-conscious, and nutritious lifestyle.
+//             </motion.p>
+//           </div>
+//         </motion.div>
+
+//         {/* MAIN PRODUCT SECTION */}
+//         <div className="relative mt-16 md:mt-20 lg:mt-24 xl:mt-28">
+          
+//           {/* Desktop Layout - Circular arrangement */}
+//           <div className="relative w-full flex justify-center items-center min-h-[700px] xl:min-h-[850px]">
+            
+//             {/* Soft shadow under product */}
+//             <motion.div
+//               animate={{
+//                 scale: [1, 1.15, 1],
+//                 opacity: [0.08, 0.14, 0.08],
+//               }}
+//               transition={{
+//                 duration: 4.5,
+//                 repeat: Infinity,
+//                 ease: "easeInOut",
+//               }}
+//               className="absolute bottom-4 w-[350px] md:w-[450px] lg:w-[550px] xl:w-[650px] h-10 md:h-14 lg:h-16 rounded-full bg-black/10 blur-3xl"
+//             />
+
+//             {/* CENTER PRODUCT - WITH PREMIUM BLINKING EFFECT */}
+//             <motion.div
+//               initial={{ opacity: 0, scale: 0.7, y: 80 }}
+//               whileInView={{ opacity: 1, scale: 1, y: 0 }}
+//               viewport={{ once: true }}
+//               transition={{ 
+//                 duration: 1.3, 
+//                 type: "spring",
+//                 stiffness: 120 
+//               }}
+//               className="z-40 relative"
+//             >
+//               <motion.div
+//                 animate={{
+//                   y: [0, -18, 0],
+//                   rotate: [0, 2, 0, -2, 0],
+//                 }}
+//                 transition={{
+//                   y: {
+//                     duration: 5.5,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                   },
+//                   rotate: {
+//                     duration: 7,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                   },
+//                 }}
+//                 className="relative"
+//               >
+//                 {/* BLINKING RADIAL GLOW - Multiple layers */}
+//                 <motion.div
+//                   animate={{
+//                     opacity: [0.3, 0.7, 0.3],
+//                     scale: [1, 1.15, 1],
+//                   }}
+//                   transition={{
+//                     duration: 2.5,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                   }}
+//                   className="absolute inset-0 rounded-full blur-3xl"
+//                   style={{
+//                     background: "radial-gradient(circle, rgba(251,191,36,0.7) 0%, rgba(245,158,11,0.5) 40%, transparent 70%)",
+//                     zIndex: -1,
+//                     transform: "scale(1.3)",
+//                   }}
+//                 />
+
+//                 <motion.div
+//                   animate={{
+//                     opacity: [0.4, 0.9, 0.4],
+//                     scale: [1, 1.1, 1],
+//                   }}
+//                   transition={{
+//                     duration: 2,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                     delay: 0.5,
+//                   }}
+//                   className="absolute inset-0 rounded-full blur-2xl"
+//                   style={{
+//                     background: "radial-gradient(circle, rgba(251,191,36,0.8) 0%, rgba(245,158,11,0.4) 50%, transparent 70%)",
+//                     zIndex: -2,
+//                   }}
+//                 />
+
+//                 {/* PRODUCT IMAGE - Larger size */}
+//                 <motion.img
+//                   whileHover={{ scale: 1.06, rotate: 3 }}
+//                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
+//                   src={productImg}
+//                   alt="Veer Bharat Kachi Ghani Mustard Oil"
+//                   className="relative z-10 w-72 sm:w-96 md:w-[480px] lg:w-[580px] xl:w-[700px] h-auto object-contain mx-auto"
+//                   style={{
+//                     filter: "drop-shadow(0 35px 70px rgba(0,0,0,0.35)) drop-shadow(0 20px 40px rgba(251,191,36,0.3))",
+//                   }}
+//                 />
+//               </motion.div>
+//             </motion.div>
+
+//             {/* Desktop benefit bubbles - arranged in circle */}
+//             {benefitsData.map((b, i) => (
+//               <BenefitBubble
+//                 key={i}
+//                 src={b.src}
+//                 alt={b.alt}
+//                 label={b.label}
+//                 stylePos={desktopPositions[i]}
+//                 i={i}
+//               />
+//             ))}
+//           </div>
+
+//           {/* MOBILE/TABLET LAYOUT - Grid Style */}
+//           <div className="xl:hidden mt-12 md:mt-16 space-y-10">
+            
+//             {/* Top row - 3 benefits */}
+//             <div className="grid grid-cols-3 gap-3 sm:gap-5 px-2 sm:px-4">
+//               {benefitsData.slice(0, 3).map((b, i) => (
+//                 <div key={i} className="flex flex-col items-center">
+//                   <BenefitBubble 
+//                     src={b.src} 
+//                     alt={b.alt} 
+//                     label={b.label} 
+//                     stylePos={null} 
+//                     i={i} 
+//                   />
+//                   <motion.p 
+//                     initial={{ opacity: 0 }}
+//                     whileInView={{ opacity: 1 }}
+//                     viewport={{ once: true }}
+//                     transition={{ delay: 0.3 + i * 0.1 }}
+//                     className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-black text-center leading-tight whitespace-pre-line"
+//                     style={{
+//                       color: "#0f172a",
+//                       fontFamily: "'Arial Black', sans-serif",
+//                     }}
+//                   >
+//                     {b.label}
+//                   </motion.p>
+//                 </div>
+//               ))}
+//             </div>
+
+//             {/* Center product for mobile */}
+//             <div className="flex justify-center px-4 py-6">
+//               <motion.div
+//                 animate={{
+//                   y: [0, -12, 0],
+//                   rotate: [0, 2, 0, -2, 0],
+//                 }}
+//                 transition={{
+//                   duration: 5,
+//                   repeat: Infinity,
+//                   ease: "easeInOut",
+//                 }}
+//                 className="relative"
+//               >
+//                 <motion.div
+//                   animate={{
+//                     opacity: [0.3, 0.8, 0.3],
+//                     scale: [1, 1.12, 1],
+//                   }}
+//                   transition={{
+//                     duration: 2.5,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                   }}
+//                   className="absolute inset-0 rounded-full blur-2xl"
+//                   style={{
+//                     background: "radial-gradient(circle, rgba(251,191,36,0.6) 0%, transparent 70%)",
+//                     zIndex: -1,
+//                   }}
+//                 />
+//                 <img
+//                   src={productImg}
+//                   alt="Veer Bharat Mustard Oil"
+//                   className="w-56 sm:w-72 md:w-80 h-auto object-contain relative z-10"
+//                   style={{
+//                     filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.3))",
+//                   }}
+//                 />
+//               </motion.div>
+//             </div>
+
+//             {/* Bottom row - 3 benefits */}
+//             <div className="grid grid-cols-3 gap-3 sm:gap-5 px-2 sm:px-4">
+//               {benefitsData.slice(3, 6).map((b, i) => (
+//                 <div key={i} className="flex flex-col items-center">
+//                   <BenefitBubble 
+//                     src={b.src} 
+//                     alt={b.alt} 
+//                     label={b.label} 
+//                     stylePos={null} 
+//                     i={i + 3} 
+//                   />
+//                   <motion.p 
+//                     initial={{ opacity: 0 }}
+//                     whileInView={{ opacity: 1 }}
+//                     viewport={{ once: true }}
+//                     transition={{ delay: 0.3 + i * 0.1 }}
+//                     className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-black text-center leading-tight whitespace-pre-line"
+//                     style={{
+//                       color: "#0f172a",
+//                       fontFamily: "'Arial Black', sans-serif",
+//                     }}
+//                   >
+//                     {b.label}
+//                   </motion.p>
+//                 </div>
+//               ))}
+//             </div>
+
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Bottom spacing */}
+//       <div className="h-16 md:h-20" />
+//     </section>
+//   );
+// }
+
+
+
+
+
+// import React from "react";
+// import { motion } from "framer-motion";
+
+// /**
+//  * VEER BHARAT KACHI GHANI MUSTARD OIL - HERO SECTION
+//  * 
+//  * Features:
+//  * - Text above product with increased sizing for visibility
+//  * - 6 benefit icons arranged in circle AROUND the product (not below)
+//  * - Electric current tumble motion on bottle
+//  * - Full-width responsive text
+//  * - Same #fef9c3 background
+//  * - Works on mobile, tablet, desktop
+//  * 
+//  * Images in public/images/:
+//  * - Veer-Bharat-Post-1-2.jpg (Desktop product)
+//  * - WhatsApp-Image-2025-10-07-at-10.57.53.jpg (Mobile product)
+//  * - WhatsApp Image 2025-09-23 at 13.35.21.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.20-3.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.21-5.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.21-2.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.21-3.jpeg
+//  * - WhatsApp Image 2025-09-23 at 13.35.21-4.jpeg
+//  */
+
+// const benefitsData = [
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21.jpeg", 
+//     alt: "Reduces Cholesterol", 
+//     label: "Reduces\nCholesterol" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.20-3.jpeg", 
+//     alt: "High Smoke Point", 
+//     label: "High Smoke\nPoint" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21-5.jpeg", 
+//     alt: "Skin-Improving Benefits", 
+//     label: "Skin-Improving\nBenefits" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21-2.jpeg", 
+//     alt: "Natural Antioxidants", 
+//     label: "Natural\nAntioxidants" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21-3.jpeg", 
+//     alt: "Physically Refined", 
+//     label: "Physically\nRefined" 
+//   },
+//   { 
+//     src: "/images/WhatsApp Image 2025-09-23 at 13.35.21-4.jpeg", 
+//     alt: "Balanced MUFA & PUFA", 
+//     label: "Balanced\nMUFA & PUFA" 
+//   },
+// ];
+
+// // Desktop circular positions - icons AROUND product center
+// const desktopPositions = [
+//   { left: "8%", top: "40%" },      // Left middle
+//   { left: "18%", top: "8%" },      // Left top
+//   { left: "22%", top: "70%" },     // Left bottom
+//   { right: "18%", top: "12%" },    // Right top
+//   { right: "22%", top: "66%" },    // Right bottom
+//   { right: "8%", top: "40%" }      // Right middle
+// ];
+
+// function BenefitBubble({ src, alt, label, stylePos, i }) {
+//   const desktopSize = 170;
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, scale: 0.3 }}
+//       whileInView={{ opacity: 1, scale: 1 }}
+//       viewport={{ once: true, amount: 0.2 }}
+//       transition={{ 
+//         duration: 0.75, 
+//         delay: i * 0.12,
+//         type: "spring",
+//         stiffness: 170
+//       }}
+//       whileHover={{ 
+//         scale: 1.12, 
+//         y: -12,
+//         transition: { duration: 0.25 } 
+//       }}
+//       style={{
+//         position: "absolute",
+//         zIndex: 30,
+//         ...stylePos,
+//       }}
+//     >
+//       <motion.div
+//         animate={{
+//           y: [0, -16, 0],
+//         }}
+//         transition={{
+//           duration: 4 + (i % 3) * 0.5,
+//           repeat: Infinity,
+//           ease: "easeInOut",
+//           delay: i * 0.2,
+//         }}
+//         className="flex flex-col items-center"
+//       >
+//         {/* Golden gradient circle with glow */}
+//         <motion.div
+//           animate={{
+//             boxShadow: [
+//               "0 0 25px rgba(251,146,60,0.5), 0 0 45px rgba(251,191,36,0.3)",
+//               "0 0 45px rgba(251,146,60,0.8), 0 0 70px rgba(251,191,36,0.5)",
+//               "0 0 25px rgba(251,146,60,0.5), 0 0 45px rgba(251,191,36,0.3)",
+//             ]
+//           }}
+//           transition={{
+//             duration: 2.8,
+//             repeat: Infinity,
+//             ease: "easeInOut",
+//             delay: i * 0.25,
+//           }}
+//           className="rounded-full relative"
+//           style={{
+//             width: desktopSize,
+//             height: desktopSize,
+//             background: "linear-gradient(140deg, #fb923c 0%, #fbbf24 50%, #f59e0b 100%)",
+//             padding: "5px",
+//             boxShadow: "0 15px 40px rgba(0,0,0,0.22)",
+//           }}
+//         >
+//           <div
+//             className="rounded-full overflow-hidden flex items-center justify-center w-full h-full"
+//             style={{
+//               backgroundColor: "#fffbeb",
+//             }}
+//           >
+//             <img 
+//               src={src} 
+//               alt={alt} 
+//               className="w-[75%] h-[75%] object-contain"
+//               style={{
+//                 mixBlendMode: "multiply",
+//                 filter: "contrast(1.08)",
+//               }}
+//             />
+//           </div>
+//         </motion.div>
+
+//         {/* Label text */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 12 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ delay: 0.4 + i * 0.1 }}
+//           className="mt-5 text-center font-bold leading-tight px-2"
+//           style={{
+//             fontSize: "16px",
+//             maxWidth: desktopSize + 15,
+//             whiteSpace: "pre-line",
+//             color: "#0f172a",
+//             fontFamily: "'Arial', 'Helvetica', sans-serif",
+//             fontWeight: "700",
+//             textShadow: "0 2px 4px rgba(0,0,0,0.12)",
+//           }}
+//         >
+//           {label}
+//         </motion.div>
+//       </motion.div>
+//     </motion.div>
+//   );
+// }
+
+// export default function VeerBharatHero() {
+//   const productImgDesktop = "/images/WhatsApp-Image-2025-10-07-at-10.57.53.jpg";
+//   const productImgMobile = "/images/WhatsApp-Image-2025-10-07-at-10.57.53.jpg";
+
+//   return (
+//     <section 
+//       className="relative overflow-hidden" 
+//       style={{ 
+//         background: "#fef9c3",
+//         minHeight: "100vh",
+//         width: "100%",
+//       }}
+//     >
+//       {/* Background pattern */}
+//       <div 
+//         className="absolute inset-0 opacity-[0.02]"
+//         style={{
+//           backgroundImage: "radial-gradient(circle, #000 1.5px, transparent 1.5px)",
+//           backgroundSize: "40px 40px",
+//         }}
+//       />
+
+//       <div className="relative w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-20 py-10 md:py-14 lg:py-16 xl:py-20">
+        
+//         {/* HEADER SECTION - INCREASED TEXT SIZING */}
+//         <motion.div
+//           initial={{ opacity: 0, y: -60 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 1.1, ease: "easeOut" }}
+//           className="text-center mb-12 md:mb-16 lg:mb-20 w-full"
+//         >
+//           {/* Main Heading - LARGER SIZE */}
+//           <h1 
+//             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black tracking-tight mb-8 md:mb-10 lg:mb-14 leading-[1.1] px-2"
+//             style={{
+//               fontFamily: "'Impact', 'Arial Black', sans-serif",
+//               color: "#000000",
+//               letterSpacing: "-0.015em",
+//               textTransform: "uppercase",
+//               textShadow: "3px 3px 0px rgba(251,146,60,0.3), 6px 6px 0px rgba(251,191,36,0.18)",
+//             }}
+//           >
+//             VEER BHARAT KACHI GHANI
+//             <br />
+//             MUSTARD OIL
+//           </h1>
+          
+//           {/* Description Paragraphs - LARGER SIZE FOR VISIBILITY */}
+//           <div className="w-full space-y-6 md:space-y-8 lg:space-y-10">
+//             <motion.p
+//               initial={{ opacity: 0 }}
+//               whileInView={{ opacity: 1 }}
+//               viewport={{ once: true }}
+//               transition={{ duration: 1, delay: 0.3 }}
+//               className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-relaxed font-normal px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 2xl:px-32"
+//               style={{
+//                 fontFamily: "'Georgia', 'Times New Roman', serif",
+//                 color: "#1e293b",
+//                 lineHeight: "1.8",
+//                 fontWeight: "400",
+//               }}
+//             >
+//               Made from 100% pure mustard seeds, Veer Bharat Kachi Ghani Mustard Oil is a heart-healthy cooking oil rich in natural goodness, which helps reduce cholesterol levels and improve overall health.
+//             </motion.p>
+
+//             <motion.p
+//               initial={{ opacity: 0 }}
+//               whileInView={{ opacity: 1 }}
+//               viewport={{ once: true }}
+//               transition={{ duration: 1, delay: 0.5 }}
+//               className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-relaxed font-normal px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 2xl:px-32"
+//               style={{
+//                 fontFamily: "'Georgia', 'Times New Roman', serif",
+//                 color: "#1e293b",
+//                 lineHeight: "1.8",
+//                 fontWeight: "400",
+//               }}
+//             >
+//               It's ideal for everyday cooking with a balanced blend of monounsaturated and polyunsaturated fats. Free from harmful chemicals, it's packed with antioxidants and offers a mild flavour, making it perfect for frying, sautéing, and more. Choose Veer Bharat Kachi Ghani Mustard Oil for a healthier, cholesterol-conscious, and nutritious lifestyle.
+//             </motion.p>
+//           </div>
+//         </motion.div>
+
+//         {/* PRODUCT WITH SURROUNDING ICONS SECTION */}
+//         <div className="relative mt-14 md:mt-20 lg:mt-24 xl:mt-28 w-full hidden lg:block">
+          
+//           {/* Container with centered product and surrounding icons */}
+//           <div className="relative w-full flex justify-center items-center min-h-[700px] xl:min-h-[850px]">
+            
+//             {/* Shadow under product */}
+//             <motion.div
+//               animate={{
+//                 scale: [1, 1.15, 1],
+//                 opacity: [0.08, 0.15, 0.08],
+//               }}
+//               transition={{
+//                 duration: 5,
+//                 repeat: Infinity,
+//                 ease: "easeInOut",
+//               }}
+//               className="absolute bottom-10 w-[400px] xl:w-[600px] h-12 xl:h-16 rounded-full bg-black/15 blur-3xl"
+//             />
+
+//             {/* CENTER PRODUCT - ELECTRIC TUMBLE MOTION */}
+//             <motion.div
+//               initial={{ opacity: 0, scale: 0.7, y: 80 }}
+//               whileInView={{ opacity: 1, scale: 1, y: 0 }}
+//               viewport={{ once: true }}
+//               transition={{ 
+//                 duration: 1.4, 
+//                 type: "spring",
+//                 stiffness: 100 
+//               }}
+//               className="z-50 relative"
+//             >
+//               <motion.div
+//                 animate={{
+//                   y: [0, -20, 0],
+//                   rotate: [0, -2, 1.5, -1, 1, -0.5, 2, -1, 0],
+//                   x: [0, -3, 2.5, -2, 3, -1.5, 2, -2.5, 0],
+//                 }}
+//                 transition={{
+//                   y: {
+//                     duration: 6,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                   },
+//                   rotate: {
+//                     duration: 4.5,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                   },
+//                   x: {
+//                     duration: 4,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                   },
+//                 }}
+//                 className="relative"
+//               >
+//                 {/* Radial glow layers */}
+//                 <motion.div
+//                   animate={{
+//                     opacity: [0.4, 0.7, 0.4],
+//                     scale: [1, 1.2, 1],
+//                   }}
+//                   transition={{
+//                     duration: 3,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                   }}
+//                   className="absolute inset-0 rounded-full blur-[80px]"
+//                   style={{
+//                     background: "radial-gradient(circle, rgba(251,146,60,0.75) 0%, rgba(251,191,36,0.55) 40%, transparent 70%)",
+//                     zIndex: -1,
+//                     transform: "scale(1.4)",
+//                   }}
+//                 />
+
+//                 <motion.div
+//                   animate={{
+//                     opacity: [0.3, 0.6, 0.3],
+//                     scale: [1, 1.15, 1],
+//                   }}
+//                   transition={{
+//                     duration: 2.5,
+//                     repeat: Infinity,
+//                     ease: "easeInOut",
+//                     delay: 0.7,
+//                   }}
+//                   className="absolute inset-0 rounded-full blur-[60px]"
+//                   style={{
+//                     background: "radial-gradient(circle, rgba(251,146,60,0.85) 0%, rgba(251,191,36,0.45) 50%, transparent 70%)",
+//                     zIndex: -2,
+//                   }}
+//                 />
+
+//                 {/* PRODUCT IMAGE */}
+//                 <motion.img
+//                   whileHover={{ 
+//                     scale: 1.07,
+//                     transition: { duration: 0.4 } 
+//                   }}
+//                   src={productImgDesktop}
+//                   alt="Veer Bharat Kachi Ghani Mustard Oil"
+//                   className="relative z-10 w-[450px] lg:w-[550px] xl:w-[650px] 2xl:w-[750px] h-auto object-contain mx-auto"
+//                   style={{
+//                     filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.4)) drop-shadow(0 20px 50px rgba(251,146,60,0.35)) contrast(1.04) brightness(1.02)",
+//                     imageRendering: "high-quality",
+//                   }}
+//                 />
+//               </motion.div>
+//             </motion.div>
+
+//             {/* 6 BENEFIT ICONS AROUND THE PRODUCT */}
+//             {benefitsData.map((b, i) => (
+//               <BenefitBubble
+//                 key={`benefit-${i}`}
+//                 src={b.src}
+//                 alt={b.alt}
+//                 label={b.label}
+//                 stylePos={desktopPositions[i]}
+//                 i={i}
+//               />
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* MOBILE/TABLET VERSION - Product only (no icons below) */}
+//         <div className="lg:hidden mt-12 md:mt-16">
+//           <div className="flex justify-center px-4 py-8">
+//             <motion.div
+//               initial={{ opacity: 0, scale: 0.7 }}
+//               whileInView={{ opacity: 1, scale: 1 }}
+//               viewport={{ once: true }}
+//               transition={{ duration: 1.2 }}
+//               animate={{
+//                 y: [0, -12, 0],
+//                 rotate: [0, -1.5, 1, -0.5, 1.5, -1, 0],
+//                 x: [0, -2, 1.5, -1, 2, -1.5, 0],
+//               }}
+//               transition={{
+//                 y: {
+//                   duration: 5,
+//                   repeat: Infinity,
+//                   ease: "easeInOut",
+//                 },
+//                 rotate: {
+//                   duration: 4,
+//                   repeat: Infinity,
+//                   ease: "easeInOut",
+//                 },
+//                 x: {
+//                   duration: 3.5,
+//                   repeat: Infinity,
+//                   ease: "easeInOut",
+//                 },
+//               }}
+//               className="relative"
+//             >
+//               <motion.div
+//                 animate={{
+//                   opacity: [0.35, 0.75, 0.35],
+//                   scale: [1, 1.15, 1],
+//                 }}
+//                 transition={{
+//                   duration: 3,
+//                   repeat: Infinity,
+//                   ease: "easeInOut",
+//                 }}
+//                 className="absolute inset-0 rounded-full blur-[60px]"
+//                 style={{
+//                   background: "radial-gradient(circle, rgba(251,146,60,0.6) 0%, transparent 70%)",
+//                   zIndex: -1,
+//                 }}
+//               />
+//               <img
+//                 src={productImgMobile}
+//                 alt="Veer Bharat Mustard Oil"
+//                 className="w-64 sm:w-80 md:w-96 h-auto object-contain relative z-10"
+//                 style={{
+//                   filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.35)) contrast(1.03)",
+//                 }}
+//               />
+//             </motion.div>
+//           </div>
+//         </div>
+
+//       </div>
+
+//       {/* Bottom spacing */}
+//       <div className="h-16 md:h-20 lg:h-24" />
+//     </section>
+//   );
+// }
+
+
+
+
 import React from "react";
 import { motion } from "framer-motion";
 
 /**
- * Put these files in public/images/ exactly as named:
- * - Veer Bharat Post (1).png (Main product image - ONLY ONE USED)
- * - WhatsApp Image 2025-09-23 at 13.35.21.jpeg
- * - WhatsApp Image 2025-09-23 at 13.35.21-2.jpeg
- * - WhatsApp Image 2025-09-23 at 13.35.21-3.jpeg
- * - WhatsApp Image 2025-09-23 at 13.35.21-4.jpeg
- * - WhatsApp Image 2025-09-23 at 13.35.21-5.jpeg
- * - WhatsApp Image 2025-09-23 at 13.35.20-3.jpeg
+ * VEER BHARAT KACHI GHANI MUSTARD OIL - FULLY RESPONSIVE
+ * 
+ * Mobile: Product only (NO icons)
+ * Tablet: Product with icons around
+ * Desktop/Laptop: Product with icons around
+ * 
+ * Images in public/images/:
+ * - Veer-Bharat-Post-1-2.jpg
+ * - WhatsApp-Image-2025-10-07-at-10.57.53.jpg
+ * - All benefit icon images
  */
 
 const benefitsData = [
@@ -359,81 +1277,93 @@ const benefitsData = [
   },
 ];
 
-// Desktop positions - exact replica of King's Rice Bran Oil layout
+// Desktop/Laptop positions (1024px+)
 const desktopPositions = [
-  { left: "6%", top: "42%" },      // Left side - top
-  { left: "18%", top: "12%" },     // Left upper
-  { left: "24%", top: "70%" },     // Left lower
-  { right: "18%", top: "16%" },    // Right upper
-  { right: "24%", top: "66%" },    // Right lower
-  { right: "6%", top: "42%" }      // Right side - top
+  { left: "8%", top: "40%" },
+  { left: "18%", top: "8%" },
+  { left: "22%", top: "70%" },
+  { right: "18%", top: "12%" },
+  { right: "22%", top: "66%" },
+  { right: "8%", top: "40%" }
+];
+
+// Tablet positions (768px - 1023px)
+const tabletPositions = [
+  { left: "5%", top: "38%" },
+  { left: "12%", top: "5%" },
+  { left: "16%", top: "68%" },
+  { right: "12%", top: "9%" },
+  { right: "16%", top: "64%" },
+  { right: "5%", top: "38%" }
 ];
 
 function BenefitBubble({ src, alt, label, stylePos, i }) {
-  const desktopSize = 240;
-  const mobileSize = 120;
+  const size = 170;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
+      initial={{ opacity: 0, scale: 0.3 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ 
-        duration: 0.7, 
+        duration: 0.75, 
         delay: i * 0.12,
         type: "spring",
-        stiffness: 180
+        stiffness: 170
       }}
-      whileHover={{ scale: 1.1, y: -10 }}
+      whileHover={{ 
+        scale: 1.12, 
+        y: -12,
+        transition: { duration: 0.25 } 
+      }}
       style={{
-        position: stylePos ? "absolute" : "relative",
-        zIndex: 20,
+        position: "absolute",
+        zIndex: 30,
         ...stylePos,
       }}
-      className={stylePos ? "hidden xl:block" : "block xl:hidden"}
+      // CRITICAL: Hide on mobile (< 768px), show on tablet and desktop
+      className="hidden md:block"
     >
       <motion.div
         animate={{
-          y: [0, -15, 0],
+          y: [0, -16, 0],
         }}
         transition={{
-          duration: 3.5 + (i % 3) * 0.6,
+          duration: 4 + (i % 3) * 0.5,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: i * 0.25,
+          delay: i * 0.2,
         }}
         className="flex flex-col items-center"
       >
-        {/* Blinking outer glow */}
+        {/* Golden gradient circle */}
         <motion.div
           animate={{
-            opacity: [0.6, 1, 0.6],
-            scale: [1, 1.08, 1],
             boxShadow: [
-              "0 0 30px rgba(251,191,36,0.4)",
-              "0 0 50px rgba(251,191,36,0.8)",
-              "0 0 30px rgba(251,191,36,0.4)",
+              "0 0 25px rgba(251,146,60,0.5), 0 0 45px rgba(251,191,36,0.3)",
+              "0 0 45px rgba(251,146,60,0.8), 0 0 70px rgba(251,191,36,0.5)",
+              "0 0 25px rgba(251,146,60,0.5), 0 0 45px rgba(251,191,36,0.3)",
             ]
           }}
           transition={{
-            duration: 2.5,
+            duration: 2.8,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: i * 0.3,
+            delay: i * 0.25,
           }}
-          className="rounded-full"
+          className="rounded-full relative"
           style={{
-            width: stylePos ? desktopSize : mobileSize,
-            height: stylePos ? desktopSize : mobileSize,
-            background: "linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #f97316 100%)",
-            padding: "8px",
-            boxShadow: "0 20px 50px rgba(0,0,0,0.25)",
+            width: size,
+            height: size,
+            background: "linear-gradient(140deg, #fb923c 0%, #fbbf24 50%, #f59e0b 100%)",
+            padding: "5px",
+            boxShadow: "0 15px 40px rgba(0,0,0,0.22)",
           }}
         >
           <div
             className="rounded-full overflow-hidden flex items-center justify-center w-full h-full"
             style={{
-              backgroundColor: "#fef9c3",
+              backgroundColor: "#fffbeb",
             }}
           >
             <img 
@@ -441,66 +1371,79 @@ function BenefitBubble({ src, alt, label, stylePos, i }) {
               alt={alt} 
               className="w-[75%] h-[75%] object-contain"
               style={{
-                mixBlendMode: "normal",
+                mixBlendMode: "multiply",
+                filter: "contrast(1.08)",
               }}
             />
           </div>
         </motion.div>
 
-        {/* Label below bubble - desktop only */}
-        {stylePos && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 + i * 0.1 }}
-            className="mt-5 text-center font-black leading-tight px-2"
-            style={{
-              fontSize: "17px",
-              maxWidth: desktopSize,
-              whiteSpace: "pre-line",
-              color: "#0f172a",
-              fontFamily: "'Arial Black', sans-serif",
-              textShadow: "0 2px 4px rgba(0,0,0,0.1)",
-            }}
-          >
-            {label}
-          </motion.div>
-        )}
+        {/* Label text */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 + i * 0.1 }}
+          className="mt-3 md:mt-4 lg:mt-5 text-center font-bold leading-tight px-2"
+          style={{
+            fontSize: "clamp(12px, 1.5vw, 16px)",
+            maxWidth: size + 15,
+            whiteSpace: "pre-line",
+            color: "#0f172a",
+            fontFamily: "'Arial', 'Helvetica', sans-serif",
+            fontWeight: "700",
+            textShadow: "0 2px 4px rgba(0,0,0,0.12)",
+          }}
+        >
+          {label}
+        </motion.div>
       </motion.div>
     </motion.div>
   );
 }
 
 export default function VeerBharatHero() {
-  const productImg = "/images/Veer Bharat Post (1).png";
+  const productImgDesktop = "/images/WhatsApp-Image-2025-10-07-at-10.57.53.jpg";
+  const productImgMobile = "/images/WhatsApp-Image-2025-10-07-at-10.57.53.jpg";
 
   return (
     <section 
-      className="relative overflow-hidden" 
+      className="relative overflow-hidden w-full" 
       style={{ 
-        
         background: "#fef9c3",
-        minHeight: "100vh" 
+        minHeight: "100vh",
       }}
     >
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-16 py-12 md:py-16 lg:py-20 xl:py-24">
+      {/* Background pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #000 1.5px, transparent 1.5px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      {/* Main container */}
+      <div className="relative w-full px-3 xs:px-4 sm:px-5 md:px-6 lg:px-8 xl:px-12 2xl:px-16 py-6 sm:py-8 md:py-10 lg:py-14 xl:py-16 2xl:py-20">
         
-        {/* HEADER SECTION - Premium Typography */}
+        {/* HEADER SECTION - FLUID TYPOGRAPHY */}
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
+          initial={{ opacity: 0, y: -60 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="text-center mb-10 md:mb-14 lg:mb-16"
+          transition={{ duration: 1.1, ease: "easeOut" }}
+          className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 xl:mb-20 w-full"
         >
+          {/* Main Heading */}
           <h1 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight mb-6 md:mb-8 lg:mb-10 leading-tight"
+            className="font-black tracking-tight mb-6 sm:mb-8 md:mb-10 lg:mb-14 leading-[1.1] px-2 sm:px-3"
             style={{
-              fontFamily: "'Arial Black', 'Helvetica', sans-serif",
+              fontSize: "clamp(1.75rem, 5vw + 1rem, 6rem)",
+              fontFamily: "'Impact', 'Arial Black', sans-serif",
               color: "#000000",
-              letterSpacing: "0.01em",
+              letterSpacing: "-0.015em",
               textTransform: "uppercase",
+              textShadow: "2px 2px 0px rgba(251,146,60,0.3), 4px 4px 0px rgba(251,191,36,0.18)",
             }}
           >
             VEER BHARAT KACHI GHANI
@@ -508,19 +1451,20 @@ export default function VeerBharatHero() {
             MUSTARD OIL
           </h1>
           
-          {/* Description paragraphs with premium styling */}
-          <div className="max-w-6xl mx-auto space-y-5 md:space-y-7 px-4 md:px-8">
+          {/* Description Paragraphs */}
+          <div className="w-full space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 xl:space-y-10">
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.9, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed font-medium"
+              transition={{ duration: 1, delay: 0.3 }}
+              className="leading-relaxed font-normal px-3 sm:px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-28"
               style={{
+                fontSize: "clamp(0.875rem, 1.5vw + 0.5rem, 2rem)",
                 fontFamily: "'Georgia', 'Times New Roman', serif",
                 color: "#1e293b",
                 lineHeight: "1.75",
-                fontWeight: "500",
+                fontWeight: "400",
               }}
             >
               Made from 100% pure mustard seeds, Veer Bharat Kachi Ghani Mustard Oil is a heart-healthy cooking oil rich in natural goodness, which helps reduce cholesterol levels and improve overall health.
@@ -530,13 +1474,14 @@ export default function VeerBharatHero() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.9, delay: 0.4 }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed font-medium"
+              transition={{ duration: 1, delay: 0.5 }}
+              className="leading-relaxed font-normal px-3 sm:px-6 md:px-10 lg:px-14 xl:px-20 2xl:px-28"
               style={{
+                fontSize: "clamp(0.875rem, 1.5vw + 0.5rem, 2rem)",
                 fontFamily: "'Georgia', 'Times New Roman', serif",
                 color: "#1e293b",
                 lineHeight: "1.75",
-                fontWeight: "500",
+                fontWeight: "400",
               }}
             >
               It's ideal for everyday cooking with a balanced blend of monounsaturated and polyunsaturated fats. Free from harmful chemicals, it's packed with antioxidants and offers a mild flavour, making it perfect for frying, sautéing, and more. Choose Veer Bharat Kachi Ghani Mustard Oil for a healthier, cholesterol-conscious, and nutritious lifestyle.
@@ -544,112 +1489,110 @@ export default function VeerBharatHero() {
           </div>
         </motion.div>
 
-        {/* MAIN PRODUCT SECTION */}
-        <div className="relative mt-16 md:mt-20 lg:mt-24 xl:mt-28">
+        {/* DESKTOP & LAPTOP VERSION (1024px+) - Product with icons around */}
+        <div className="relative mt-10 sm:mt-12 md:mt-14 lg:mt-18 xl:mt-24 w-full hidden lg:block">
           
-          {/* Desktop Layout - Circular arrangement */}
-          <div className="relative w-full flex justify-center items-center min-h-[700px] xl:min-h-[850px]">
+          <div className="relative w-full flex justify-center items-center" style={{ minHeight: "clamp(600px, 50vh, 900px)" }}>
             
-            {/* Soft shadow under product */}
+            {/* Shadow */}
             <motion.div
               animate={{
                 scale: [1, 1.15, 1],
-                opacity: [0.08, 0.14, 0.08],
+                opacity: [0.08, 0.15, 0.08],
               }}
               transition={{
-                duration: 4.5,
+                duration: 5,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute bottom-4 w-[350px] md:w-[450px] lg:w-[550px] xl:w-[650px] h-10 md:h-14 lg:h-16 rounded-full bg-black/10 blur-3xl"
+              className="absolute bottom-8 lg:bottom-10 xl:bottom-12 rounded-full bg-black/15 blur-3xl"
+              style={{
+                width: "clamp(350px, 40vw, 600px)",
+                height: "clamp(40px, 4vw, 70px)",
+              }}
             />
 
-            {/* CENTER PRODUCT - WITH PREMIUM BLINKING EFFECT */}
+            {/* CENTER PRODUCT */}
             <motion.div
               initial={{ opacity: 0, scale: 0.7, y: 80 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ 
-                duration: 1.3, 
+                duration: 1.4, 
                 type: "spring",
-                stiffness: 120 
+                stiffness: 100 
               }}
-              className="z-40 relative"
+              className="z-50 relative"
             >
               <motion.div
                 animate={{
-                  y: [0, -18, 0],
-                  rotate: [0, 2, 0, -2, 0],
+                  y: [0, -20, 0],
+                  rotate: [0, -2, 1.5, -1, 1, -0.5, 2, -1, 0],
+                  x: [0, -3, 2.5, -2, 3, -1.5, 2, -2.5, 0],
                 }}
                 transition={{
-                  y: {
-                    duration: 5.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  },
-                  rotate: {
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  },
+                  y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                  rotate: { duration: 4.5, repeat: Infinity, ease: "easeInOut" },
+                  x: { duration: 4, repeat: Infinity, ease: "easeInOut" },
                 }}
                 className="relative"
               >
-                {/* BLINKING RADIAL GLOW - Multiple layers */}
+                {/* Radial glows */}
                 <motion.div
                   animate={{
-                    opacity: [0.3, 0.7, 0.3],
+                    opacity: [0.4, 0.7, 0.4],
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute inset-0 rounded-full blur-[80px]"
+                  style={{
+                    background: "radial-gradient(circle, rgba(251,146,60,0.75) 0%, rgba(251,191,36,0.55) 40%, transparent 70%)",
+                    zIndex: -1,
+                    transform: "scale(1.4)",
+                  }}
+                />
+
+                <motion.div
+                  animate={{
+                    opacity: [0.3, 0.6, 0.3],
                     scale: [1, 1.15, 1],
                   }}
                   transition={{
                     duration: 2.5,
                     repeat: Infinity,
                     ease: "easeInOut",
+                    delay: 0.7,
                   }}
-                  className="absolute inset-0 rounded-full blur-3xl"
+                  className="absolute inset-0 rounded-full blur-[60px]"
                   style={{
-                    background: "radial-gradient(circle, rgba(251,191,36,0.7) 0%, rgba(245,158,11,0.5) 40%, transparent 70%)",
-                    zIndex: -1,
-                    transform: "scale(1.3)",
-                  }}
-                />
-
-                <motion.div
-                  animate={{
-                    opacity: [0.4, 0.9, 0.4],
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.5,
-                  }}
-                  className="absolute inset-0 rounded-full blur-2xl"
-                  style={{
-                    background: "radial-gradient(circle, rgba(251,191,36,0.8) 0%, rgba(245,158,11,0.4) 50%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(251,146,60,0.85) 0%, rgba(251,191,36,0.45) 50%, transparent 70%)",
                     zIndex: -2,
                   }}
                 />
 
-                {/* PRODUCT IMAGE - Larger size */}
+                {/* PRODUCT IMAGE */}
                 <motion.img
-                  whileHover={{ scale: 1.06, rotate: 3 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  src={productImg}
+                  whileHover={{ scale: 1.07, transition: { duration: 0.4 } }}
+                  src={productImgDesktop}
                   alt="Veer Bharat Kachi Ghani Mustard Oil"
-                  className="relative z-10 w-72 sm:w-96 md:w-[480px] lg:w-[580px] xl:w-[700px] h-auto object-contain mx-auto"
+                  className="relative z-10 h-auto object-contain mx-auto"
                   style={{
-                    filter: "drop-shadow(0 35px 70px rgba(0,0,0,0.35)) drop-shadow(0 20px 40px rgba(251,191,36,0.3))",
+                    width: "clamp(400px, 35vw, 700px)",
+                    filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.4)) drop-shadow(0 20px 50px rgba(251,146,60,0.35)) contrast(1.04) brightness(1.02)",
+                    imageRendering: "high-quality",
                   }}
                 />
               </motion.div>
             </motion.div>
 
-            {/* Desktop benefit bubbles - arranged in circle */}
+            {/* DESKTOP ICONS AROUND PRODUCT */}
             {benefitsData.map((b, i) => (
               <BenefitBubble
-                key={i}
+                key={`desktop-benefit-${i}`}
                 src={b.src}
                 alt={b.alt}
                 label={b.label}
@@ -658,113 +1601,136 @@ export default function VeerBharatHero() {
               />
             ))}
           </div>
+        </div>
 
-          {/* MOBILE/TABLET LAYOUT - Grid Style */}
-          <div className="xl:hidden mt-12 md:mt-16 space-y-10">
+        {/* TABLET VERSION (768px - 1023px) - Product with icons around */}
+        <div className="relative mt-10 sm:mt-12 md:mt-14 w-full hidden md:block lg:hidden">
+          
+          <div className="relative w-full flex justify-center items-center min-h-[550px]">
             
-            {/* Top row - 3 benefits */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-5 px-2 sm:px-4">
-              {benefitsData.slice(0, 3).map((b, i) => (
-                <div key={i} className="flex flex-col items-center">
-                  <BenefitBubble 
-                    src={b.src} 
-                    alt={b.alt} 
-                    label={b.label} 
-                    stylePos={null} 
-                    i={i} 
-                  />
-                  <motion.p 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.1 }}
-                    className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-black text-center leading-tight whitespace-pre-line"
-                    style={{
-                      color: "#0f172a",
-                      fontFamily: "'Arial Black', sans-serif",
-                    }}
-                  >
-                    {b.label}
-                  </motion.p>
-                </div>
-              ))}
-            </div>
+            {/* Shadow */}
+            <motion.div
+              animate={{
+                scale: [1, 1.12, 1],
+                opacity: [0.08, 0.14, 0.08],
+              }}
+              transition={{
+                duration: 4.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute bottom-8 w-[320px] h-10 rounded-full bg-black/15 blur-2xl"
+            />
 
-            {/* Center product for mobile */}
-            <div className="flex justify-center px-4 py-6">
+            {/* CENTER PRODUCT */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.3 }}
+              className="z-50 relative"
+            >
               <motion.div
                 animate={{
-                  y: [0, -12, 0],
-                  rotate: [0, 2, 0, -2, 0],
+                  y: [0, -16, 0],
+                  rotate: [0, -1.5, 1, -0.8, 1.5, -1, 0],
+                  x: [0, -2, 2, -1.5, 2, -1, 0],
                 }}
                 transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
+                  y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" },
+                  rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                  x: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
                 }}
                 className="relative"
               >
                 <motion.div
-                  animate={{
-                    opacity: [0.3, 0.8, 0.3],
-                    scale: [1, 1.12, 1],
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute inset-0 rounded-full blur-2xl"
+                  animate={{ opacity: [0.35, 0.65, 0.35], scale: [1, 1.15, 1] }}
+                  transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 rounded-full blur-[60px]"
                   style={{
-                    background: "radial-gradient(circle, rgba(251,191,36,0.6) 0%, transparent 70%)",
+                    background: "radial-gradient(circle, rgba(251,146,60,0.7) 0%, rgba(251,191,36,0.5) 40%, transparent 70%)",
                     zIndex: -1,
+                    transform: "scale(1.35)",
                   }}
                 />
+
                 <img
-                  src={productImg}
+                  src={productImgDesktop}
                   alt="Veer Bharat Mustard Oil"
-                  className="w-56 sm:w-72 md:w-80 h-auto object-contain relative z-10"
+                  className="relative z-10 w-[380px] h-auto object-contain mx-auto"
                   style={{
-                    filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.3))",
+                    filter: "drop-shadow(0 35px 70px rgba(0,0,0,0.35)) contrast(1.03)",
                   }}
                 />
               </motion.div>
-            </div>
+            </motion.div>
 
-            {/* Bottom row - 3 benefits */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-5 px-2 sm:px-4">
-              {benefitsData.slice(3, 6).map((b, i) => (
-                <div key={i} className="flex flex-col items-center">
-                  <BenefitBubble 
-                    src={b.src} 
-                    alt={b.alt} 
-                    label={b.label} 
-                    stylePos={null} 
-                    i={i + 3} 
-                  />
-                  <motion.p 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.1 }}
-                    className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-black text-center leading-tight whitespace-pre-line"
-                    style={{
-                      color: "#0f172a",
-                      fontFamily: "'Arial Black', sans-serif",
-                    }}
-                  >
-                    {b.label}
-                  </motion.p>
-                </div>
-              ))}
-            </div>
+            {/* TABLET ICONS AROUND PRODUCT */}
+            {benefitsData.map((b, i) => (
+              <BenefitBubble
+                key={`tablet-benefit-${i}`}
+                src={b.src}
+                alt={b.alt}
+                label={b.label}
+                stylePos={tabletPositions[i]}
+                i={i}
+              />
+            ))}
+          </div>
+        </div>
 
+        {/* MOBILE VERSION (< 768px) - PRODUCT ONLY, NO ICONS */}
+        <div className="md:hidden mt-8 sm:mt-10">
+          <div className="flex justify-center px-3 sm:px-4 py-6 sm:py-8">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2 }}
+              animate={{
+                y: [0, -12, 0],
+                rotate: [0, -1.5, 1, -0.5, 1.5, -1, 0],
+                x: [0, -2, 1.5, -1, 2, -1.5, 0],
+              }}
+              transition={{
+                y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                x: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
+              }}
+              className="relative"
+            >
+              <motion.div
+                animate={{
+                  opacity: [0.35, 0.75, 0.35],
+                  scale: [1, 1.15, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute inset-0 rounded-full blur-[50px]"
+                style={{
+                  background: "radial-gradient(circle, rgba(251,146,60,0.6) 0%, transparent 70%)",
+                  zIndex: -1,
+                }}
+              />
+              <img
+                src={productImgMobile}
+                alt="Veer Bharat Mustard Oil"
+                className="relative z-10 h-auto object-contain"
+                style={{
+                  width: "clamp(220px, 70vw, 350px)",
+                  filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.3)) contrast(1.03)",
+                }}
+              />
+            </motion.div>
           </div>
         </div>
       </div>
 
       {/* Bottom spacing */}
-      <div className="h-16 md:h-20" />
+      <div className="h-10 sm:h-12 md:h-16 lg:h-20 xl:h-24" />
     </section>
   );
 }
