@@ -591,9 +591,466 @@
 
 
 
+// "use client";
+
+// import { createContext, useContext, useCallback, useRef, useState, useEffect } from "react";
+
+// const SplashContext = createContext();
+
+// export function useSplash() {
+//   return useContext(SplashContext);
+// }
+
+// export default function SplashProvider({ children }) {
+//   const [visible, setVisible] = useState(false);
+//   const resolveRef = useRef(null);
+//   const timeoutRef = useRef(null);
+
+//   const DURATION = 10000; // 10 seconds
+
+//   useEffect(() => {
+//     // Check if splash has been shown in this session
+//     const splashShown = sessionStorage.getItem('splashShown');
+    
+//     // Show splash only if not shown in this session
+//     if (!splashShown) {
+//       setVisible(true);
+//       sessionStorage.setItem('splashShown', 'true');
+      
+//       timeoutRef.current = setTimeout(() => {
+//         setVisible(false);
+//       }, DURATION);
+//     }
+//   }, []);
+
+//   const show = useCallback((ms = DURATION) => {
+//     setVisible(true);
+//     return new Promise((resolve) => {
+//       resolveRef.current = resolve;
+//       timeoutRef.current = setTimeout(() => {
+//         if (resolveRef.current) {
+//           resolveRef.current();
+//           resolveRef.current = null;
+//           setVisible(false);
+//         }
+//       }, ms);
+//     });
+//   }, []);
+
+//   const hideNow = useCallback(() => {
+//     if (resolveRef.current) {
+//       resolveRef.current();
+//       resolveRef.current = null;
+//     }
+//     clearTimeout(timeoutRef.current);
+//     setVisible(false);
+//   }, []);
+
+//   useEffect(() => {
+//     return () => clearTimeout(timeoutRef.current);
+//   }, []);
+
+//   return (
+//     <SplashContext.Provider value={{ show, hideNow }}>
+//       {visible && <LogoSplash onDone={hideNow} duration={DURATION} />}
+//       <div style={{ display: visible ? "none" : "block" }}>{children}</div>
+//     </SplashContext.Provider>
+//   );
+// }
+
+// /* ---------------- LogoSplash UI with Traditional Style ---------------- */
+// function LogoSplash({ onDone, duration = 10000 }) {
+//   const [progress, setProgress] = useState(0);
+
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setProgress((prev) => {
+//         if (prev >= 100) {
+//           clearInterval(interval);
+//           return 100;
+//         }
+//         return prev + 1;
+//       });
+//     }, duration / 100);
+
+//     return () => clearInterval(interval);
+//   }, [duration]);
+
+//   return (
+//     <div
+//       style={{
+//         position: "fixed",
+//         inset: 0,
+//         zIndex: 9999,
+//         background: "linear-gradient(135deg, #fef9c3 0%, #DFC6F6 50%, #fef9c3 100%)",
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         overflow: "hidden",
+//       }}
+//     >
+//       {/* Animated Background Patterns */}
+//       <div
+//         style={{
+//           position: "absolute",
+//           inset: 0,
+//           opacity: 0.15,
+//           backgroundImage: `
+//             radial-gradient(circle at 20% 30%, #DFC6F6 0%, transparent 50%),
+//             radial-gradient(circle at 80% 70%, #fef9c3 0%, transparent 50%),
+//             radial-gradient(circle at 40% 80%, #DFC6F6 0%, transparent 50%),
+//             radial-gradient(circle at 90% 20%, #fef9c3 0%, transparent 50%)
+//           `,
+//           animation: "float 20s ease-in-out infinite",
+//         }}
+//       />
+
+//       {/* Decorative Corner Elements - Traditional Mandala Style */}
+//       <svg
+//         style={{
+//           position: "absolute",
+//           top: 0,
+//           left: 0,
+//           width: "200px",
+//           height: "200px",
+//           opacity: 0.3,
+//           animation: "rotate 30s linear infinite",
+//         }}
+//         viewBox="0 0 100 100"
+//       >
+//         <circle cx="50" cy="50" r="40" fill="none" stroke="#DFC6F6" strokeWidth="0.5" />
+//         <circle cx="50" cy="50" r="30" fill="none" stroke="#fef9c3" strokeWidth="0.5" />
+//         <circle cx="50" cy="50" r="20" fill="none" stroke="#DFC6F6" strokeWidth="0.5" />
+//       </svg>
+
+//       <svg
+//         style={{
+//           position: "absolute",
+//           top: 0,
+//           right: 0,
+//           width: "200px",
+//           height: "200px",
+//           opacity: 0.3,
+//           animation: "rotate 25s linear infinite reverse",
+//         }}
+//         viewBox="0 0 100 100"
+//       >
+//         <circle cx="50" cy="50" r="40" fill="none" stroke="#fef9c3" strokeWidth="0.5" />
+//         <circle cx="50" cy="50" r="30" fill="none" stroke="#DFC6F6" strokeWidth="0.5" />
+//         <circle cx="50" cy="50" r="20" fill="none" stroke="#fef9c3" strokeWidth="0.5" />
+//       </svg>
+
+//       <svg
+//         style={{
+//           position: "absolute",
+//           bottom: 0,
+//           left: 0,
+//           width: "200px",
+//           height: "200px",
+//           opacity: 0.3,
+//           animation: "rotate 35s linear infinite",
+//         }}
+//         viewBox="0 0 100 100"
+//       >
+//         <circle cx="50" cy="50" r="40" fill="none" stroke="#DFC6F6" strokeWidth="0.5" />
+//         <circle cx="50" cy="50" r="30" fill="none" stroke="#fef9c3" strokeWidth="0.5" />
+//         <circle cx="50" cy="50" r="20" fill="none" stroke="#DFC6F6" strokeWidth="0.5" />
+//       </svg>
+
+//       <svg
+//         style={{
+//           position: "absolute",
+//           bottom: 0,
+//           right: 0,
+//           width: "200px",
+//           height: "200px",
+//           opacity: 0.3,
+//           animation: "rotate 28s linear infinite reverse",
+//         }}
+//         viewBox="0 0 100 100"
+//       >
+//         <circle cx="50" cy="50" r="40" fill="none" stroke="#fef9c3" strokeWidth="0.5" />
+//         <circle cx="50" cy="50" r="30" fill="none" stroke="#DFC6F6" strokeWidth="0.5" />
+//         <circle cx="50" cy="50" r="20" fill="none" stroke="#fef9c3" strokeWidth="0.5" />
+//       </svg>
+
+//       {/* Main Content Container */}
+//       <div
+//         style={{
+//           position: "relative",
+//           zIndex: 10,
+//           textAlign: "center",
+//           animation: "fadeInScale 1.5s ease-out forwards",
+//         }}
+//       >
+//         {/* Logo Container with Traditional Border */}
+//         <div
+//           style={{
+//             position: "relative",
+//             width: "280px",
+//             height: "280px",
+//             margin: "0 auto 2rem",
+//             animation: "pulse 3s ease-in-out infinite",
+//           }}
+//         >
+//           {/* Outer Decorative Ring */}
+//           <div
+//             style={{
+//               position: "absolute",
+//               inset: "-20px",
+//               border: "3px solid",
+//               borderImage: "linear-gradient(135deg, #DFC6F6, #fef9c3, #DFC6F6) 1",
+//               borderRadius: "50%",
+//               animation: "rotate 20s linear infinite",
+//             }}
+//           />
+
+//           {/* Middle Ring */}
+//           <div
+//             style={{
+//               position: "absolute",
+//               inset: "-10px",
+//               border: "2px solid",
+//               borderColor: "#DFC6F6",
+//               borderRadius: "50%",
+//               opacity: 0.5,
+//               animation: "rotate 15s linear infinite reverse",
+//             }}
+//           />
+
+//           {/* Logo Background */}
+//           <div
+//             style={{
+//               position: "absolute",
+//               inset: 0,
+//               background: "linear-gradient(135deg, rgba(223, 198, 246, 0.2), rgba(254, 249, 195, 0.2))",
+//               borderRadius: "50%",
+//               boxShadow: "0 10px 40px rgba(223, 198, 246, 0.4), inset 0 0 30px rgba(254, 249, 195, 0.3)",
+//             }}
+//           />
+
+//           {/* Logo Image */}
+//           <div
+//             style={{
+//               position: "absolute",
+//               inset: "10px",
+//               borderRadius: "50%",
+//               overflow: "hidden",
+//               background: "white",
+//               boxShadow: "0 0 20px rgba(223, 198, 246, 0.5)",
+//             }}
+//           >
+//             <img
+//               src="/logo.png"
+//               alt="Veer Bharat Logo"
+//               style={{
+//                 width: "100%",
+//                 height: "100%",
+//                 objectFit: "contain",
+//                 padding: "20px",
+//               }}
+//             />
+//           </div>
+
+//           {/* Shimmer Effect */}
+//           <div
+//             style={{
+//               position: "absolute",
+//               inset: 0,
+//               background: "linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.6) 50%, transparent 70%)",
+//               animation: "shimmer 3s ease-in-out infinite",
+//               borderRadius: "50%",
+//               pointerEvents: "none",
+//             }}
+//           />
+//         </div>
+
+//         {/* Welcome Text */}
+//         <h1
+//           style={{
+//             fontSize: "clamp(2rem, 5vw, 3.5rem)",
+//             fontWeight: 900,
+//             background: "linear-gradient(135deg, #7c3aed, #a855f7, #d946ef)",
+//             WebkitBackgroundClip: "text",
+//             WebkitTextFillColor: "transparent",
+//             backgroundClip: "text",
+//             marginBottom: "1rem",
+//             fontFamily: "'Georgia', serif",
+//             letterSpacing: "2px",
+//             textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+//             animation: "slideDown 1.5s ease-out 0.5s both",
+//           }}
+//         >
+//           Welcome to Veer Bharat
+//         </h1>
+
+//         {/* Hindi Subtitle */}
+//         <p
+//           style={{
+//             fontSize: "clamp(1rem, 3vw, 1.5rem)",
+//             color: "#7c3aed",
+//             fontWeight: 600,
+//             marginBottom: "2rem",
+//             fontFamily: "'Noto Sans Devanagari', sans-serif",
+//             animation: "slideUp 1.5s ease-out 0.8s both",
+//           }}
+//         >
+//           वीर भारत में आपका स्वागत है
+//         </p>
+
+//         {/* Decorative Line */}
+//         <div
+//           style={{
+//             width: "200px",
+//             height: "4px",
+//             background: "linear-gradient(90deg, transparent, #DFC6F6, #fef9c3, #DFC6F6, transparent)",
+//             margin: "0 auto 2rem",
+//             borderRadius: "2px",
+//             animation: "expand 2s ease-out 1s both",
+//           }}
+//         />
+
+//         {/* Tagline */}
+//         <p
+//           style={{
+//             fontSize: "clamp(0.9rem, 2.5vw, 1.2rem)",
+//             color: "#6b21a8",
+//             fontWeight: 500,
+//             maxWidth: "600px",
+//             margin: "0 auto 2rem",
+//             lineHeight: 1.6,
+//             padding: "0 1rem",
+//             animation: "fadeIn 2s ease-out 1.2s both",
+//           }}
+//         >
+//           Pure, Natural & Authentic Products for Your Family
+//         </p>
+
+//         {/* Loading Progress Bar */}
+//         <div
+//           style={{
+//             width: "300px",
+//             height: "8px",
+//             background: "rgba(223, 198, 246, 0.3)",
+//             borderRadius: "999px",
+//             margin: "0 auto",
+//             overflow: "hidden",
+//             boxShadow: "inset 0 2px 4px rgba(0,0,0,0.1)",
+//           }}
+//         >
+//           <div
+//             style={{
+//               width: `${progress}%`,
+//               height: "100%",
+//               background: "linear-gradient(90deg, #DFC6F6, #fef9c3, #DFC6F6)",
+//               borderRadius: "999px",
+//               transition: "width 0.1s ease-out",
+//               boxShadow: "0 0 10px rgba(223, 198, 246, 0.8)",
+//             }}
+//           />
+//         </div>
+
+//         {/* Loading Text */}
+//         <p
+//           style={{
+//             marginTop: "1rem",
+//             fontSize: "0.9rem",
+//             color: "#7c3aed",
+//             fontWeight: 600,
+//           }}
+//         >
+//           Loading... {progress}%
+//         </p>
+//       </div>
+
+//       {/* CSS Animations */}
+//       <style>{`
+//         @keyframes float {
+//           0%, 100% { transform: translate(0, 0) scale(1); }
+//           25% { transform: translate(10px, -10px) scale(1.05); }
+//           50% { transform: translate(-10px, 10px) scale(0.95); }
+//           75% { transform: translate(-5px, -5px) scale(1.02); }
+//         }
+
+//         @keyframes rotate {
+//           from { transform: rotate(0deg); }
+//           to { transform: rotate(360deg); }
+//         }
+
+//         @keyframes pulse {
+//           0%, 100% { transform: scale(1); }
+//           50% { transform: scale(1.05); }
+//         }
+
+//         @keyframes shimmer {
+//           0% { transform: translateX(-100%) rotate(20deg); }
+//           100% { transform: translateX(200%) rotate(20deg); }
+//         }
+
+//         @keyframes fadeInScale {
+//           from {
+//             opacity: 0;
+//             transform: scale(0.8);
+//           }
+//           to {
+//             opacity: 1;
+//             transform: scale(1);
+//           }
+//         }
+
+//         @keyframes slideDown {
+//           from {
+//             opacity: 0;
+//             transform: translateY(-30px);
+//           }
+//           to {
+//             opacity: 1;
+//             transform: translateY(0);
+//           }
+//         }
+
+//         @keyframes slideUp {
+//           from {
+//             opacity: 0;
+//             transform: translateY(30px);
+//           }
+//           to {
+//             opacity: 1;
+//             transform: translateY(0);
+//           }
+//         }
+
+//         @keyframes expand {
+//           from {
+//             width: 0;
+//             opacity: 0;
+//           }
+//           to {
+//             width: 200px;
+//             opacity: 1;
+//           }
+//         }
+
+//         @keyframes fadeIn {
+//           from { opacity: 0; }
+//           to { opacity: 1; }
+//         }
+
+//         @media (max-width: 768px) {
+//           /* Responsive adjustments handled by clamp() */
+//         }
+//       `}</style>
+//     </div>
+//   );
+// }
+
+
+
+
 "use client";
 
 import { createContext, useContext, useCallback, useRef, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const SplashContext = createContext();
 
@@ -603,28 +1060,46 @@ export function useSplash() {
 
 export default function SplashProvider({ children }) {
   const [visible, setVisible] = useState(false);
-  const [hasShown, setHasShown] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const resolveRef = useRef(null);
   const timeoutRef = useRef(null);
+  const pathname = usePathname();
 
   const DURATION = 10000; // 10 seconds
 
+  // Check if component is mounted
   useEffect(() => {
-    // Show splash only once when component mounts (first time page loads)
-    if (!hasShown) {
-      setVisible(true);
-      setHasShown(true);
+    setMounted(true);
+  }, []);
+
+  // Show splash only on home page first visit
+  useEffect(() => {
+    if (!mounted) return;
+
+    // Check if we're on home page
+    const isHomePage = pathname === "/";
+    
+    if (typeof window !== "undefined" && isHomePage) {
+      // Check if splash has been shown in this session
+      const splashShown = sessionStorage.getItem('splashShown');
       
-      timeoutRef.current = setTimeout(() => {
-        setVisible(false);
-      }, DURATION);
+      // Show splash only if not shown in this session AND on home page
+      if (!splashShown) {
+        setVisible(true);
+        sessionStorage.setItem('splashShown', 'true');
+        
+        timeoutRef.current = setTimeout(() => {
+          setVisible(false);
+        }, DURATION);
+      }
     }
-  }, [hasShown]);
+  }, [mounted, pathname]);
 
   const show = useCallback((ms = DURATION) => {
     setVisible(true);
     return new Promise((resolve) => {
       resolveRef.current = resolve;
+      clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         if (resolveRef.current) {
           resolveRef.current();
@@ -647,6 +1122,8 @@ export default function SplashProvider({ children }) {
   useEffect(() => {
     return () => clearTimeout(timeoutRef.current);
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <SplashContext.Provider value={{ show, hideNow }}>
