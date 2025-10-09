@@ -614,24 +614,24 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3 mt-6">
               <li>
-                <Link 
+                {/* <Link 
                   href="/privacy-policy" 
                   className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
                 >
                   Privacy Policy
-                </Link>
+                </Link> */}
               </li>
               <li>
-                <Link 
+                {/* <Link 
                   href="/infrastructure" 
                   className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
                 >
                   Infrastructure
-                </Link>
+                </Link> */}
               </li>
               <li>
                 <Link 
-                  href="/blogs" 
+                  href="/blog" 
                   className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
                 >
                   Blogs
