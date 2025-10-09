@@ -3384,6 +3384,7 @@ import HealthBenefits from "../components/HealthBenefits";
 import VeerBharatHero from "@/components/VeerBharatHero";
 import CategoryCarousel from "@/components/CategoryCarousel";
 import WhyUsSection from '@/components/WhyUsSection';
+import CustomerFeedback from "@/components/CustomerFeedback";
 
 
 /* ---------- Fonts ---------- */
@@ -3435,6 +3436,7 @@ export default function Home() {
       
 <HealthBenefits />
       <WhyUsSection />
+      <CustomerFeedback />
       {/* <Branches /> */}
 
  

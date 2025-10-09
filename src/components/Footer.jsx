@@ -290,177 +290,471 @@
 
 
 
+// import React from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+
+// const Footer = () => {
+//   return (
+//     <footer className="bg-[#DFC6F6] border-t border-[rgba(8,52,139,0.08)] mt-6 font-sans">
+//       <div className="max-w-7xl mx-auto px-6 py-6">
+//         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
+//           {/* LEFT COLUMN: Small Logos & Company Info */}
+//           <div className="flex flex-col items-start gap-3">
+//             {/* FSSAI Logo - Very Small */}
+//             <div className="relative w-full max-w-[180px] h-auto">
+//               <Image
+//                 src="/FSSAI_Logo.png"
+//                 alt="FSSAI registration"
+//                 width={180}
+//                 height={66}
+//                 style={{ width: "100%", height: "auto", objectFit: "contain" }}
+//                 priority
+//               />
+//             </div>
+
+//             {/* Company Logo - Very Small */}
+//             <div className="relative w-full max-w-[180px] h-auto">
+//               <Image
+//                 src="/logo.png"
+//                 alt="Veer Bharat company logo"
+//                 width={180}
+//                 height={66}
+//                 style={{ width: "100%", height: "auto", objectFit: "contain" }}
+//                 priority
+//               />
+//             </div>
+
+//             {/* Company Info - Compact */}
+//             <div className="mt-1">
+//               <h4 className="text-[#08348b] font-extrabold text-xl leading-tight">
+//                 VEER BHARAT
+//               </h4>
+//               <p className="text-sm text-[#332e3a] mt-1 uppercase tracking-wide font-semibold">
+//                 वाह! मज़ा आ गया
+//               </p>
+
+//               <p className="text-sm text-[#3b3640] mt-2 leading-relaxed">
+//                 MUSTARD OIL & AGRO PRODUCTS
+//               </p>
+
+//               <p className="text-sm text-[#3b3640] mt-2 leading-relaxed">
+//                 Registered with the Food Safety & Standards Authority of India (FSSAI).
+//                 We maintain strict quality and safety standards across our manufacturing and packaging.
+//               </p>
+
+//               <div className="mt-2 text-sm text-[#333]">
+//                 <strong className="text-[#08348b]">FSSAI No:</strong>{" "}
+//                 <span className="font-semibold">10012022000234</span>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* MIDDLE COLUMN: Our Products */}
+//           <div>
+//             <h5 className="text-[#08348b] font-bold mb-3 text-lg">Our Products</h5>
+//             <ul className="space-y-2 text-base text-[#3b3640] font-medium">
+//               <li>
+//                 <Link href="/soyabean-oil" className="hover:text-[#08348b] hover:underline transition">
+//                   Soyabean Oil
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link href="/kachi-ghani" className="hover:text-[#08348b] hover:underline transition">
+//                   Kachi Ghani Pure Mustard Oil
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link href="/sunflower-oil" className="hover:text-[#08348b] hover:underline transition">
+//                   Sunflower Oil
+//                 </Link>
+//               </li>
+//               <li>
+//                 <Link href="/rice-bran-oil" className="hover:text-[#08348b] hover:underline transition">
+//                   Rice Bran Oil
+//                 </Link>
+//               </li>
+//             </ul>
+
+//             {/* Additional Links */}
+//             <div className="mt-6">
+//               <Link
+//                 href="/plant-address"
+//                 className="text-base text-[#0066cc] font-semibold hover:underline block mb-2"
+//               >
+//                 Plant Address
+//               </Link>
+//               <Link
+//                 href="/terms"
+//                 className="text-base text-[#0066cc] font-semibold hover:underline block mb-2"
+//               >
+//                 Terms & Conditions
+//               </Link>
+//               <Link
+//                 href="/privacy"
+//                 className="text-base text-[#0066cc] font-semibold hover:underline block"
+//               >
+//                 Privacy Policy
+//               </Link>
+//             </div>
+//           </div>
+
+//           {/* RIGHT COLUMN: Contact Us */}
+//           <div>
+//             <h5 className="text-[#08348b] font-bold mb-3 text-lg">Contact Us</h5>
+//             <div className="text-[#3b3640] space-y-2">
+//               <div>
+//                 <p className="text-base font-bold text-[#08348b]">
+//                   SHREE ARIHANT OIL AND GENERAL MILLS
+//                 </p>
+//                 <p className="text-base leading-relaxed mt-2">
+//                   "Fortune House",
+//                 </p>
+//                 <p className="text-base leading-relaxed">
+//                   Near Navrangpura Railway Crossing,
+//                 </p>
+//                 <p className="text-base leading-relaxed">
+//                   Ahmedabad-380009, Gujarat(India).
+//                 </p>
+//               </div>
+
+//               <div className="mt-3">
+//                 <p className="text-base font-bold text-[#08348b]">Phone:</p>
+//                 <a
+//                   href="tel:8802000091"
+//                   className="block text-base hover:text-[#aa2266] transition mt-1"
+//                 >
+//                   8802000091
+//                 </a>
+//                 <a
+//                   href="tel:9216506091"
+//                   className="block text-base hover:text-[#aa2266] transition"
+//                 >
+//                   9216506091
+//                 </a>
+//                 <a
+//                   href="tel:9216806091"
+//                   className="block text-base hover:text-[#aa2266] transition"
+//                 >
+//                   9216806091
+//                 </a>
+//               </div>
+
+//               <div className="mt-3">
+//                 <p className="text-base font-bold text-[#08348b]">Email:</p>
+//                 <a
+//                   href="mailto:info@arihantoilmills.com"
+//                   className="text-base hover:text-[#aa2266] hover:underline transition block mt-1 break-all"
+//                 >
+//                   info@arihantoilmills.com
+//                 </a>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* COPYRIGHT SECTION - Single Line */}
+//         <div className="mt-6 pt-4 border-t border-[rgba(8,52,139,0.12)]">
+//           <div className="flex flex-col md:flex-row items-center justify-center gap-2 text-center">
+//             <div className="text-sm text-[#08348b] font-semibold">
+//               Copyright © 2025 <span className="font-bold">VEER BHARAT</span>. All Rights Reserved.
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
+
+
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#DFC6F6] border-t border-[rgba(8,52,139,0.08)] mt-6 font-sans">
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-
-          {/* LEFT COLUMN: Small Logos & Company Info */}
-          <div className="flex flex-col items-start gap-3">
-            {/* FSSAI Logo - Very Small */}
-            <div className="relative w-full max-w-[180px] h-auto">
-              <Image
-                src="/FSSAI_Logo.png"
-                alt="FSSAI registration"
-                width={180}
-                height={66}
-                style={{ width: "100%", height: "auto", objectFit: "contain" }}
-                priority
-              />
-            </div>
-
-            {/* Company Logo - Very Small */}
-            <div className="relative w-full max-w-[180px] h-auto">
-              <Image
-                src="/logo.png"
-                alt="Veer Bharat company logo"
-                width={180}
-                height={66}
-                style={{ width: "100%", height: "auto", objectFit: "contain" }}
-                priority
-              />
-            </div>
-
-            {/* Company Info - Compact */}
-            <div className="mt-1">
-              <h4 className="text-[#08348b] font-extrabold text-xl leading-tight">
-                VEER BHARAT
-              </h4>
-              <p className="text-sm text-[#332e3a] mt-1 uppercase tracking-wide font-semibold">
-                वाह! मज़ा आ गया
-              </p>
-
-              <p className="text-sm text-[#3b3640] mt-2 leading-relaxed">
-                MUSTARD OIL & AGRO PRODUCTS
-              </p>
-
-              <p className="text-sm text-[#3b3640] mt-2 leading-relaxed">
-                Registered with the Food Safety & Standards Authority of India (FSSAI).
-                We maintain strict quality and safety standards across our manufacturing and packaging.
-              </p>
-
-              <div className="mt-2 text-sm text-[#333]">
-                <strong className="text-[#08348b]">FSSAI No:</strong>{" "}
-                <span className="font-semibold">10012022000234</span>
-              </div>
-            </div>
-          </div>
-
-          {/* MIDDLE COLUMN: Our Products */}
+    <footer 
+      className="relative overflow-hidden border-t-4 border-purple-300" 
+      style={{ 
+        background: 'linear-gradient(to right, #fef9c3 0%, #DFC6F6 100%)',
+        minHeight: '40vh'
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-8 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          
+          {/* LEFT COLUMN: Products */}
           <div>
-            <h5 className="text-[#08348b] font-bold mb-3 text-lg">Our Products</h5>
-            <ul className="space-y-2 text-base text-[#3b3640] font-medium">
+            <h3 className="text-gray-900 font-extrabold text-2xl mb-5 pb-2 border-b-3 border-gray-800 inline-block">
+              Products
+            </h3>
+            <ul className="space-y-3 mt-6">
               <li>
-                <Link href="/soyabean-oil" className="hover:text-[#08348b] hover:underline transition">
-                  Soyabean Oil
-                </Link>
-              </li>
-              <li>
-                <Link href="/kachi-ghani" className="hover:text-[#08348b] hover:underline transition">
+                <Link 
+                  href="/mustard-oil" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
                   Kachi Ghani Pure Mustard Oil
                 </Link>
               </li>
               <li>
-                <Link href="/sunflower-oil" className="hover:text-[#08348b] hover:underline transition">
+                <Link 
+                  href="/soyabean-oil" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  Soyabean Oil
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/sunflower-oil" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
                   Sunflower Oil
                 </Link>
               </li>
               <li>
-                <Link href="/rice-bran-oil" className="hover:text-[#08348b] hover:underline transition">
+                <Link 
+                  href="/rice-bran-oil" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
                   Rice Bran Oil
                 </Link>
               </li>
             </ul>
 
-            {/* Additional Links */}
-            <div className="mt-6">
-              <Link
-                href="/plant-address"
-                className="text-base text-[#0066cc] font-semibold hover:underline block mb-2"
-              >
-                Plant Address
-              </Link>
-              <Link
-                href="/terms"
-                className="text-base text-[#0066cc] font-semibold hover:underline block mb-2"
-              >
-                Terms & Conditions
-              </Link>
-              <Link
-                href="/privacy"
-                className="text-base text-[#0066cc] font-semibold hover:underline block"
-              >
-                Privacy Policy
-              </Link>
+            {/* Company Logo */}
+            <div className="mt-8 flex items-center gap-4">
+              <div className="relative w-32 h-auto">
+                <Image
+                  src="/logo.png"
+                  alt="Veer Bharat Logo"
+                  width={128}
+                  height={64}
+                  style={{ width: "100%", height: "auto", objectFit: "contain" }}
+                  priority
+                />
+              </div>
+              <div>
+                <p className="text-gray-900 font-black text-xl">VEER BHARAT</p>
+                <p className="text-base text-gray-800 font-bold mt-1">वाह! मज़ा आ गया</p>
+              </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Contact Us */}
+          {/* MIDDLE COLUMN: Quick Links */}
           <div>
-            <h5 className="text-[#08348b] font-bold mb-3 text-lg">Contact Us</h5>
-            <div className="text-[#3b3640] space-y-2">
-              <div>
-                <p className="text-base font-bold text-[#08348b]">
-                  SHREE ARIHANT OIL AND GENERAL MILLS
-                </p>
-                <p className="text-base leading-relaxed mt-2">
-                  "Fortune House",
-                </p>
-                <p className="text-base leading-relaxed">
-                  Near Navrangpura Railway Crossing,
-                </p>
-                <p className="text-base leading-relaxed">
-                  Ahmedabad-380009, Gujarat(India).
-                </p>
-              </div>
+            <h3 className="text-gray-900 font-extrabold text-2xl mb-5 pb-2 border-b-3 border-gray-800 inline-block">
+              Quick Links
+            </h3>
+            <ul className="space-y-3 mt-6">
+              <li>
+                <Link 
+                  href="/" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/about" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/recipes" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  Recipes
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/contact" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
 
-              <div className="mt-3">
-                <p className="text-base font-bold text-[#08348b]">Phone:</p>
-                <a
-                  href="tel:8802000091"
-                  className="block text-base hover:text-[#aa2266] transition mt-1"
-                >
-                  8802000091
-                </a>
-                <a
-                  href="tel:9216506091"
-                  className="block text-base hover:text-[#aa2266] transition"
-                >
-                  9216506091
-                </a>
-                <a
-                  href="tel:9216806091"
-                  className="block text-base hover:text-[#aa2266] transition"
-                >
-                  9216806091
-                </a>
+            {/* FSSAI Logo */}
+            <div className="mt-8 p-4 bg-white/60 rounded-lg border-2 border-gray-300">
+              <div className="flex items-center gap-4">
+                <div className="relative w-24 h-auto">
+                  <Image
+                    src="/FSSAI_Logo.png"
+                    alt="FSSAI Certified"
+                    width={96}
+                    height={40}
+                    style={{ width: "100%", height: "auto", objectFit: "contain" }}
+                    priority
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-900">FSSAI Certified</p>
+                  <p className="text-base font-black text-gray-900 mt-1">10012022000234</p>
+                </div>
               </div>
+            </div>
+          </div>
 
-              <div className="mt-3">
-                <p className="text-base font-bold text-[#08348b]">Email:</p>
-                <a
-                  href="mailto:info@arihantoilmills.com"
-                  className="text-base hover:text-[#aa2266] hover:underline transition block mt-1 break-all"
+          {/* RIGHT COLUMN: Important Links & Contact */}
+          <div>
+            <h3 className="text-gray-900 font-extrabold text-2xl mb-5 pb-2 border-b-3 border-gray-800 inline-block">
+              Important Links
+            </h3>
+            <ul className="space-y-3 mt-6">
+              <li>
+                <Link 
+                  href="/privacy-policy" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
                 >
-                  info@arihantoilmills.com
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/infrastructure" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  Infrastructure
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/blogs" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  Blogs
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/clients" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  Clients
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/media" 
+                  className="text-gray-800 text-lg font-bold hover:text-purple-700 transition-colors duration-200"
+                >
+                  Media
+                </Link>
+              </li>
+            </ul>
+
+            {/* Contact Info
+            <div className="mt-6">
+              <p className="text-base font-black text-gray-900 mb-2">
+                SHREE ARIHANT OIL AND GENERAL MILLS
+              </p>
+              <p className="text-base font-bold text-gray-800 leading-relaxed">
+                "Fortune House", Near Navrangpura Railway Crossing,<br />
+                Ahmedabad-380009, Gujarat (India)
+              </p>
+              
+              <div className="mt-4 space-y-2">
+                <div>
+                  <p className="text-sm font-bold text-gray-900 mb-1">Phone:</p>
+                  <div className="space-y-1">
+                    <a href="tel:8802000091" className="block text-base font-bold text-gray-800 hover:text-purple-700 transition-colors">
+                      8802000091
+                    </a>
+                    <a href="tel:9216506091" className="block text-base font-bold text-gray-800 hover:text-purple-700 transition-colors">
+                      9216506091
+                    </a>
+                    <a href="tel:9216806091" className="block text-base font-bold text-gray-800 hover:text-purple-700 transition-colors">
+                      9216806091
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="mt-3">
+                  <p className="text-sm font-bold text-gray-900 mb-1">Email:</p>
+                  <a 
+                    href="mailto:info@arihantoilmills.com" 
+                    className="text-base font-bold text-gray-800 hover:text-purple-700 hover:underline transition-colors break-all"
+                  >
+                    info@arihantoilmills.com
+                  </a>
+                </div>
+              </div>
+            </div> */}
+
+            {/* Social Media */}
+            <div className="mt-6">
+              <p className="text-sm font-bold text-gray-900 mb-3">Follow Us:</p>
+              <div className="flex gap-3">
+                <a 
+                  href="https://facebook.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors font-bold"
+                >
+                  f
+                </a>
+                <a 
+                  href="https://twitter.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors font-bold text-sm"
+                >
+                  𝕏
+                </a>
+                <a 
+                  href="https://linkedin.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors font-bold text-xs"
+                >
+                  in
+                </a>
+                <a 
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors"
+                >
+                  📷
+                </a>
+                <a 
+                  href="https://youtube.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-gray-800 text-white rounded-lg flex items-center justify-center hover:bg-purple-700 transition-colors"
+                >
+                  ▶
+                </a>
+                <a 
+                  href="https://wa.me/918802000091" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-green-600 text-white rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors"
+                >
+                  💬
                 </a>
               </div>
             </div>
           </div>
         </div>
 
-        {/* COPYRIGHT SECTION - Single Line */}
-        <div className="mt-6 pt-4 border-t border-[rgba(8,52,139,0.12)]">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 text-center">
-            <div className="text-sm text-[#08348b] font-semibold">
-              Copyright © 2025 <span className="font-bold">VEER BHARAT</span>. All Rights Reserved.
-            </div>
-          </div>
+        {/* COPYRIGHT SECTION */}
+        <div className="mt-10 pt-5 border-t-2 border-gray-400">
+          <p className="text-center text-base font-bold text-gray-900">
+            Copyright © 2025 <span className="font-black">VEER BHARAT</span>. All Rights Reserved.
+          </p>
         </div>
       </div>
     </footer>

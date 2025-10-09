@@ -1,7 +1,5 @@
 {
-  "/palm-oil/page": "app/palm-oil/page.js",
-  "/contact/page": "app/contact/page.js",
   "/about/page": "app/about/page.js",
-  "/products/page": "app/products/page.js",
-  "/blog/page": "app/blog/page.js"
+  "/mustard-oil/page": "app/mustard-oil/page.js",
+  "/page": "app/page.js"
 }
