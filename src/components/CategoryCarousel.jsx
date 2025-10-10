@@ -811,20 +811,219 @@
 // }
 
 
+// import React from "react";
+// import Image from "next/image";
+// import Link from "next/link";
+
+// /**
+//  * components/CategoryCarousel.jsx
+//  *
+//  * Enhanced with scroll animations and modern design
+//  * - Image slides in from right on scroll
+//  * - Text fades in from left
+//  * - Removed image border
+//  * - Added "Veer Bharat" heading
+//  * - Increased text sizing
+//  */
+
+// export default function CategoryCarousel() {
+//   const [isVisible, setIsVisible] = React.useState(false);
+//   const sectionRef = React.useRef(null);
+
+//   React.useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) {
+//           setIsVisible(true);
+//         }
+//       },
+//       { threshold: 0.2 }
+//     );
+
+//     if (sectionRef.current) {
+//       observer.observe(sectionRef.current);
+//     }
+
+//     return () => {
+//       if (sectionRef.current) {
+//         observer.unobserve(sectionRef.current);
+//       }
+//     };
+//   }, []);
+
+//   return (
+//     <section
+//       ref={sectionRef}
+//       className="py-16 lg:py-24 relative overflow-hidden"
+//       style={{
+//         background: "linear-gradient(135deg, #fef9c3 0%, #fef3c7 50%, #fef9c3 100%)",
+//       }}
+//     >
+//       {/* Decorative elements */}
+//       <div className="absolute inset-0 opacity-10">
+//         <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-400 rounded-full blur-3xl"></div>
+//         <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-300 rounded-full blur-3xl"></div>
+//       </div>
+
+//       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+//         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+//           {/* LEFT: content with fade-in from left */}
+//           <div
+//             className={`order-2 lg:order-1 transition-all duration-1000 ease-out ${
+//               isVisible
+//                 ? "opacity-100 translate-x-0"
+//                 : "opacity-0 -translate-x-12"
+//             }`}
+//           >
+//             <div className="max-w-2xl">
+//               {/* Veer Bharat Heading */}
+//               <div className="mb-8">
+//                 <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#16335f] via-[#1e4577] to-[#16335f] mb-2 tracking-tight leading-tight">
+//                   Veer Bharat
+//                 </h2>
+//                 <div className="h-1.5 w-32 bg-gradient-to-r from-[#16335f] to-orange-400 rounded-full"></div>
+//               </div>
+
+//               <p className="text-xl md:text-2xl text-[#24304a] leading-relaxed mb-8 font-normal">
+//                 Since its establishment in 2000,{" "}
+//                 <Link
+//                   href="/about"
+//                   className="text-[#16335f] font-bold underline decoration-2 underline-offset-4 hover:text-[#0f2847] transition-colors"
+//                 >
+//                   Sri Shyam Agro Industries
+//                 </Link>{" "}
+//                 has been dedicated to bringing the finest quality edible oils to
+//                 every household. With a strong commitment to purity, trust, and
+//                 customer satisfaction, Veer Bharat has become a name synonymous
+//                 with healthy living and authentic taste.
+//               </p>
+
+//               <div className="space-y-7 text-[1.15rem] md:text-[1.25rem] text-[#24304a] mb-8">
+//                 <div
+//                   className={`transition-all duration-1000 delay-200 ${
+//                     isVisible ? "opacity-100" : "opacity-0"
+//                   }`}
+//                 >
+//                   <p className="leading-relaxed font-normal">
+//                     We specialize in producing a wide range of oils, including{" "}
+//                     <strong className="font-bold text-[#16335f]">
+//                       Kachi Ghani Mustard Oil
+//                     </strong>
+//                     ,{" "}
+//                     <strong className="font-bold text-[#16335f]">
+//                       Soybean Oil
+//                     </strong>
+//                     ,{" "}
+//                     <strong className="font-bold text-[#16335f]">
+//                       Palm Oil
+//                     </strong>
+//                     , and many more. Each drop of our oil reflects our
+//                     thoughtful practices — from carefully sourcing raw materials
+//                     to using advanced extraction techniques that retain natural
+//                     aroma, flavor, and nutrition.
+//                   </p>
+//                 </div>
+
+//                 <div
+//                   className={`transition-all duration-1000 delay-400 ${
+//                     isVisible ? "opacity-100" : "opacity-0"
+//                   }`}
+//                 >
+//                   <p className="leading-relaxed font-normal">
+//                     At Veer Bharat, we believe that true quality lies in
+//                     balancing tradition with modern technology. That is why our
+//                     products combine time-honored methods with strict quality
+//                     standards, ensuring you receive only the best for your
+//                     family's kitchen.
+//                   </p>
+//                 </div>
+
+//                 <div
+//                   className={`transition-all duration-1000 delay-600 ${
+//                     isVisible ? "opacity-100" : "opacity-0"
+//                   }`}
+//                 >
+//                   <p className="leading-relaxed font-normal">
+//                     Choosing Veer Bharat means choosing trust, purity, and
+//                     goodness that enrich every meal. With us, tradition truly
+//                     meets purity — making your food healthier, tastier, and
+//                     filled with care.
+//                   </p>
+//                 </div>
+//               </div>
+
+//               {/* Button with enhanced styling */}
+//               <div
+//                 className={`mt-10 transition-all duration-1000 delay-700 ${
+//                   isVisible
+//                     ? "opacity-100 translate-y-0"
+//                     : "opacity-0 translate-y-4"
+//                 }`}
+//               >
+//                 <Link
+//                   href="/about"
+//                   className="inline-block rounded-2xl bg-gradient-to-r from-[#16335f] to-[#1e4577] text-white px-12 py-5 font-bold text-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+//                 >
+//                   <span className="relative z-10">About Us</span>
+//                   <div className="absolute inset-0 bg-gradient-to-r from-[#0f2847] to-[#16335f] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+//                 </Link>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* RIGHT: image slides in from right with scale effect - NO BORDER */}
+//           <div
+//             className={`order-1 lg:order-2 flex justify-center lg:justify-end items-center transition-all duration-1200 ease-out ${
+//               isVisible
+//                 ? "opacity-100 translate-x-0 scale-100"
+//                 : "opacity-0 translate-x-16 scale-95"
+//             }`}
+//           >
+//             <div
+//               className="relative group"
+//               style={{
+//                 width: "100%",
+//                 maxWidth: 880,
+//                 height: 520,
+//               }}
+//             >
+//               {/* Glowing effect behind image */}
+//               <div className="absolute -inset-6 bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-400 rounded-3xl opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-500"></div>
+
+//               {/* Image container - NO BORDER, just shadow */}
+//               <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
+//                 <Image
+//                   src="/images/Brochure.png"
+//                   alt="Veer Bharat product basket"
+//                   width={880}
+//                   height={520}
+//                   style={{
+//                     objectFit: "cover",
+//                     width: "100%",
+//                     height: "100%",
+//                   }}
+//                   className="transition-transform duration-700 group-hover:scale-110"
+//                   priority
+//                 />
+//               </div>
+
+//               {/* Decorative corner accent */}
+//               <div className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-[#16335f] to-[#1e4577] rounded-full opacity-15 blur-2xl group-hover:opacity-30 transition-opacity duration-500"></div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+// "use client";
+
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-/**
- * components/CategoryCarousel.jsx
- *
- * Enhanced with scroll animations and modern design
- * - Image slides in from right on scroll
- * - Text fades in from left
- * - Removed image border
- * - Added "Veer Bharat" heading
- * - Increased text sizing
- */
 
 export default function CategoryCarousel() {
   const [isVisible, setIsVisible] = React.useState(false);
@@ -837,7 +1036,7 @@ export default function CategoryCarousel() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.25 }
     );
 
     if (sectionRef.current) {
@@ -854,115 +1053,81 @@ export default function CategoryCarousel() {
   return (
     <section
       ref={sectionRef}
-      className="py-16 lg:py-24 relative overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #fef9c3 0%, #fef3c7 50%, #fef9c3 100%)",
-      }}
+      className="py-16 lg:py-24 relative overflow-hidden bg-gradient-to-tr from-[#fef9c3] via-[#fef3c7] to-[#fef9c3]"
     >
-      {/* Decorative elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-300 rounded-full blur-3xl"></div>
+      {/* Soft Decorative elements - subtle */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none select-none">
+        <div className="absolute top-24 left-12 w-72 h-72 bg-yellow-300 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-24 right-10 w-96 h-96 bg-orange-300 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* LEFT: content with fade-in from left */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          {/* Left Side - Text Content */}
           <div
             className={`order-2 lg:order-1 transition-all duration-1000 ease-out ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-12"
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
             }`}
           >
-            <div className="max-w-2xl">
-              {/* Veer Bharat Heading */}
+            <div className="max-w-3xl">
+              {/* Heading */}
               <div className="mb-8">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#16335f] via-[#1e4577] to-[#16335f] mb-2 tracking-tight leading-tight">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#16335f] via-[#1e4577] to-[#16335f] tracking-tight leading-tight select-text">
                   Veer Bharat
                 </h2>
-                <div className="h-1.5 w-32 bg-gradient-to-r from-[#16335f] to-orange-400 rounded-full"></div>
+                <div className="h-1.5 w-28 bg-gradient-to-r from-[#16335f]/90 to-orange-400 rounded-full mt-1"></div>
               </div>
 
-              <p className="text-xl md:text-2xl text-[#24304a] leading-relaxed mb-8 font-normal">
+              {/* Description */}
+              <p className="text-lg sm:text-xl md:text-2xl text-[#24304a] leading-relaxed mb-8 font-normal">
                 Since its establishment in 2000,{" "}
                 <Link
                   href="/about"
-                  className="text-[#16335f] font-bold underline decoration-2 underline-offset-4 hover:text-[#0f2847] transition-colors"
+                  className="text-[#16335f] font-semibold underline decoration-2 underline-offset-4 hover:text-[#0f2847] transition-colors"
                 >
                   Sri Shyam Agro Industries
                 </Link>{" "}
-                has been dedicated to bringing the finest quality edible oils to
-                every household. With a strong commitment to purity, trust, and
-                customer satisfaction, Veer Bharat has become a name synonymous
-                with healthy living and authentic taste.
+                has been dedicated to bringing the finest quality edible oils to every household. With a strong commitment to purity, trust, and customer satisfaction, Veer Bharat has become a name synonymous with healthy living and authentic taste.
               </p>
 
+              {/* Detailed paragraphs */}
               <div className="space-y-7 text-[1.15rem] md:text-[1.25rem] text-[#24304a] mb-8">
-                <div
-                  className={`transition-all duration-1000 delay-200 ${
-                    isVisible ? "opacity-100" : "opacity-0"
-                  }`}
-                >
+                <div className={`transition-opacity duration-1000 delay-200 ${isVisible ? "opacity-100" : "opacity-0"}`}>
                   <p className="leading-relaxed font-normal">
                     We specialize in producing a wide range of oils, including{" "}
-                    <strong className="font-bold text-[#16335f]">
+                    <strong className="font-semibold text-[#16335f]">
                       Kachi Ghani Mustard Oil
                     </strong>
                     ,{" "}
-                    <strong className="font-bold text-[#16335f]">
+                    <strong className="font-semibold text-[#16335f]">
                       Soybean Oil
                     </strong>
                     ,{" "}
-                    <strong className="font-bold text-[#16335f]">
+                    <strong className="font-semibold text-[#16335f]">
                       Palm Oil
                     </strong>
-                    , and many more. Each drop of our oil reflects our
-                    thoughtful practices — from carefully sourcing raw materials
-                    to using advanced extraction techniques that retain natural
-                    aroma, flavor, and nutrition.
+                    , and many more. Each drop of our oil reflects our thoughtful practices — from carefully sourcing raw materials to using advanced extraction techniques that retain natural aroma, flavor, and nutrition.
                   </p>
                 </div>
 
-                <div
-                  className={`transition-all duration-1000 delay-400 ${
-                    isVisible ? "opacity-100" : "opacity-0"
-                  }`}
-                >
+                <div className={`transition-opacity duration-1000 delay-400 ${isVisible ? "opacity-100" : "opacity-0"}`}>
                   <p className="leading-relaxed font-normal">
-                    At Veer Bharat, we believe that true quality lies in
-                    balancing tradition with modern technology. That is why our
-                    products combine time-honored methods with strict quality
-                    standards, ensuring you receive only the best for your
-                    family's kitchen.
+                    At Veer Bharat, we believe that true quality lies in balancing tradition with modern technology. That is why our products combine time-honored methods with strict quality standards, ensuring you receive only the best for your family's kitchen.
                   </p>
                 </div>
 
-                <div
-                  className={`transition-all duration-1000 delay-600 ${
-                    isVisible ? "opacity-100" : "opacity-0"
-                  }`}
-                >
+                <div className={`transition-opacity duration-1000 delay-600 ${isVisible ? "opacity-100" : "opacity-0"}`}>
                   <p className="leading-relaxed font-normal">
-                    Choosing Veer Bharat means choosing trust, purity, and
-                    goodness that enrich every meal. With us, tradition truly
-                    meets purity — making your food healthier, tastier, and
-                    filled with care.
+                    Choosing Veer Bharat means choosing trust, purity, and goodness that enrich every meal. With us, tradition truly meets purity — making your food healthier, tastier, and filled with care.
                   </p>
                 </div>
               </div>
 
-              {/* Button with enhanced styling */}
-              <div
-                className={`mt-10 transition-all duration-1000 delay-700 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4"
-                }`}
-              >
+              {/* Button */}
+              <div className={`mt-10 transition-all duration-1000 delay-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
                 <Link
                   href="/about"
-                  className="inline-block rounded-2xl bg-gradient-to-r from-[#16335f] to-[#1e4577] text-white px-12 py-5 font-bold text-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+                  className="inline-block rounded-2xl bg-gradient-to-r from-[#16335f] to-[#1e4577] text-white px-12 py-5 font-semibold text-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 relative overflow-hidden group"
                 >
                   <span className="relative z-10">About Us</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#0f2847] to-[#16335f] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -971,48 +1136,38 @@ export default function CategoryCarousel() {
             </div>
           </div>
 
-          {/* RIGHT: image slides in from right with scale effect - NO BORDER */}
+          {/* Right Side - Image without background */}
           <div
-            className={`order-1 lg:order-2 flex justify-center lg:justify-end items-center transition-all duration-1200 ease-out ${
-              isVisible
-                ? "opacity-100 translate-x-0 scale-100"
-                : "opacity-0 translate-x-16 scale-95"
+            className={`order-1 lg:order-2 flex justify-center lg:justify-end items-center transition-transform duration-1200 ease-out ${
+              isVisible ? "opacity-100 translate-x-0 scale-100" : "opacity-0 translate-x-16 scale-95"
             }`}
           >
-            <div
-              className="relative group"
-              style={{
-                width: "100%",
-                maxWidth: 880,
-                height: 520,
-              }}
-            >
-              {/* Glowing effect behind image */}
-              <div className="absolute -inset-6 bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-400 rounded-3xl opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-500"></div>
-
-              {/* Image container - NO BORDER, just shadow */}
-              <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
-                <Image
-                  src="/images/Brochure.png"
-                  alt="Veer Bharat product basket"
-                  width={880}
-                  height={520}
-                  style={{
-                    objectFit: "cover",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                  className="transition-transform duration-700 group-hover:scale-110"
-                  priority
-                />
-              </div>
-
-              {/* Decorative corner accent */}
-              <div className="absolute -top-4 -right-4 w-32 h-32 bg-gradient-to-br from-[#16335f] to-[#1e4577] rounded-full opacity-15 blur-2xl group-hover:opacity-30 transition-opacity duration-500"></div>
+            <div className="relative group w-full max-w-[880px] h-[520px] shadow-2xl rounded-3xl overflow-hidden transition-transform duration-700 group-hover:scale-[1.05]">
+              <Image
+                src="/images/Brochure.png"
+                alt="Veer Bharat product basket"
+                fill
+                style={{ objectFit: "cover" }}
+                priority
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 880px"
+              />
             </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes floatIn {
+          from {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+      `}</style>
     </section>
   );
 }

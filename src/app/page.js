@@ -3398,6 +3398,8 @@ export default function Home() {
       <VideoHero videos={["/images/hero-video.mp4"]} />
 
       {/* Heading */}
+
+
       <div className="py-12 md:py-16 text-center">
         <motion.h1
           initial={{ y: 30, opacity: 0 }}
