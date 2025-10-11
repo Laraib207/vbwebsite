@@ -193,6 +193,7 @@ export default function WhyUsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="inline-block mb-4 md:mb-6"
+            // 
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full shadow-lg">
               <span className="text-lg md:text-xl">✨</span>
