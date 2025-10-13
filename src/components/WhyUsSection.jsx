@@ -153,21 +153,21 @@ export default function WhyUsSection() {
       title: "Quality",
       subtitle: "Premium Selection",
       desc: "Carefully selected, premium brown mustard seeds ensure that we deliver the highest-quality products. Our rigorous quality control process guarantees that only the finest seeds make it to your kitchen, providing you with oil that meets the highest standards of excellence.",
-      icon: "🏆"
+      icon: ""
     },
     {
       img: "/images/purity.jpg",
       title: "Purity",
       subtitle: "Double Filtered",
       desc: "Double filtration allows us to deliver 100% pure mustard oil, free from any additives. Our state-of-the-art filtration technology removes all impurities while preserving the natural nutrients and authentic flavor, ensuring you get nothing but pure, unadulterated goodness in every drop.",
-      icon: "💎"
+      icon: ""
     },
     {
       img: "/images/flavour.jpg",
-      title: "Flavour",
+      title: "Product",
       subtitle: "Authentic Taste",
       desc: "Millions recognise our brand for its exceptional taste and pungency. The traditional cold-pressed extraction method we use retains the natural aroma and distinctive sharp flavor that makes our mustard oil the preferred choice for authentic Indian cooking and health-conscious consumers.",
-      icon: "⭐"
+      icon: ""
     }
   ];
 
@@ -209,7 +209,7 @@ export default function WhyUsSection() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 bg-gradient-to-r from-amber-900 via-amber-800 to-yellow-900 bg-clip-text text-transparent leading-tight px-4"
           >
-            Veer Bharat Mustard Oil
+           Why Veer Bharat 
           </motion.h2>
 
           <motion.div
@@ -420,7 +420,7 @@ export default function WhyUsSection() {
             >
               {[
                 { number: "100%", label: "Pure & Natural" },
-                { number: "50+", label: "Years Legacy" },
+                { number: "5+", label: "Years Legacy" },
                 { number: "1M+", label: "Happy Families" },
                 { number: "99.9%", label: "Quality Rate" }
               ].map((stat, i) => (

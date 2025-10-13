@@ -692,6 +692,7 @@ const Footer = () => {
                 </div>
               </div>
             </div> */}
+            
 
             {/* Social Media */}
             <div className="mt-6">
