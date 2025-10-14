@@ -1,4 +1,4 @@
-// File: /Users/laraibd/Desktop/mdd/vbwebsite/vb2/v9/vbwebsite/src/app/soyabean-oil/page.jsx
+// File: /Users/laraibd/Desktop/mdd/v10/vbwebsite/src/app/soyabean-oil/page.jsx
 import * as entry from '../../../../src/app/soyabean-oil/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
