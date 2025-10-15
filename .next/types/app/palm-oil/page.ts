@@ -1,4 +1,4 @@
-// File: C:\Users\Admin\Desktop\v10\vbwebsite\src\app\palm-oil\page.jsx
+// File: /Users/laraibd/Desktop/mdd/v10/vbwebsite/src/app/palm-oil/page.jsx
 import * as entry from '../../../../src/app/palm-oil/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
